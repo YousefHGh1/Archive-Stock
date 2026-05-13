@@ -21,12 +21,12 @@
 
     <!--begin::Card-->
     <div class="card card-custom">
-        <div class="card-header flex-wrap border-0 pt-6 pb-0">
+        <div class="flex-wrap pt-6 pb-0 border-0 card-header">
             <div class="card-title">
                 <h3 class="card-label">عرض الأقسام </h3></div>
             <div class="card-toolbar">
                 <!--begin::Dropdown-->
-                <div class="dropdown dropdown-inline mr-2">
+                <div class="mr-2 dropdown dropdown-inline">
                     <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
@@ -42,8 +42,8 @@
                     <!--begin::Dropdown Menu-->
                     <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
                         <!--begin::Navigation-->
-                        <ul class="navi flex-column navi-hover py-2">
-                            <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">اختر:</li>
+                        <ul class="py-2 navi flex-column navi-hover">
+                            <li class="pb-2 navi-header font-weight-bolder text-uppercase font-size-sm text-primary">اختر:</li>
                             <li class="navi-item">
                                 <a href="#" class="navi-link">
                                     <span class="navi-icon">
@@ -91,7 +91,7 @@
                 </div>
                 <!--end::Dropdown-->
                 <!--begin::Button-->
-                <a href="https://master/CoreArchive/public/subcensorship/create" class="btn btn-primary font-weight-bolder">
+                <a href="https://master/CoreArchive/public/subcensorship/create" class="btn btn-success font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -113,7 +113,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-9 col-xl-8">
                         <div class="row align-items-center">
-                            <div class="col-md-4 my-2 my-md-0">
+                            <div class="my-2 col-md-4 my-md-0">
                                 <div class="input-icon">
                                     <input type="text" class="form-control" placeholder="ابحث..." id="kt_datatable_search_query" />
                                     <span>
@@ -122,12 +122,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">البحث</a>
+                            <div class="mt-5 col-lg-3 col-xl-4 mt-lg-0">
+                                <a href="#" class="px-6 btn btn-light-primary font-weight-bold">البحث</a>
                             </div>
-                            {{-- <div class="col-md-4 my-2 my-md-0">
+                            {{-- <div class="my-2 col-md-4 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                    <label class="mb-0 mr-3 d-none d-md-block">Status:</label>
                                     <select class="form-control" id="kt_datatable_search_status">
                                         <option value="">All</option>
                                         <option value="1">Pending</option>
@@ -139,9 +139,9 @@
                                     </select>
                                 </div>
                             </div> --}}
-                            {{-- <div class="col-md-4 my-2 my-md-0">
+                            {{-- <div class="my-2 col-md-4 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                    <label class="mb-0 mr-3 d-none d-md-block">Type:</label>
                                     <select class="form-control" id="kt_datatable_search_type">
                                         <option value="">All</option>
                                         <option value="1">Online</option>

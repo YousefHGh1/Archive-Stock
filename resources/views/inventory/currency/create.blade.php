@@ -51,6 +51,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض العملة </a>
+                            <x-add-resource-button />
                         </div>
                     </div>
                     <!--begin::Form-->
@@ -68,24 +69,24 @@
                                     <div class="input-group">
                                         <input name="name" id="name" type="text" class="form-control"
                                             placeholder="ادخل اسم العملة">
-                                        @error('name')
-                                            <span>{{ $message }}</span>
-                                        @enderror
+
                                     </div>
+                                    @error('name')
+                                        <span>{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 <!-- نموذج HTML لإدخال قيمة value -->
 
-                                    <label for="value" class="col-lg-2 col-form-label">
-                                        <h6><strong>قيمة العملة:</strong></h6>
-                                    </label>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input name="value" type="number" min="0" class="form-control"
-                                                id="value" placeholder="ادخل قيمة العملة"
-                                                 />
-                                        </div>
+                                <label for="value" class="col-lg-2 col-form-label">
+                                    <h6><strong>قيمة العملة:</strong></h6>
+                                </label>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input name="value" type="number" min="0" class="form-control"
+                                            id="value" placeholder="ادخل قيمة العملة" />
                                     </div>
+                                </div>
 
                             </div>
 
@@ -96,7 +97,7 @@
                                 <div class="col-lg-10">
                                     <button type="submit" class="mr-2 btn btn-success">حفظ</button>
                                     <button type="reset" class="mr-2 btn btn-danger">إلغاء</button>
-                                   
+
                                 </div>
 
                             </div>

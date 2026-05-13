@@ -71,7 +71,6 @@
                 </div>
             </div>
 
-
             <div class="accordion accordion-light " id="accordionExample5">
                 <div class="card">
                     <div class="p-5 card-header" style="cursor: auto" id="headingOne5">
@@ -86,18 +85,19 @@
 
                             <div class="col-lg-6">
                                 <label>التاريخ:</label>
-                                <form action="{{ route('dieselexport.searchdate') }}" method="POST"
-                                    class="pr-5 form-group">
+                                <form action="{{ route('dieselexport.report') }}" method="GET" class="pr-5 form-group">
                                     @csrf
                                     <div class="input-daterange input-group">
                                         <div class="p-0 col-4">
-                                            <input name="start_date" type="date" class="form-control" id="start_date" />
+                                            <input name="start_date" type="date" class="form-control"
+                                                value="{{ old('start_date') }}" />
                                         </div>
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                                         </div>
                                         <div class="p-0 col-4">
-                                            <input name="end_date" type="date" class="form-control" id="end_date" />
+                                            <input name="end_date" type="date" class="form-control"
+                                                value="{{ old('end_date') }}" />
                                         </div>
                                         <div class="mt-auto mb-auto col-lg-2">
                                             <input type="submit" class="btn btn-primary btn-primary--icon"
@@ -109,15 +109,17 @@
 
                             <div class="col-lg-3">
                                 <label>الايصال:</label>
-                                <form action="{{ route('dieselexport.searchsec') }}" method="POST" class="pr-5 form-group">
+                                <form action="{{ route('dieselexport.report') }}" method="GET" class="pr-5 form-group">
                                     @csrf
                                     <div class="input-daterange input-group">
                                         <div class="p-0 col-4">
-                                            <input name="startNum" type="text" class="form-control" id="startNum" />
+                                            <input name="startNum" type="text" class="form-control"
+                                                value="{{ old('startNum') }}" />
                                         </div>
                                         *
                                         <div class="p-0 col-4">
-                                            <input name="endNum" type="text" class="form-control" id="endNum" />
+                                            <input name="endNum" type="text" class="form-control"
+                                                value="{{ old('endNum') }}" />
                                         </div>
                                         <div class="mt-auto mb-auto col-lg-2">
                                             <input type="submit" class="btn btn-primary btn-primary--icon"
@@ -129,17 +131,17 @@
 
                             <div class="col-lg-3">
                                 <label>السند:</label>
-                                <form action="{{ route('dieselexport.searchvou') }}" method="POST" class="pr-5 form-group">
+                                <form action="{{ route('dieselexport.report') }}" method="GET" class="pr-5 form-group">
                                     @csrf
                                     <div class="input-daterange input-group">
                                         <div class="p-0 col-4">
                                             <input name="start_voucher" type="text" class="form-control"
-                                                id="start_voucher" />
+                                                value="{{ old('start_voucher') }}" />
                                         </div>
                                         *
                                         <div class="p-0 col-4">
                                             <input name="end_voucher" type="text" class="form-control"
-                                                id="end_voucher" />
+                                                value="{{ old('end_voucher') }}" />
                                         </div>
                                         <div class="mt-auto mb-auto col-lg-2">
                                             <input type="submit" class="btn btn-primary btn-primary--icon"
@@ -149,35 +151,44 @@
                                 </form>
                             </div>
                         </div>
+
                         <div class="mb-6 col-lg-12">
-                            <form action="{{ route('dieselexport.searchname') }}" method="POST" class="pl-5 form-group">
+                            <form action="{{ route('dieselexport.report') }}" method="GET" class="pl-5 form-group">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="p-0 col-2">
-                                        <input name="start_date" type="date" class="form-control" id="start_date" />
+                                        <input name="start_date" type="date" class="form-control"
+                                            value="{{ old('start_date') }}" />
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                                     </div>
                                     <div class="p-0 col-2">
-                                        <input name="end_date" type="date" class="form-control" id="end_date" />
+                                        <input name="end_date" type="date" class="form-control"
+                                            value="{{ old('end_date') }}" />
                                     </div>
 
                                     <div class="pl-5 pr-5 col-3">
-                                        <select name="section_id" id="" class="form-control"
-                                            title="اختر القسم...">
-                                            <option value="">{{ 'القسم الرئيسي -------' }}</option>
+                                        <select name="section_id" id="section_id" class="form-control selectpicker"
+                                            data-size="7" data-live-search="true">
+                                            <option value="">اختر الدائرة</option>
                                             @foreach ($section as $sections)
-                                                <option value="{{ $sections->id }}">{{ $sections->name_section }}</option>
+                                                <option value="{{ $sections->id }}"
+                                                    {{ old('section_id') == $sections->id ? 'selected' : '' }}>
+                                                    {{ $sections->name_section }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="pl-2 pr-5 col-3">
-                                        <select name="subSection_id" id="" class="form-control"
-                                            title="اختر القسم...">
-                                            <option value="">{{ 'القسم الفرعي -------' }}</option>
+                                        <select name="sub_section_id" id="sub_section_id" class="form-control"
+                                            data-live-search="true">
+                                            <option value="">اختر القسم </option>
                                             @foreach ($subSection as $subSections)
-                                                <option value="{{ $subSections->id }}">{{ $subSections->name }}</option>
+                                                <option value="{{ $subSections->id }}"
+                                                    {{ old('sub_section_id') == $subSections->id ? 'selected' : '' }}>
+                                                    {{ $subSections->name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -189,16 +200,17 @@
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
             {{-- *********************** --}}
             <div class="card-body">
                 <!--begin: Datatable-->
-                <table id="example" class="table table-striped dt-responsive " style="width:100%">
+                <table id="example" class="table table-striped dt-responsive" style="width:100%">
                     <thead class="thead_dark">
                         <tr>
                             <th>{{ 'نوع المحروقات' }}</th>
-                            <th>{{ 'القسم' }}</th>
+                            <th>{{ 'الدائرة' }}</th>
                             <th>{{ 'القسم الفرعي' }}</th>
                             <th>{{ 'سند الصادر ' }} </th>
                             <th>{{ 'كمية الصادر ' }} </th>
@@ -207,24 +219,56 @@
                             <th>{{ 'تاريخ الصادر' }}</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        @foreach ($dieselexport as $dieselexports)
+                        @foreach ($dieselExports as $dieselexport)
                             <tr>
-                                <td> {{ $dieselexports->typesfuel->name }}</td>
-                                <td> {{ $dieselexports->section->name_section }}</td>
-                                <td>{{ $dieselexports->subSection->name }}</td>
-                                <td>{{ $dieselexports->voucher }}</td>
-                                <td>{{ $dieselexports->quantity }}</td>
-                                <td>{{ $dieselexports->num_section }}</td>
-                                <td>{{ $dieselexports->num_note }}</td>
-                                <td>{{ $dieselexports->date }}</td>
+                                <td>{{ $dieselexport->typesfuel->name }}</td>
+                                <td>{{ $dieselexport->section->name_section }}</td>
+                                <td>{{ $dieselexport->subSection->name }}</td>
+                                <td>{{ $dieselexport->voucher }}</td>
+                                <td>{{ $dieselexport->quantity }}</td>
+                                <td>{{ $dieselexport->num_section }}</td>
+                                <td>{{ $dieselexport->num_note }}</td>
+                                <td>{{ $dieselexport->date }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
                 <!--end: Datatable-->
             </div>
+
+            <div class="text-center card">
+                <div class="card-body">
+                    <h4 class="mb-0 alert bg-primary-o-50 text-primary">كميات المحروقات</h4>
+                    <table class="table table-striped table-hover table-checkable" id="myTable">
+                        <thead class="text-white bg-primary">
+                            <tr>
+                                <th>رصيد سابق</th>
+                                @for ($i = 1; $i <= 12; $i++)
+                                    <th>شهر {{ $i }}</th>
+                                @endfor
+                                <th>عدد الصادر</th>
+                                <th>مجموع الصادر</th>
+                                <th>المتبقي من السولار</th>
+                                <th>المتبقي من البنزين</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ $previousBalance }} لتر</td>
+                                @for ($i = 1; $i <= 12; $i++)
+                                    <td>{{ $dieselData[$i] ?? 0 }} لتر</td>
+                                @endfor
+                                <td>{{ $totalEntries }}</td>
+                                <td>{{ $totalExported }} لتر</td>
+                                <td>{{ $remainingDiesel }} لتر</td>
+                                <td>{{ $remainingGasoline }} لتر</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection
@@ -243,6 +287,32 @@
                 rightArrow: '<i class="la la-angle-right"></i>',
             },
             format: 'dd-mm-yyyy',
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('select[name="section_id"]').on('change', function() {
+                var section_id = $(this).val();
+                if (section_id) {
+                    $.ajax({
+                        url: "{{ URL::to('getsub_section') }}/" + section_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="sub_section_id"]').empty();
+                            $.each(data, function(id, name) {
+                                // Append the correct value (ID) for sub_section_id
+                                $('select[name="sub_section_id"]').append(
+                                    '<option value="' + id + '">' + name +
+                                    '</option>'
+                                );
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
         });
     </script>
 @endsection

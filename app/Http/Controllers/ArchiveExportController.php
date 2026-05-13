@@ -6,17 +6,41 @@ use App\Models\ArchiveExport;
 use App\Models\Export;
 use App\Models\Section;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class ArchiveExportController extends Controller
 {
-
-
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:archive', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
+
+    public function index(Request $request)
+    {
+        $archiveExport = ArchiveExport::whereNotNull('date')->get();
+        $export = Export::all();
+
+        // استخراج السنوات
+        $years = $archiveExport->pluck('date')
+            ->map(fn ($date) => date('Y', strtotime($date)))
+            ->unique()
+            ->values();
+
+        // آخر سنة موجودة (مع حماية)
+        $latestYear = $years->max();
+
+        // السنة المختارة
+        $selectedYear = $request->input('year', $latestYear);
+
+        // فلترة البيانات
+        $archiveExport = $archiveExport->filter(function ($item) use ($selectedYear) {
+            return date('Y', strtotime($item->date)) == $selectedYear;
+        });
+
+        return view('archiveExport.index', compact('archiveExport', 'export', 'years', 'selectedYear'));
+
+        // return view('archiveExport.index', compact('archiveExport', 'export', 'years', 'selectedYear'));
+    }
+
     //     public function index(Request $request)
     // {
     //     $archiveExport = ArchiveExport::all();
@@ -38,29 +62,28 @@ class ArchiveExportController extends Controller
     //     return view('archiveExport.index', compact('archiveExport', 'export', 'years', 'selectedYear'));
     // }
 
-    public function index(Request $request)
-    {
-        $archiveExport = ArchiveExport::all();
-        $export = Export::all();
-        // Get all the years from the archive items
-        $years = $archiveExport->pluck('date')->map(function ($date) {
-            return date('Y', strtotime($date));
-        })->unique()->toArray();
-    
-        // Get the latest year based on created_at field
-        $latestYear = date('Y', strtotime($archiveExport->sortByDesc('created_at')->first()->date));
-    
-        // Get the selected year from the request or use the latest year as default
-        $selectedYear = $request->input('year', $latestYear);
-    
-        // Filter the archive items by the selected year
-        $archiveExport = $archiveExport->filter(function ($item) use ($selectedYear) {
-            return date('Y', strtotime($item->date)) == $selectedYear;
-        });
-    
-        return view('archiveExport.index', compact('archiveExport', 'export', 'years', 'selectedYear'));
-    }
+    // public function index(Request $request)
+    // {
+    //     $archiveExport = ArchiveExport::all();
+    //     $export = Export::all();
+    //     // Get all the years from the archive items
+    //     $years = $archiveExport->pluck('date')->map(function ($date) {
+    //         return date('Y', strtotime($date));
+    //     })->unique()->toArray();
 
+    //     // Get the latest year based on created_at field
+    //     $latestYear = date('Y', strtotime($archiveExport->sortByDesc('created_at')->first()->date));
+
+    //     // Get the selected year from the request or use the latest year as default
+    //     $selectedYear = $request->input('year', $latestYear);
+
+    //     // Filter the archive items by the selected year
+    //     $archiveExport = $archiveExport->filter(function ($item) use ($selectedYear) {
+    //         return date('Y', strtotime($item->date)) == $selectedYear;
+    //     });
+
+    //     return view('archiveExport.index', compact('archiveExport', 'export', 'years', 'selectedYear'));
+    // }
 
     // public function index(Request $request)
     // {
@@ -69,7 +92,6 @@ class ArchiveExportController extends Controller
     //     $export = Export::all();
     //     return view('archiveExport.index', compact('archiveExport', 'export'));
     // }
-
 
     public function create()
     {
@@ -81,7 +103,6 @@ class ArchiveExportController extends Controller
         return view('archiveExport.create', compact('archiveExport', 'section', 'export'));
     }
 
-
     public function store(Request $request)
     {
         //
@@ -90,14 +111,14 @@ class ArchiveExportController extends Controller
             'title' => 'required',
             'export_id' => 'required',
             'date' => 'required',
-            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx,DWG,DXF,DWF'
+            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx,DWG,DXF,DWF',
         ]);
         if ($request->hasfile('files')) {
             foreach ($request->file('files') as $file) {
                 // $name = $file->getClientOriginalName();
-                $name = uniqid() . '.' . $file->getClientOriginalExtension();
+                $name = uniqid().'.'.$file->getClientOriginalExtension();
 
-                $file->move(public_path() . '/uploads/', $name);
+                $file->move(public_path().'/uploads/', $name);
                 $data[] = $name;
             }
         }
@@ -107,9 +128,8 @@ class ArchiveExportController extends Controller
             'title' => $request->get('title'),
             'export_id' => $request->get('export_id'),
             'date' => $request->get('date'),
-            'files' => json_encode($data)
+            'files' => json_encode($data),
         ]);
-
 
         if ($archiveExport->save()) {
             return redirect()->back()->with('success', 'تمت الاضافة بنجاح!');
@@ -123,9 +143,9 @@ class ArchiveExportController extends Controller
         //
         $archiveExport = ArchiveExport::find($id);
         $export = Export::all();
+
         return view('archiveExport.show', compact('export'))->with('archiveExport', $archiveExport);
     }
-
 
     public function edit($id)
     {
@@ -133,9 +153,9 @@ class ArchiveExportController extends Controller
         $archiveExport = ArchiveExport::find($id);
         $section = Section::all();
         $export = Export::all();
+
         return view('archiveExport.edit', compact('archiveExport', 'section', 'export'));
     }
-
 
     public function update(Request $request, $id)
     {
@@ -144,16 +164,16 @@ class ArchiveExportController extends Controller
             'title' => 'required',
             'export_id' => 'required',
             'date' => 'required',
-            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx|max:2048'
+            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx|max:2048',
         ]);
 
         if ($request->hasfile('files')) {
             $data = [];
             foreach ($request->file('files') as $file) {
                 // $name = $file->getClientOriginalName();
-                $name = uniqid() . '.' . $file->getClientOriginalExtension();
+                $name = uniqid().'.'.$file->getClientOriginalExtension();
 
-                $file->move(public_path() . '/uploads/', $name);
+                $file->move(public_path().'/uploads/', $name);
                 $data[] = $name;
             }
         }
@@ -168,7 +188,6 @@ class ArchiveExportController extends Controller
             $archiveExport->files = json_encode($data);
         }
 
-
         if ($archiveExport->save()) {
             return redirect('archiveExport')->with('info', 'تمت التعديل بنجاح!');
         } else {
@@ -180,9 +199,9 @@ class ArchiveExportController extends Controller
     {
         //
         ArchiveExport::destroy($id);
+
         return redirect('archiveExport')->with('danger', 'تمت الحذف بنجاح!');
     }
-
 
     public function searchdate(Request $request)
     {
@@ -205,6 +224,7 @@ class ArchiveExportController extends Controller
 
         $number = $request->input('number');
         $archiveExport = ArchiveExport::where('number', $number)->get();
+
         // قم بعرض نتيجة البحث
         return view('archiveExport.report', compact('archiveExport', 'export'))
             ->with('success', 'تمت عملية البحث !');

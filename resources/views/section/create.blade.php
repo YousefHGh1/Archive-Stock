@@ -1,14 +1,14 @@
 @extends('layout.master')
 
 @section('title')
-    إضافة قسم
+    إضافة دائرة
 @endsection
 
 @section('page_title')
     لوحة التحكم
 @endsection
 @section('sub_main')
-    الأقسام
+الدوائر
 @endsection
 @section('sub_title')
     صفحة الإضافة
@@ -24,11 +24,11 @@
     <div class="card card-custom card-sticky" id="kt_page_sticky_card">
         <div class="card-header">
         <div class="card-title">
-        <h3 class="card-label"> بيانات الأقسام <i class="mr-2"></i></h3>
+        <h3 class="card-label"> بيانات الدوائر <i class="mr-2"></i></h3>
         </div>
         <div class="card-toolbar">
 
-            <a href="{{url('/section')}}" class="btn btn-primary font-weight-bolder">
+            <a href="{{url('/section')}}" class="btn btn-info font-weight-bolder">
                 <span class="svg-icon svg-icon-md">
                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -39,7 +39,9 @@
                         </g>
                     </svg>
                     <!--end::Svg Icon-->
-                </span>عرض الأقسام</a>
+                </span>عرض الدوائر</a>
+                <x-add-resource-button />
+
         </div>
     </div>
         <form action="{{ route('section.store') }}" method="post" class="form needs-validation" novalidate enctype="multipart/form-data" id="kt_form">
@@ -53,15 +55,16 @@
                         <div class="my-5">
                             <div class="my-10 separator separator-dashed"></div>
                             <div class="form-group row">
-                            <label class="col-3">اسم القسم</label>
+                            <label class="col-3">اسم الدائرة</label>
                             <div class="col-9">
-                            <input  name="name_section" type="text"  class="@error('name_section') is-invalid @enderror form-control form-control-solid" id="name_section" placeholder="ادخل اسم القسم" />
+                            <input  name="name_section" type="text"  class="@error('name_section') is-invalid @enderror form-control form-control-solid" id="name_section" placeholder="ادخل اسم الدائرة" />
                             </div>
                             </div>
                             <div class="form-group row">
-                            <label class="col-3">رقم القسم</label>
+                            <label class="col-3">رقم الدائرة</label>
                             <div class="col-9">
-                                <input  name="num_section" type="text"  class="@error('num_section') is-invalid @enderror form-control form-control-solid" id="num_section" placeholder="ادخل رقم القسم" />
+                                <input  name="num_section" type="text" disabled
+                                value="{{ old('num_section', $newSection) }}" class="@error('num_section') is-invalid @enderror form-control form-control-solid" id="num_section" placeholder="ادخل رقم الدائرة" />
 
                             </div>
                             </div>

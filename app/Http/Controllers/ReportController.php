@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Export_item;
-use App\Models\Import_item;
+use App\Models\Category;
 use App\Models\InvoiceExport_product;
 use App\Models\InvoiceProduct;
 use App\Models\Item;
@@ -13,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 class ReportController extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
-        $this->middleware('permission:report', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
+        $this->middleware('permission:report', ['only' => ['transactions_report', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
     public function totalreport()
@@ -35,21 +33,36 @@ class ReportController extends Controller
             ->groupBy('items.id', 'items.item_num', 'items.item_name', 'items.open_balance', 'items.balance')
             ->having('items.balance', '>', 0)
             ->get();
-        
+
         return view('inventory.report.totalreport', [
-            'totalreport' => $totalReport
+            'totalreport' => $totalReport,
         ]);
     }
 
     public function searchbalance(Request $request)
     {
-        $InvoiceProduct = InvoiceProduct::all();
+        $InvoiceProduct        = InvoiceProduct::all();
         $InvoiceExport_product = InvoiceExport_product::all();
-        $balance = $request->input('balance');
-        $totalreport = Item::where('balance', $balance)->get();
+        $balance               = $request->input('balance');
+        $totalreport           = Item::select(
+            'items.id',
+            'items.item_num',
+            'items.item_name',
+            'items.open_balance',
+            'items.balance',
+            DB::raw('SUM(ip.quantity) as total_incoming'),
+            DB::raw('SUM(iep.quantity) as total_outgoing')
+        )
+            ->leftJoin('invoice_products as ip', 'ip.item_id', '=', 'items.id')
+            ->leftJoin('invoice_export_products as iep', 'iep.item_id', '=', 'items.id')
+            ->groupBy('items.id', 'items.item_num', 'items.item_name', 'items.open_balance', 'items.balance')
+            ->having('items.balance', '>', 0)
+            ->where('balance', $balance)
+            ->get();
+
+        // $totalreport           = Item::where('balance', $balance)->get();
         return view('inventory.report.totalreport', compact('totalreport', 'InvoiceExport_product', 'InvoiceProduct'))->with('success', 'تمت عملية البحث !');
     }
-
 
     public function transactions($itemId)
     {
@@ -96,14 +109,13 @@ class ReportController extends Controller
             $transactions[$key]->balance = $balance; // تحديث قيمة الرصيد في المصفوفة
         }
 
-
         return view('inventory.report.transactions', compact('transactions', 'item'));
     }
 
     public function searchdate(Request $request)
     {
         $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        $end_date   = $request->input('end_date');
 
         $item = DB::table('items')
             ->select('items.open_balance')->get();
@@ -143,10 +155,57 @@ class ReportController extends Controller
     }
 
 
-    public function transactions_report()
-    {
-        $items = Item::all();
 
-        return view('inventory.report.index', compact('items'));
+    public function transactions_report(Request $request)
+    {
+        $query = Item::with('category', 'unit');
+
+        // Check if a category search query exists
+        if ($request->has('category_name') && $request->input('category_name') != '') {
+            $category = $request->input('category_name');
+            $query->whereHas('category', function ($q) use ($category) {
+                $q->where('category_name', 'LIKE', "%{$category}%");
+            });
+        }
+
+        // Check if a category search query exists
+        if ($request->has('category_num') && $request->input('category_num') != '') {
+            $category = $request->input('category_num');
+            $query->whereHas('category', function ($q) use ($category) {
+                $q->where('category_num', 'LIKE', "%{$category}%");
+            });
+        }
+
+        // Paginate the results
+        $item     = $query->get();
+        $category = Category::get(['id', 'category_name', 'category_num']);
+
+        return view('inventory.report.transactions_report', compact('item', 'category'));
+    }
+    public function balance(Request $request)
+    {
+        $query = Item::with(['category', 'unit'])->where('balance', '>', 0);
+
+        // Check if a category search query exists
+        if ($request->has('category_name') && $request->input('category_name') != '') {
+            $category = $request->input('category_name');
+            $query->whereHas('category', function ($q) use ($category) {
+                $q->where('category_name', 'LIKE', "%{$category}%");
+            });
+        }
+
+        // Check if a category search query exists
+        if ($request->has('category_num') && $request->input('category_num') != '') {
+            $category = $request->input('category_num');
+            $query->whereHas('category', function ($q) use ($category) {
+                $q->where('category_num', 'LIKE', "%{$category}%");
+            });
+        }
+
+        // Paginate the results
+        $item     = $query->get();
+        $category = Category::get(['id', 'category_name', 'category_num']);
+
+        return view('inventory.report.balance', compact('item', 'category'));
     }
 }

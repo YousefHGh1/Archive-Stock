@@ -51,6 +51,8 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض الوحدات </a>
+
+                            <x-add-resource-button />
                         </div>
                     </div>
                     <!--begin::Form-->
@@ -76,16 +78,16 @@
 
                                 <!-- نموذج HTML لإدخال قيمة unit_num -->
 
-                                    <label for="unit_num" class="col-lg-2 col-form-label">
-                                        <h6><strong>رقم الوحدة:</strong></h6>
-                                    </label>
-                                    <div class="col-lg-3">
-                                        <div class="input-group">
-                                            <input name="unit_num" type="number" min="0" class="form-control"
-                                                id="unit_num" placeholder="ادخل رقم الوحدة"
-                                                value="{{ old('unit_num', $next_num) }}" disabled />
-                                        </div>
+                                <label for="unit_num" class="col-lg-2 col-form-label">
+                                    <h6><strong>رقم الوحدة:</strong></h6>
+                                </label>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <input name="unit_num" type="number" min="0" class="form-control"
+                                            id="unit_num" placeholder="ادخل رقم الوحدة"
+                                            value="{{ old('unit_num', $next_num) }}" disabled />
                                     </div>
+                                </div>
 
                             </div>
 
@@ -96,7 +98,6 @@
                                 <div class="col-lg-10">
                                     <button type="submit" class="mr-2 btn btn-success">حفظ</button>
                                     <button type="reset" class="mr-2 btn btn-danger">إلغاء</button>
-                                    <x-add-resource-button />
 
                                 </div>
 

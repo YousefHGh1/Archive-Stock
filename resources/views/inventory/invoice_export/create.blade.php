@@ -63,6 +63,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض فاتورة صرف</a>
+                            <x-add-resource-button />
                         </div>
                     </div>
                     <!--begin::Form-->
@@ -79,7 +80,8 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input type="number" class="@error('voucher_no') is-invalid @enderror form-control"
-                                            id="voucher_no" name="voucher_no">
+                                            id="voucher_no" name="voucher_no" disabled
+                                            value="{{ old('voucher_no', $newVoucherNo) }}">
                                         @error('voucher_no')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -107,12 +109,15 @@
 
                                 <label for="subSection_id" class="col-lg-2 col-form-label ">
                                     <h6> الأقسام:</h6>
+                                                                    <a href="{{ url('inventory/sub_section/create') }}" title="اضافة قسم جديد" target="_blank">
+                                    <i class="p-3 ki ki-solid-plus icon-md"></i>
+                                </a>
                                 </label>
+
                                 <div class="col-lg-3">
                                     <div class="input-group">
-                                        <select name="subSection_id" id="subSection_id"
-                                            onclick="console.log($(this).val())" onchange="console.log('change is firing')"
-                                            data-size="7" tabindex="null"
+                                        <select name="subSection_id" id="subSection_id" onclick="console.log($(this).val())"
+                                            onchange="console.log('change is firing')" data-size="7" tabindex="null"
                                             class="@error('subSection_id') is-invalid @enderror form-control selectpicker"
                                             data-live-search="true" title="أدخل اسم القسم ">
                                             {{-- <option value="">اختر القسم </option> --}}
@@ -129,32 +134,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                <a href="{{ url('inventory/sub_section/create') }}" title="اضافة قسم جديد" target="_blank">
-                                    <i class="p-3 ki ki-solid-plus icon-md"></i>
-                                </a>
+
 
                                 <div class=" col-lg-1"></div>
 
-                                <label for="user_id" class="col-lg-2 col-form-label ">
+                                <label for="beneficiary" class="col-lg-2 col-form-label ">
                                     <h6> المستلم:</h6>
                                 </label>
+
                                 <div class="col-lg-3">
                                     <div class="input-group">
-                                        <select name="user_id" id="user_id" data-size="7" tabindex="null"
-                                            class="@error('user_id') is-invalid @enderror form-control "
-                                            data-live-search="true" title="أدخل اسم القسم">
-                                            @foreach ($user as $users)
-                                                <option value="{{ $users->id }}">
-                                                    {{ $users->employee_name }}
-                                                </option>
-                                            @endforeach
-
-                                            @if ($errors->has('user_id'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('user_id') }}</strong>
-                                                </span>
-                                            @endif
-                                        </select>
+                                        <input type="text" class="form-control" id="beneficiary" name="beneficiary">
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +207,6 @@
                                 <div class="col-lg-10">
                                     <button type="submit" class="ml-5 btn btn-success">حفظ</button>
 
-                                    <x-add-resource-button />
 
                                 </div>
 
@@ -254,23 +243,28 @@
                 calculateTotalAll();
             });
 
-            // تحويل الزر "add-row" لإضافة الصف إلى جدول المنتجات
             $("#add-row").click(function() {
                 var html = "<tr>";
                 html +=
-                    "<td><select name='product[]' title='اختر الصنف' class='form-control' data-live-search='true'>";
+                    "<td><select name='product[]' class='form-control selectpicker' data-live-search='true' title='أدخل الصنف'>";
                 @foreach ($products as $product)
                     html +=
                         "<option value='{{ $product->id }}'>{{ $product->item_num }} {{ $product->item_name }} {{ $product->balance }}</option>";
                 @endforeach
                 html += "</select></td>";
                 html +=
-                    "<td><input type='number' name='quantity[]' class='form-control'  onchange='calculateTotal(this); calculateTotalAll();'></td>";
-
+                    "<td><input type='number' name='quantity[]' class='form-control' onchange='calculateTotal(this); calculateTotalAll();'></td>";
+                // html +=
+                //     "<td><input type='number' name='price[]' class='form-control' onchange='calculateTotal(this); calculateTotalAll();'></td>";
                 html += "<td><button type='button' class='btn btn-danger delete-row'>حذف</button></td>";
                 html += "</tr>";
+
                 $("table tbody").append(html);
+
+                // Initialize Bootstrap Select for newly added select elements
+                $(".selectpicker").selectpicker();
             });
+
 
             // حساب الإجمالي الكلي
             function calculateTotalAll() {
@@ -296,7 +290,7 @@
         }
     </script>
 
-
+    {{--
     <script>
         $(document).ready(function() {
             $('select[name="subSection_id"]').on('change', function() {
@@ -307,9 +301,9 @@
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
-                            $('select[name="user_id"]').empty();
+                            $('select[name="beneficiary"]').empty();
                             $.each(data, function(key, value) {
-                                $('select[name="user_id"]').append(
+                                $('select[name="beneficiary"]').append(
                                     '<option value="' +
                                     value + '">' + value + '</option>');
                             });
@@ -320,5 +314,5 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 @endsection

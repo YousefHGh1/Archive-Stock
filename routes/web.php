@@ -56,9 +56,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 // *********************************************dashboard****************************************************************
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HeadController::class, 'nots'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::prefix('/')->middleware('auth')->group(function () {
     Route::get('/', function () {
@@ -145,6 +143,9 @@ Route::prefix('inventory/')->middleware('auth')->group(function () {
     Route::get('/transactions/{itemId}', [ReportController::class, 'transactions'])->name('transactions');
     Route::post('transactions_report/searchdate', [ReportController::class, 'searchdate']);
 
+    Route::get('/balance', [ReportController::class, 'balance'])->name('balance');
+// Route::get('/last-item/{categoryId}', [ItemController::class, 'getLastItem'])->name('last_item');
+
     // *****************************************Inside_Search******************************************************
     Route::post('invoice/searchdate', [InvoiceController::class, 'searchdate']);
     Route::post('invoice_export/searchdate', [InvoiceExportController::class, 'searchdate']);
@@ -179,9 +180,9 @@ Route::prefix('/')->group(function () {
     Route::post('dieselexport/searchname', [DieselExportController::class, 'searchname'])->name('dieselexport.searchname');
     Route::post('dieselexport/searchtotal', [DieselExportController::class, 'searchtotal'])->name('dieselexport.searchtotal');
     // **************************Diesel********************************************************************
-    Route::get('dieselfilter', [DieselController::class, 'report'])->name('diesel.report');
-    Route::post('diesel/searchdate', [DieselController::class, 'searchdate'])->name('diesel.searchdate');
-    Route::post('diesel/searchvou', [DieselController::class, 'searchvou'])->name('diesel.searchvou');
+
+    Route::match(['get', 'post'], '/dieselreport', [DieselController::class, 'report'])->name('diesel.report');
+
     // **************************legal********************************************************************
     Route::get('legalreport', [LegalController::class, 'report']);
 });
@@ -189,18 +190,18 @@ Route::prefix('/')->group(function () {
 // ***********************************************historical**************************************************************
 Route::prefix('/historical')->group(function () {
     Route::get('exportindex', [HistoricalController::class, 'exportindex'])->name('historical.exportindex');
-    Route::get('exportreport', [HistoricalController::class, 'exportreport'])->name('historical.exportreport');
+    // Route::get('exportreport', [HistoricalController::class, 'exportreport'])->name('historical.exportreport');
     Route::get('totalreport', [HistoricalController::class, 'totalreport'])->name('historical.totalreport');
-    Route::post('searchdate', [HistoricalController::class, 'searchdate'])->name('historical.searchdate');
-    Route::post('searchvou', [HistoricalController::class, 'searchvou'])->name('historical.searchvou');
-    Route::post('searchsec', [HistoricalController::class, 'searchsec'])->name('historical.searchsec');
-    Route::post('searchname', [HistoricalController::class, 'searchname'])->name('historical.searchname');
+    // Route::post('searchdate', [HistoricalController::class, 'searchdate'])->name('historical.searchdate');
+    // Route::post('searchvou', [HistoricalController::class, 'searchvou'])->name('historical.searchvou');
+    // Route::post('searchsec', [HistoricalController::class, 'searchsec'])->name('historical.searchsec');
+    // Route::post('searchname', [HistoricalController::class, 'searchname'])->name('historical.searchname');
 
     Route::post('searchtotal', [HistoricalController::class, 'searchtotal'])->name('historical.searchtotal');
 
     Route::get('waredindex', [HistoricalController::class, 'waredindex'])->name('historical.waredindex');
-    Route::get('waredreport', [HistoricalController::class, 'waredreport'])->name('historical.waredreport');
-    Route::post('datewared', [HistoricalController::class, 'datewared'])->name('historical.datewared');
+    // Route::get('waredreport', [HistoricalController::class, 'waredreport'])->name('historical.waredreport');
+    // Route::post('datewared', [HistoricalController::class, 'datewared'])->name('historical.datewared');
 });
 
 // ***********************************************court**************************************************************
@@ -226,5 +227,13 @@ Route::prefix('/')->group(function () {
 
 // *********************************اضافة اخطار 1 ********************************************
 Route::resource('court', CourtController::class);
+
+// *********************************last item in category ********************************************
+// Route::get('/category/{id}/last-item', [ItemController::class, 'getLastItem'])->name('last_item');
+Route::get('/category/{id}/last-item', [ItemController::class, 'getLastItem'])
+    ->name('category.last_item');
+
+Route::get('/last-item/{categoryId}', [ItemController::class, 'getLastItem'])
+    ->name('item.last_by_category');
 
 require __DIR__ . '/auth.php';

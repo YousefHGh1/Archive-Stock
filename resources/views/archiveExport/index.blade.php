@@ -48,10 +48,10 @@
         .dataTables_wrapper .dataTable thead th {
             background-color: #E4E6EF;
         }
-        .card-body{
+
+        .card-body {
             padding: 10px 12px !important;
         }
-
     </style>
 @endsection
 
@@ -84,7 +84,7 @@
 
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{ url('/archiveExport/create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ url('/archiveExport/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -117,12 +117,12 @@
                         <div id="collapseOne5" class="pl-5 collapse" data-parent="#accordionExample5"
                             style="direction: rtl;">
                             <div class="card-body1">
-                                <div class="row mb-0 search_input">
+                                <div class="mb-0 row search_input">
 
-                                    <div class="col-lg-7 mb-6">
+                                    <div class="mb-6 col-lg-7">
                                         <label>التاريخ:</label>
                                         <form action="{{ url('archiveExport/searchdate') }}" method="POST"
-                                        class="pr-5 form-group">
+                                            class="pr-5 form-group">
                                             @csrf
                                             <div class="input-daterange input-group">
                                                 <div class="p-0 col-4">
@@ -130,22 +130,21 @@
                                                         id="start_date" />
                                                 </div>
                                                 <div class="input-group-append">
-                                                    <span class="input-group-text"><i
-                                                            class="la la-ellipsis-h"></i></span>
+                                                    <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                                                 </div>
                                                 <div class="p-0 col-4">
                                                     <input name="end_date" type="date" class="form-control"
                                                         id="end_date" />
                                                 </div>
                                                 <div class="mt-auto mb-auto col-lg-2">
-                                                    <input type="submit" class="btn     btn-primary btn-primary--icon"
+                                                    <input type="submit" class="btn btn-primary btn-primary--icon"
                                                         value="بحث" />
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
 
-                                    <div class="col-lg-5 mb-6">
+                                    <div class="mb-6 col-lg-5">
                                         <label>رقم الصادر:</label>
                                         <form action="{{ url('archiveExport/searchnumber') }}" method="POST"
                                             class="pr-5 form-group">
@@ -187,8 +186,10 @@
                         @foreach ($archiveExport as $archiveExports)
                             <tr>
                                 <td>{{ $archiveExports->number }}</td>
-                                <td>{{ $archiveExports->date }}</td>
-                                <td> {{ $archiveExports->export->export_name }}</td>
+                                <td>
+                                <td>{{ $archiveExports->date ?? '-' }}</td>
+                                </td>
+                                <td> {{ optional($archiveExports->export)->export_name ?? '-' }}</td>
                                 <td> {{ $archiveExports->title }}</td>
                                 {{-- <td><a href="https://master/CoreArchive/public/filearchiveExport/{{ $archiveExports->file }}"
                                         target="_blank">{{ $archiveExports->file }}</a></td> --}}

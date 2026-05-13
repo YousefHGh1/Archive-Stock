@@ -66,6 +66,7 @@
                             <!--end::Svg Icon-->
                         </span>إنشاء مورد جديد</a>
                     <!--end::Button-->
+                    <x-add-resource-button />
 
                 </div>
 
@@ -202,46 +203,50 @@
 @endsection
 
 @section('scripts')
-    <script>
-        function confirmDelete(id, reference) {
-            Swal.fire({
-                title: 'هل تريد الحذف؟',
-                text: "لن تتمكن من التراجع عن هذا",
-                icon: 'warning',
-                showCancelButton: true,
-                cancelButtonColor: '#d33',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'نعم, احذف!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    performDelete(id, reference);
-                }
+<script>
+    function confirmDelete(id, reference) {
+        Swal.fire({
+            title: 'هل تريد الحذف؟',
+            text: "لن تتمكن من التراجع عن هذا",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'نعم, احذف!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                performDelete(id, reference);
+            }
+        });
+    }
+
+    function performDelete(id, reference) {
+        // Blade will output the route with a placeholder we replace in JS
+        let url = "{{ route('supplier.destroy', ['supplier' => ':id']) }}";
+        url = url.replace(':id', id);
+
+        axios.delete(url)
+            .then(function(response) {
+                console.log(response);
+                reference.closest('tr').remove();
+                showMessage(response.data);
+            })
+            .catch(function(error) {
+                console.log(error.response);
+                showMessage(error.response.data);
             });
-        }
+    }
 
-        function performDelete(id, reference) {
-            axios.delete('/supplier/' + id)
-                .then(function(response) {
-                    console.log(response);
-                    // toastr.success(response.data.message);
-                    reference.closest('tr').remove();
-                    showMessage(response.data);
-                })
-                .catch(function(error) {
-                    console.log(error.response);
-                    // toastr.error(error.response.data.message);
-                    showMessage(error.response.data);
-                });
-        }
-
-        function showMessage(message) {
-            Swal.fire(
-                'تم الحذف بنجاح!',
-                'تم حذف ملفك.',
-                'success'
-            );
-        }
-    </script>
+    function showMessage(message) {
+        Swal.fire(
+            'تم الحذف بنجاح!',
+            'تم حذف ملفك.',
+            'success'
+        ).then(() => {
+        location.reload(); // Refresh the page after the success alert is dismissed
+    });
+    }
+</script>
 
 
     <script>

@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    اضافة مستخدم
+    اضافة الموظفين
 @endsection
 @section('page_title')
     لوحة التحكم
@@ -67,8 +67,6 @@
                             </div>
                             <!--end::Form group-->
 
-
-
                             <!--begin::Form group-->
                             <div class="p-3 form-group row">
                                 <label for="section_id" class="col-lg-2 col-form-label ">
@@ -120,11 +118,8 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!--end::Form group-->
                         </center>
-
-
 
                         <!--begin::Action-->
                         <div class="card-footer">
@@ -186,10 +181,12 @@
                         dataType: "json",
                         success: function(data) {
                             $('select[name="sub_section_id"]').empty();
-                            $.each(data, function(key, value) {
+                            $.each(data, function(id, name) {
+                                // Append the correct value (ID) for sub_section_id
                                 $('select[name="sub_section_id"]').append(
-                                    '<option value="' +
-                                    value + '">' + value + '</option>');
+                                    '<option value="' + id + '">' + name +
+                                    '</option>'
+                                );
                             });
                         },
                     });

@@ -54,6 +54,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض الموردين </a>
+                            <x-add-resource-button />
                         </div>
                     </div>
 
@@ -70,8 +71,8 @@
                                 </label>
                                 <div class="col-3 primary">
                                     <input name="supplier_item_num" type="number" min="0"
-                                        class="@error('supplier_item_num') is-invalid @enderror form-control"
-                                        id="supplier_item_num" placeholder="ادخل رقم المورد " />
+                                        class="@error('supplier_item_num') is-invalid @enderror form-control" disabled
+                                        id="supplier_item_num" placeholder="ادخل رقم المورد " value="{{ old('supplier_item_num', $NewSupplierNo) }}"/>
                                     @error('supplier_item_num')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -128,7 +129,6 @@
                                     <button type="reset"
                                         class="mr-2 btn btn-danger m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">الغاء</button>
 
-                                        <x-add-resource-button />
 
                                 </div>
                             </div>

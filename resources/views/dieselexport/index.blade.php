@@ -67,18 +67,18 @@
                                                     <path
                                                         d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z"
                                                         fill="#000000" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="9"
-                                                        width="7" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="9"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="13"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="13"
-                                                        width="7" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="17"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="17"
-                                                        width="7" height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="9" width="7"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="9" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="13" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="13" width="7"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="17" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="17" width="7"
+                                                        height="2" rx="1" />
                                                 </g>
                                             </svg>
                                             <!--end::Svg Icon-->
@@ -101,18 +101,18 @@
                                                     <path
                                                         d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z"
                                                         fill="#000000" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="9"
-                                                        width="7" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="9"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="13"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="13"
-                                                        width="7" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="17"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="17"
-                                                        width="7" height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="9" width="7"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="9" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="13" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="13" width="7"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="17" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="17" width="7"
+                                                        height="2" rx="1" />
                                                 </g>
                                             </svg>
                                             <!--end::Svg Icon-->
@@ -127,7 +127,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="{{ url('dieselexport/create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ url('dieselexport/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -143,6 +143,8 @@
                             <!--end::Svg Icon-->
                         </span>إنشاء صادر جديد</a>
                     <!--end::Button-->
+                    <x-add-resource-button />
+
                 </div>
             </div>
             <div class="card-body">
@@ -176,7 +178,7 @@
                         <tr class="text-uppercase">
                             <th style="min-width: 10px">{{ 'نوع المحروقات' }}</th>
                             <th style="min-width: 10px">{{ 'رقم الإيصال' }}</th>
-                            <th style="min-width: 10px">{{ ' القسم' }}</th>
+                            <th style="min-width: 10px">{{ ' الدائرة' }}</th>
                             <th style="min-width: 10px">{{ 'القسم الفرعي' }}</th>
                             <th style="min-width: 10px">{{ 'رقم الدفتر' }}</th>
                             <th style="min-width: 10px">{{ 'كمية الصادر' }}</th>
@@ -191,7 +193,7 @@
                                 <td class="py-8 pl-0">{{ $dieselexports->typesfuel->name }}</td>
                                 <td class="py-8 pl-0"> {{ $dieselexports->num_section }} </td>
                                 <td class="py-8 pl-0">{{ $dieselexports->section->name_section }} </td>
-                                <td class="py-8 pl-0"> {{ $dieselexports->sub_section_id }} </td>
+                                <td class="py-8 pl-0"> {{ $dieselexports->subSection->name }} </td>
                                 <td class="py-8 pl-0"> {{ $dieselexports->num_note }} </td>
                                 <td class="py-8 pl-0"> {{ $dieselexports->quantity }} </td>
                                 <td class="py-8 pl-0"> {{ $dieselexports->voucher }} </td>
@@ -227,133 +229,6 @@
         </div>
         <!--end::Card-->
 
-        <div class="text-center card">
-
-            <div class="card-body">
-                <h4 class="mb-0 alert bg-primary-o-50 text-primary">كميات المحروقات</h4>
-                <table class="table table-striped table-hover table-checkable" id="myTable">
-                    <thead class="text-white bg-primary">
-                        <tr>
-
-                            <th>{{ 'شهر 1' }} </th>
-                            <th>{{ 'شهر 2' }}</th>
-                            <th>{{ 'شهر 3' }} </th>
-                            <th>{{ 'شهر 4' }} </th>
-                            <th>{{ 'شهر 5' }} </th>
-                            <th>{{ 'شهر 6 ' }} </th>
-                            <th>{{ 'شهر 7 ' }} </th>
-                            <th>{{ 'شهر 8 ' }} </th>
-                            <th>{{ 'شهر 9 ' }} </th>
-                            <th>{{ 'شهر 10 ' }} </th>
-                            <th>{{ 'شهر 11 ' }} </th>
-                            <th>{{ 'شهر 12 ' }} </th>
-                            <th>{{ 'عدد الصادر' }}</th>
-                            <th>{{ 'مجموع الصادر' }}</th>
-                            <th>{{ 'مجموع المتبقي من المحروقات' }} </th>
-
-
-                        </tr>
-                    </thead>
-
-
-                    <tbody>
-                        <tr>
-                            <td>
-                                {{-- <li class="list-group-item">   --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 1 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                                </li>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">  --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 2 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">  --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 3 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">  --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 4 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">  --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 5 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">  --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 6 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">  --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 7 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">   --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 8 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-
-                            <td>
-                                {{-- <li class="list-group-item"> --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 9 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">   --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 10 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">   --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 11 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{-- <li class="list-group-item">   --}}
-                                {{ \App\Models\DieselExport::select('quantity')->whereRaw('MONTH(diesel_exports.date) = 12 && YEAR(diesel_exports.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-
-                            <td>
-                                {{ \App\Models\DieselExport::select('id')->whereRaw('YEAR(diesel_exports.date) = 2022')->count('id') }}
-                                </li>
-                            </td>
-                            <td> {{ \App\Models\DieselExport::select('quantity')->whereRaw('YEAR(diesel_exports.date) = 2022')->sum('quantity') }}
-                                <span>لتر</span> </li>
-                            </td>
-                            <td> {{ \App\Models\Diesel::sum('quantity') - \App\Models\DieselExport::sum('quantity') }}
-                                {{-- <td>   {{ \App\Models\Diesel::select('quantity')->whereRaw('YEAR(diesel_exports.date) = 2022')->sum('quantity') - \App\Models\DieselExport::select('quantity')->whereRaw('YEAR(diesel_exports.date) = 2022')->sum('quantity') }} --}}
-
-                                <span>لتر</span>
-                                </li>
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-
     </div>
 @endsection
 
@@ -376,7 +251,10 @@
         }
 
         function performDelete(id, reference) {
-            axios.delete('/dieselexport/' + id)
+            let url = "{{ route('dieselexport.destroy', ['dieselexport' => ':id']) }}";
+            url = url.replace(':id', id);
+
+            axios.delete(url)
                 .then(function(response) {
                     console.log(response);
                     reference.closest('tr').remove();
@@ -393,9 +271,12 @@
                 'تم الحذف بنجاح!',
                 'تم حذف ملفك.',
                 'success'
-            );
+            ).then(() => {
+                location.reload(); // Refresh the page after the success alert is dismissed
+            });
         }
     </script>
+
 
     {{-- // $('#section_id').on('change',function(){
 

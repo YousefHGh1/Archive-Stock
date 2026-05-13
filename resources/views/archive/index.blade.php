@@ -96,7 +96,7 @@
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{ url('/archive/create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ url('/archive/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -131,9 +131,9 @@
                             <div class="card-body1">
                                 <div class="mb-6 col-lg-12">
 
-                                    <div class="row mb-0 search_input">
+                                    <div class="mb-0 row search_input">
 
-                                        <div class="col-lg-7 mb-6">
+                                        <div class="mb-6 col-lg-7">
                                             <label>التاريخ:</label>
                                             <form action="{{ url('archive/searchdate') }}" method="POST"
                                                 class="pr-5 form-group">
@@ -152,14 +152,14 @@
                                                             id="end_date" />
                                                     </div>
                                                     <div class="mt-auto mb-auto col-lg-2">
-                                                        <input type="submit" class="btn     btn-primary btn-primary--icon"
+                                                        <input type="submit" class="btn btn-primary btn-primary--icon"
                                                             value="بحث" />
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
 
-                                        <div class="col-lg-5 mb-6">
+                                        <div class="mb-6 col-lg-5">
                                             <label>رقم الوارد:</label>
                                             <form action="{{ url('archive/searchnumber') }}" method="POST"
                                                 class="pr-5 form-group">
@@ -205,8 +205,9 @@
                             @if (date('Y', strtotime($archives->date)) == $selectedYear)
                                 <tr>
                                     <td>{{ $archives->number }}</td>
-                                    <td>{{ $archives->date }}</td>
-                                    <td> {{ $archives->import->import_name }}</td>
+                                    <td>{{ $archives->date ?? '-' }}</td>
+                                    <td>{{ optional($archives->import)->import_name }}
+                                    </td>
                                     <td> {{ $archives->title }}</td>
                                     <td>{{ $archives->num_Ministry }}</td>
 

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('diesel_exports', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
-            $table->integer('voucher')->unique();
+            $table->integer('voucher');
             $table->date('date');
             $table->integer('num_section');
             $table->integer('num_note');

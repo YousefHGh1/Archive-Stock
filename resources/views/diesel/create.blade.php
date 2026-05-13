@@ -47,6 +47,8 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض وارد المحروقات</a>
+                            <x-add-resource-button />
+
                         </div>
                     </div>
                     <!--begin::Form-->
@@ -61,15 +63,17 @@
                                 </label>
                                 <div class="col-8">
                                     <div class="dropdown bootstrap-select form-control dropup">
-                                        <select
-                                            class="@error('supplier_id') is-invalid @enderror form-control selectpicker "
-                                            data-size="7" tabindex="null" data-live-search="true" title="..."
-                                            name="supplier_id" id="supplier_id">
+                                        <select class="form-control selectpicker @error('supplier_id') is-invalid @enderror"
+                                            name="supplier_id" id="supplier_id" data-size="7" data-live-search="true"
+                                            title="...">
                                             @foreach ($supplier as $suppliers)
-                                                <option value="{{ $suppliers->id }}">{{ $suppliers->name_supplier }}
+                                                <option value="{{ $suppliers->id }}"
+                                                    {{ old('supplier_id') == $suppliers->id ? 'selected' : '' }}>
+                                                    {{ $suppliers->name_supplier }}
                                                 </option>
                                             @endforeach
                                         </select>
+
                                     </div>
                                     @error('supplier_id')
                                         <span class="text-sm text-danger">{{ $message }}</span>
@@ -83,7 +87,7 @@
                                 </label>
                                 <div class="col-lg-3">
                                     <div class="input-group">
-                                        <input name="quantity" id="quantity" type="number"
+                                        <input name="quantity" id="quantity" type="number" value="{{ old('quantity') }}"
                                             class="@error('quantity') is-invalid @enderror form-control" min="0"
                                             placeholder="ادخل كمية التوريد">
                                     </div>
@@ -96,7 +100,7 @@
                                 </label>
                                 <div class="col-lg-3">
                                     <div class="input-group">
-                                        <input name="type" id="type" type="text"
+                                        <input name="type" id="type" type="text" value="{{ old('type') }}"
                                             class="@error('type') is-invalid @enderror form-control"
                                             placeholder="ادخل جهة التوريد">
                                     </div>
@@ -113,6 +117,7 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input name="invoice_num" type="number" min="0"
+                                            value="{{ old('invoice_num') }}"
                                             class="@error('invoice_num') is-invalid @enderror form-control" id="invoice_num"
                                             placeholder="ادخل رقم الفاتورة" />
                                     </div>
@@ -125,7 +130,7 @@
                                 </label>
                                 <div class="col-lg-3">
                                     <div class="input-group">
-                                        <input name="voucher" type="number" min="0"
+                                        <input name="voucher" type="number" min="0" value="{{ old('voucher') }}"
                                             class="@error('voucher') is-invalid @enderror form-control" id="voucher"
                                             placeholder="ادخل سند التوريد" />
                                     </div>
@@ -157,14 +162,17 @@
                                 <div class="col-3">
                                     <div class="dropdown bootstrap-select form-control dropup">
                                         <select
-                                            class="@error('typesfuel_id') is-invalid @enderror form-control selectpicker "
-                                            data-size="7" tabindex="null" data-live-search="true" title="..."
-                                            name="typesfuel_id" id="typesfuel_id">
-                                            @foreach ($typesfuel as $typesfuels)
-                                                <option value="{{ $typesfuels->id }}">{{ $typesfuels->name }}
+                                            class="form-control selectpicker @error('typesfuel_id') is-invalid @enderror"
+                                            name="typesfuel_id" id="typesfuel_id" data-size="7" data-live-search="true"
+                                            title="...">
+                                            @foreach ($typesfuel as $fuelType)
+                                                <option value="{{ $fuelType->id }}"
+                                                    {{ old('typesfuel_id') == $fuelType->id ? 'selected' : '' }}>
+                                                    {{ $fuelType->name }}
                                                 </option>
                                             @endforeach
                                         </select>
+
                                     </div>
                                     @error('typesfuel_id')
                                         <span class="text-sm text-danger">{{ $message }}</span>

@@ -152,7 +152,7 @@
                                 <td>{{ $invoice_export->voucher_date }}</td>
                                 <td>{{ $invoice_export->invoice_no }}</td>
                                 <td>{{ $invoice_export->name }}</td>
-                                <td>{{ $invoice_export->user_id }}</td>
+                                <td>{{ $invoice_export->beneficiary }}</td>
                                 <td>{!! $invoice_export->products !!}</td>
 
                                 <td data-field="Actions" data-autohide-disabled="false" aria-label="null"

@@ -60,6 +60,7 @@
                         <span class="menu-text">لوحة التحكم</span>
                     </a>
                 </li>
+
                 {{-- ************************************************المخازن********************************************* --}}
                 @can('stock')
                     <li class="menu-section">
@@ -91,423 +92,358 @@
                                 <ul class="menu-subnav">
                                     {{-- ***********************************************المحروقات*********************************************** --}}
                                     @can('diesels')
-                                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover"><a
-                                                href="javascript:;" class="menu-link menu-toggle"><span
-                                                    class="svg-icon menu-icon"><!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Bucket.svg--><svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                        viewBox="0 0 24 24" version="1.1">
-                                                        <g stroke="none" stroke-width="1" fill="none"
-                                                            fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24"
-                                                                height="24"></rect>
-                                                            <path
-                                                                d="M5,5 L5,15 C5,15.5948613 5.25970314,16.1290656 5.6719139,16.4954176 C5.71978107,16.5379595 5.76682388,16.5788906 5.81365532,16.6178662 C5.82524933,16.6294602 15,7.45470952 15,7.45470952 C15,6.9962515 15,6.17801499 15,5 L5,5 Z M5,3 L15,3 C16.1045695,3 17,3.8954305 17,5 L17,15 C17,17.209139 15.209139,19 13,19 L7,19 C4.790861,19 3,17.209139 3,15 L3,5 C3,3.8954305 3.8954305,3 5,3 Z"
-                                                                fill="#000000" fill-rule="nonzero"
-                                                                transform="translate(10.000000, 11.000000) rotate(-315.000000) translate(-10.000000, -11.000000) ">
-                                                            </path>
-                                                            <path
-                                                                d="M20,22 C21.6568542,22 23,20.6568542 23,19 C23,17.8954305 22,16.2287638 20,14 C18,16.2287638 17,17.8954305 17,19 C17,20.6568542 18.3431458,22 20,22 Z"
-                                                                fill="#000000" opacity="0.3"></path>
-                                                        </g>
-                                                    </svg><!--end::Svg Icon--></span><span class="menu-text">
-                                                    المحروقات</span><i class="menu-arrow"></i></a>
-                                            <div class="menu-submenu " kt-hidden-height="80" style=""><i
-                                                    class="menu-arrow"></i>
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                                <span class="svg-icon menu-icon">
+                                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-fuel-pump-diesel" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M3.5 2a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5h-5ZM4 14V9h1.796c.5 0 .913.098 1.237.293.325.195.567.479.725.85.161.371.242.82.242 1.344 0 .528-.08.98-.242 1.355a1.805 1.805 0 0 1-.732.861c-.324.198-.734.297-1.23.297H4Zm1.666-4.194h-.692v3.385h.692c.229 0 .427-.035.595-.103a.986.986 0 0 0 .412-.315c.108-.142.188-.318.241-.528.056-.21.083-.456.083-.74 0-.376-.048-.69-.144-.94a1.11 1.11 0 0 0-.436-.569c-.195-.127-.445-.19-.75-.19Z" />
+                                                        <path
+                                                            d="M3 0a2 2 0 0 0-2 2v13H.5a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1H11v-4a1 1 0 0 1 1 1v.5a1.5 1.5 0 0 0 3 0V8h.5a.5.5 0 0 0 .5-.5V4.324c0-.616 0-1.426-.294-2.081a1.969 1.969 0 0 0-.794-.907C14.534 1.111 14.064 1 13.5 1a.5.5 0 0 0 0 1c.436 0 .716.086.9.195a.97.97 0 0 1 .394.458c.147.328.19.746.201 1.222H13.5a.5.5 0 0 0-.5.5V7.5a.5.5 0 0 0 .5.5h.5v4.5a.5.5 0 0 1-1 0V12a2 2 0 0 0-2-2V2a2 2 0 0 0-2-2H3Zm7 2v13H2V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1Z" />
+                                                    </svg>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                <span class="menu-text">المحروقات</span>
+                                                <i class="menu-arrow"></i>
+                                            </a>
+                                            <div class="menu-submenu">
+                                                <i class="menu-arrow"></i>
                                                 <ul class="menu-subnav">
-                                                    <li class="menu-item menu-item-parent" aria-haspopup="true"><span
-                                                            class="menu-link"><span class="menu-text">
-                                                                المحروقات</span></span>
-                                                    </li>
-                                                    <li class="menu-item " aria-haspopup="true"><a
-                                                            href="{{ route('TypesFuel.index') }}" class="menu-link "><i
-                                                                class="menu-bullet menu-bullet-dot"><span></span></i><span
-                                                                class="menu-text">أنواع المحروقات</span></a>
-                                                    </li>
-
-                                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                                        data-menu-toggle="hover">
-                                                        <a href="javascript:;" class="menu-link menu-toggle">
-                                                            <span class="svg-icon menu-icon">
-                                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-fuel-pump-diesel" viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M3.5 2a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 .5.5h5a.5.5 0 0 0 .5-.5v-5a.5.5 0 0 0-.5-.5h-5ZM4 14V9h1.796c.5 0 .913.098 1.237.293.325.195.567.479.725.85.161.371.242.82.242 1.344 0 .528-.08.98-.242 1.355a1.805 1.805 0 0 1-.732.861c-.324.198-.734.297-1.23.297H4Zm1.666-4.194h-.692v3.385h.692c.229 0 .427-.035.595-.103a.986.986 0 0 0 .412-.315c.108-.142.188-.318.241-.528.056-.21.083-.456.083-.74 0-.376-.048-.69-.144-.94a1.11 1.11 0 0 0-.436-.569c-.195-.127-.445-.19-.75-.19Z" />
-                                                                    <path
-                                                                        d="M3 0a2 2 0 0 0-2 2v13H.5a.5.5 0 0 0 0 1h11a.5.5 0 0 0 0-1H11v-4a1 1 0 0 1 1 1v.5a1.5 1.5 0 0 0 3 0V8h.5a.5.5 0 0 0 .5-.5V4.324c0-.616 0-1.426-.294-2.081a1.969 1.969 0 0 0-.794-.907C14.534 1.111 14.064 1 13.5 1a.5.5 0 0 0 0 1c.436 0 .716.086.9.195a.97.97 0 0 1 .394.458c.147.328.19.746.201 1.222H13.5a.5.5 0 0 0-.5.5V7.5a.5.5 0 0 0 .5.5h.5v4.5a.5.5 0 0 1-1 0V12a2 2 0 0 0-2-2V2a2 2 0 0 0-2-2H3Zm7 2v13H2V2a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1Z" />
-                                                                </svg>
-                                                                <!--end::Svg Icon-->
-                                                            </span>
+                                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                                        <span class="menu-link">
                                                             <span class="menu-text">المحروقات</span>
-                                                            <i class="menu-arrow"></i>
-                                                        </a>
-                                                        <div class="menu-submenu">
-                                                            <i class="menu-arrow"></i>
-                                                            <ul class="menu-subnav">
-                                                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                                                    <span class="menu-link">
-                                                                        <span class="menu-text">المحروقات</span>
-                                                                    </span>
-                                                                </li>
+                                                        </span>
+                                                    </li>
 
+                                                    <ul class="menu-subnav">
+
+                                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                                            data-menu-toggle="hover">
+                                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                                                <span class="svg-icon menu-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                                                        version="1.1">
+                                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                                            fill-rule="evenodd">
+                                                                            <rect x="0" y="0" width="24" height="24">
+                                                                            </rect>
+                                                                            <rect fill="#000000" opacity="0.3"
+                                                                                transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
+                                                                                x="11" y="1" width="2" height="12"
+                                                                                rx="1"></rect>
+                                                                            <path
+                                                                                d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
+                                                                                fill="#000000" fill-rule="nonzero"
+                                                                                opacity="0.3"></path>
+                                                                            <path
+                                                                                d="M14.2928932,10.2928932 C14.6834175,9.90236893 15.3165825,9.90236893 15.7071068,10.2928932 C16.0976311,10.6834175 16.0976311,11.3165825 15.7071068,11.7071068 L12.7071068,14.7071068 C12.3165825,15.0976311 11.6834175,15.0976311 11.2928932,14.7071068 L8.29289322,11.7071068 C7.90236893,11.3165825 7.90236893,10.6834175 8.29289322,10.2928932 C8.68341751,9.90236893 9.31658249,9.90236893 9.70710678,10.2928932 L12,12.5857864 L14.2928932,10.2928932 Z"
+                                                                                fill="#000000" fill-rule="nonzero"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="menu-text"> الوارد</span>
+                                                                <i class="menu-arrow"></i>
+                                                            </a>
+                                                            <div class="menu-submenu">
+                                                                <i class="menu-arrow"></i>
                                                                 <ul class="menu-subnav">
-                                                                    <li class="menu-item menu-item-submenu"
-                                                                        aria-haspopup="true" data-menu-toggle="hover">
-                                                                        <a href="javascript:;" class="menu-link menu-toggle">
-                                                                            <span class="svg-icon menu-icon">
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                    width="24px" height="24px"
-                                                                                    viewBox="0 0 24 24" version="1.1">
-                                                                                    <g stroke="none" stroke-width="1"
-                                                                                        fill="none" fill-rule="evenodd">
-                                                                                        <rect x="0" y="0"
-                                                                                            width="24" height="24">
-                                                                                        </rect>
-                                                                                        <rect fill="#000000" opacity="0.3"
-                                                                                            transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
-                                                                                            x="11" y="1"
-                                                                                            width="2" height="12"
-                                                                                            rx="1"></rect>
-                                                                                        <path
-                                                                                            d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
-                                                                                            fill="#000000" fill-rule="nonzero"
-                                                                                            opacity="0.3"></path>
-                                                                                        <path
-                                                                                            d="M14.2928932,10.2928932 C14.6834175,9.90236893 15.3165825,9.90236893 15.7071068,10.2928932 C16.0976311,10.6834175 16.0976311,11.3165825 15.7071068,11.7071068 L12.7071068,14.7071068 C12.3165825,15.0976311 11.6834175,15.0976311 11.2928932,14.7071068 L8.29289322,11.7071068 C7.90236893,11.3165825 7.90236893,10.6834175 8.29289322,10.2928932 C8.68341751,9.90236893 9.31658249,9.90236893 9.70710678,10.2928932 L12,12.5857864 L14.2928932,10.2928932 Z"
-                                                                                            fill="#000000"
-                                                                                            fill-rule="nonzero"></path>
-                                                                                    </g>
-                                                                                </svg>
-                                                                            </span>
+                                                                    <li class="menu-item menu-item-parent"
+                                                                        aria-haspopup="true">
+                                                                        <span class="menu-link">
                                                                             <span class="menu-text"> الوارد</span>
-                                                                            <i class="menu-arrow"></i>
-                                                                        </a>
-                                                                        <div class="menu-submenu">
-                                                                            <i class="menu-arrow"></i>
-                                                                            <ul class="menu-subnav">
-                                                                                <li class="menu-item menu-item-parent"
-                                                                                    aria-haspopup="true">
-                                                                                    <span class="menu-link">
-                                                                                        <span class="menu-text"> الوارد</span>
-                                                                                    </span>
-                                                                                </li>
-                                                                                <li class="menu-item" aria-haspopup="true">
-                                                                                    <a href="{{ route('diesel.create') }}"
-                                                                                        class="menu-link">
-                                                                                        <span class="svg-icon menu-icon">
-                                                                                            <i
-                                                                                                class="menu-bullet flaticon-add-circular-button"></i>
-                                                                                        </span>
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item" aria-haspopup="true">
+                                                                        <a href="{{ route('diesel.create') }}"
+                                                                            class="menu-link">
+                                                                            <span class="svg-icon menu-icon">
+                                                                                <i
+                                                                                    class="menu-bullet flaticon-add-circular-button"></i>
+                                                                            </span>
 
-                                                                                        <span class="menu-text">إضافة وارد
-                                                                                            المحروقات</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="menu-item" aria-haspopup="true">
-                                                                                    <a href="{{ route('diesel.index') }}"
-                                                                                        class="menu-link">
-                                                                                        <span class="svg-icon menu-icon">
-                                                                                            <i
-                                                                                                class="menu-bullet flaticon-eye"></i>
-                                                                                        </span>
-                                                                                        <span class="menu-text">عرض وارد
-                                                                                            المحروقات</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="menu-item" aria-haspopup="true">
-                                                                                    <a href="{{ route('diesel.report') }}"
-                                                                                        class="menu-link">
-                                                                                        <span class="svg-icon menu-icon">
-                                                                                            <i
-                                                                                                class="menu-bullet flaticon-graphic"></i>
-                                                                                        </span>
-                                                                                        <span class="menu-text">تقارير
-                                                                                            الوارد</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li class="menu-item menu-item-submenu"
-                                                                        aria-haspopup="true" data-menu-toggle="hover">
-                                                                        <a href="javascript:;" class="menu-link menu-toggle">
-                                                                            <span class="svg-icon menu-icon">
-                                                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo4/dist/../src/media/svg/icons/Files/Export.svg--><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                    width="24px" height="24px"
-                                                                                    viewBox="0 0 24 24" version="1.1">
-                                                                                    <g stroke="none" stroke-width="1"
-                                                                                        fill="none" fill-rule="evenodd">
-                                                                                        <rect x="0" y="0"
-                                                                                            width="24" height="24" />
-                                                                                        <path
-                                                                                            d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
-                                                                                            fill="#000000" fill-rule="nonzero"
-                                                                                            opacity="0.3" />
-                                                                                        <rect fill="#000000" opacity="0.3"
-                                                                                            transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                            x="11" y="2"
-                                                                                            width="2" height="12"
-                                                                                            rx="1" />
-                                                                                        <path
-                                                                                            d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
-                                                                                            fill="#000000" fill-rule="nonzero"
-                                                                                            transform="translate(12.000000, 2.500000) scale(1, -1) translate(-12.000000, -2.500000) " />
-                                                                                    </g>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span class="menu-text"> الصادر</span>
-                                                                            <i class="menu-arrow"></i>
+                                                                            <span class="menu-text">إضافة وارد
+                                                                                المحروقات</span>
                                                                         </a>
-                                                                        <div class="menu-submenu">
-                                                                            <i class="menu-arrow"></i>
-                                                                            <ul class="menu-subnav">
-                                                                                <li class="menu-item menu-item-parent"
-                                                                                    aria-haspopup="true">
-                                                                                    <span class="menu-link">
-                                                                                        <span class="menu-text"> الصادر</span>
-                                                                                    </span>
-                                                                                </li>
-                                                                                <li class="menu-item" aria-haspopup="true">
-                                                                                    <a href="{{ route('dieselexport.create') }}"
-                                                                                        class="menu-link">
-                                                                                        <span class="svg-icon menu-icon">
-                                                                                            <i
-                                                                                                class="flaticon-add-circular-button"></i>
-                                                                                            <!--end::Svg Icon-->
-                                                                                        </span>
-                                                                                        <span class="menu-text">إضافة صادر
-                                                                                            المحروقات</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="menu-item" aria-haspopup="true">
-                                                                                    <a href="{{ route('dieselexport.index') }}"
-                                                                                        class="menu-link">
-                                                                                        <span class="svg-icon menu-icon">
-                                                                                            <i class="flaticon-eye"></i>
-                                                                                            <!--end::Svg Icon-->
-                                                                                        </span>
-                                                                                        <span class="menu-text">عرض صادر
-                                                                                            المحروقات</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                                <li class="menu-item" aria-haspopup="true">
-                                                                                    <a href="{{ route('dieselexport.report') }}"
-                                                                                        class="menu-link">
-                                                                                        <span class="svg-icon menu-icon">
-                                                                                            <i
-                                                                                                class="menu-bullet flaticon-graphic"></i>
-                                                                                        </span>
-                                                                                        <span class="menu-text">تقارير
-                                                                                            الصادر</span>
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
                                                                     </li>
-                                                                    <li class="menu-item menu-item-submenu"
-                                                                        aria-haspopup="true" data-menu-toggle="hover">
-                                                                        <a href="javascript:;" class="menu-link menu-toggle">
+                                                                    <li class="menu-item" aria-haspopup="true">
+                                                                        <a href="{{ route('diesel.index') }}"
+                                                                            class="menu-link">
                                                                             <span class="svg-icon menu-icon">
-                                                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
-                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                    width="24px" height="24px"
-                                                                                    viewBox="0 0 24 24" version="1.1">
-                                                                                    <g stroke="none" stroke-width="1"
-                                                                                        fill="none" fill-rule="evenodd">
-                                                                                        <polygon
-                                                                                            points="0 0 24 0 24 24 0 24" />
-                                                                                        <path
-                                                                                            d="M4.85714286,1 L11.7364114,1 C12.0910962,1 12.4343066,1.12568431 12.7051108,1.35473959 L17.4686994,5.3839416 C17.8056532,5.66894833 18,6.08787823 18,6.52920201 L18,19.0833333 C18,20.8738751 17.9795521,21 16.1428571,21 L4.85714286,21 C3.02044787,21 3,20.8738751 3,19.0833333 L3,2.91666667 C3,1.12612489 3.02044787,1 4.85714286,1 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z"
-                                                                                            fill="#000000" fill-rule="nonzero"
-                                                                                            opacity="0.3" />
-                                                                                        <path
-                                                                                            d="M6.85714286,3 L14.7364114,3 C15.0910962,3 15.4343066,3.12568431 15.7051108,3.35473959 L20.4686994,7.3839416 C20.8056532,7.66894833 21,8.08787823 21,8.52920201 L21,21.0833333 C21,22.8738751 20.9795521,23 19.1428571,23 L6.85714286,23 C5.02044787,23 5,22.8738751 5,21.0833333 L5,4.91666667 C5,3.12612489 5.02044787,3 6.85714286,3 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z"
-                                                                                            fill="#000000"
-                                                                                            fill-rule="nonzero" />
-                                                                                    </g>
-                                                                                </svg>
-                                                                                <!--end::Svg Icon-->
+                                                                                <i class="menu-bullet flaticon-eye"></i>
                                                                             </span>
-                                                                            <span class="menu-text">الملف التاريخي</span>
-                                                                            <i class="menu-arrow"></i>
+                                                                            <span class="menu-text">عرض وارد
+                                                                                المحروقات</span>
                                                                         </a>
-                                                                        <div class="menu-submenu">
-                                                                            <i class="menu-arrow"></i>
-                                                                            <ul class="menu-subnav">
-                                                                                <li class="menu-item menu-item-parent"
-                                                                                    aria-haspopup="true">
-                                                                                    <span class="menu-link">
-                                                                                        <span class="menu-text">الملف
-                                                                                            التاريخي</span>
-                                                                                    </span>
-                                                                                </li>
-                                                                                <ul class="menu-subnav">
-                                                                                    <li class="menu-item menu-item-submenu"
-                                                                                        aria-haspopup="true"
-                                                                                        data-menu-toggle="hover">
-                                                                                        <a href="javascript:;"
-                                                                                            class="menu-link menu-toggle">
-                                                                                            <span class="svg-icon menu-icon">
-                                                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                                    width="24px"
-                                                                                                    height="24px"
-                                                                                                    viewBox="0 0 24 24"
-                                                                                                    version="1.1">
-                                                                                                    <g stroke="none"
-                                                                                                        stroke-width="1"
-                                                                                                        fill="none"
-                                                                                                        fill-rule="evenodd">
-                                                                                                        <rect x="0"
-                                                                                                            y="0"
-                                                                                                            width="24"
-                                                                                                            height="24" />
-                                                                                                        <rect fill="#000000"
-                                                                                                            opacity="0.3"
-                                                                                                            transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
-                                                                                                            x="11"
-                                                                                                            y="1"
-                                                                                                            width="2"
-                                                                                                            height="12"
-                                                                                                            rx="1" />
-                                                                                                        <path
-                                                                                                            d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
-                                                                                                            fill="#000000"
-                                                                                                            fill-rule="nonzero"
-                                                                                                            opacity="0.3" />
-                                                                                                        <path
-                                                                                                            d="M14.2928932,10.2928932 C14.6834175,9.90236893 15.3165825,9.90236893 15.7071068,10.2928932 C16.0976311,10.6834175 16.0976311,11.3165825 15.7071068,11.7071068 L12.7071068,14.7071068 C12.3165825,15.0976311 11.6834175,15.0976311 11.2928932,14.7071068 L8.29289322,11.7071068 C7.90236893,11.3165825 7.90236893,10.6834175 8.29289322,10.2928932 C8.68341751,9.90236893 9.31658249,9.90236893 9.70710678,10.2928932 L12,12.5857864 L14.2928932,10.2928932 Z"
-                                                                                                            fill="#000000"
-                                                                                                            fill-rule="nonzero" />
-                                                                                                    </g>
-                                                                                                </svg>
-                                                                                                <!--end::Svg Icon-->
-                                                                                            </span>
-                                                                                            <!--end::Svg Icon-->
-                                                                                            <span class="menu-text">
-                                                                                                الوارد</span>
-                                                                                            <i class="menu-arrow"></i>
-                                                                                        </a>
-                                                                                        <div class="menu-submenu">
-                                                                                            <i class="menu-arrow"></i>
-                                                                                            <ul class="menu-subnav">
-                                                                                                <li class="menu-item menu-item-parent"
-                                                                                                    aria-haspopup="true">
-                                                                                                    <span class="menu-link">
-                                                                                                        <span
-                                                                                                            class="menu-text">
-                                                                                                            الوارد</span>
-                                                                                                    </span>
-                                                                                                </li>
-                                                                                                <li class="menu-item"
-                                                                                                    aria-haspopup="true">
-                                                                                                    <a href="{{ route('historical.waredindex') }}"
-                                                                                                        class="menu-link">
-                                                                                                        <i
-                                                                                                            class="menu-bullet menu-bullet-dot">
-                                                                                                            <span></span>
-                                                                                                        </i>
-                                                                                                        <span
-                                                                                                            class="menu-text">عرض
-                                                                                                            الملف
-                                                                                                            التاريخي
-                                                                                                            للوارد</span>
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                    <li class="menu-item menu-item-submenu"
-                                                                                        aria-haspopup="true"
-                                                                                        data-menu-toggle="hover">
-                                                                                        <a href="javascript:;"
-                                                                                            class="menu-link menu-toggle">
-                                                                                            <span class="svg-icon menu-icon">
-                                                                                                <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo4/dist/../src/media/svg/icons/Files/Export.svg--><svg
-                                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                                    width="24px"
-                                                                                                    height="24px"
-                                                                                                    viewBox="0 0 24 24"
-                                                                                                    version="1.1">
-                                                                                                    <g stroke="none"
-                                                                                                        stroke-width="1"
-                                                                                                        fill="none"
-                                                                                                        fill-rule="evenodd">
-                                                                                                        <rect x="0"
-                                                                                                            y="0"
-                                                                                                            width="24"
-                                                                                                            height="24" />
-                                                                                                        <path
-                                                                                                            d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
-                                                                                                            fill="#000000"
-                                                                                                            fill-rule="nonzero"
-                                                                                                            opacity="0.3" />
-                                                                                                        <rect fill="#000000"
-                                                                                                            opacity="0.3"
-                                                                                                            transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                                            x="11"
-                                                                                                            y="2"
-                                                                                                            width="2"
-                                                                                                            height="12"
-                                                                                                            rx="1" />
-                                                                                                        <path
-                                                                                                            d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
-                                                                                                            fill="#000000"
-                                                                                                            fill-rule="nonzero"
-                                                                                                            transform="translate(12.000000, 2.500000) scale(1, -1) translate(-12.000000, -2.500000) " />
-                                                                                                    </g>
-                                                                                                </svg>
-                                                                                                <!--end::Svg Icon-->
-                                                                                            </span>
-                                                                                            <span class="menu-text">
-                                                                                                الصادر</span>
-                                                                                            <i class="menu-arrow"></i>
-                                                                                        </a>
-                                                                                        <div class="menu-submenu">
-                                                                                            <i class="menu-arrow"></i>
-                                                                                            <ul class="menu-subnav">
-                                                                                                <li class="menu-item menu-item-parent"
-                                                                                                    aria-haspopup="true">
-                                                                                                    <span class="menu-link">
-                                                                                                        <span
-                                                                                                            class="menu-text">
-                                                                                                            الصادر</span>
-                                                                                                    </span>
-                                                                                                </li>
-                                                                                                <li class="menu-item"
-                                                                                                    aria-haspopup="true">
-                                                                                                    <a href="{{ route('historical.exportindex') }}"
-                                                                                                        class="menu-link">
-                                                                                                        <i
-                                                                                                            class="menu-bullet menu-bullet-dot">
-                                                                                                            <span></span>
-                                                                                                        </i>
-                                                                                                        <span
-                                                                                                            class="menu-text">عرض
-                                                                                                            الملف
-                                                                                                            التاريخي
-                                                                                                            للصادر</span>
-                                                                                                    </a>
-                                                                                                </li>
-                                                                                            </ul>
-                                                                                        </div>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </ul>
-                                                                        </div>
+                                                                    </li>
+                                                                    <li class="menu-item" aria-haspopup="true">
+                                                                        <a href="{{ route('diesel.report') }}"
+                                                                            class="menu-link">
+                                                                            <span class="svg-icon menu-icon">
+                                                                                <i class="menu-bullet flaticon-graphic"></i>
+                                                                            </span>
+                                                                            <span class="menu-text">تقارير
+                                                                                الوارد</span>
+                                                                        </a>
                                                                     </li>
                                                                 </ul>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                                            data-menu-toggle="hover">
+                                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                                                <span class="svg-icon menu-icon">
+                                                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo4/dist/../src/media/svg/icons/Files/Export.svg--><svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                                                        version="1.1">
+                                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                                            fill-rule="evenodd">
+                                                                            <rect x="0" y="0" width="24" height="24" />
+                                                                            <path
+                                                                                d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
+                                                                                fill="#000000" fill-rule="nonzero"
+                                                                                opacity="0.3" />
+                                                                            <rect fill="#000000" opacity="0.3"
+                                                                                transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
+                                                                                x="11" y="2" width="2" height="12"
+                                                                                rx="1" />
+                                                                            <path
+                                                                                d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
+                                                                                fill="#000000" fill-rule="nonzero"
+                                                                                transform="translate(12.000000, 2.500000) scale(1, -1) translate(-12.000000, -2.500000) " />
+                                                                        </g>
+                                                                    </svg>
+                                                                </span>
+                                                                <span class="menu-text"> الصادر</span>
+                                                                <i class="menu-arrow"></i>
+                                                            </a>
+                                                            <div class="menu-submenu">
+                                                                <i class="menu-arrow"></i>
+                                                                <ul class="menu-subnav">
+                                                                    <li class="menu-item menu-item-parent"
+                                                                        aria-haspopup="true">
+                                                                        <span class="menu-link">
+                                                                            <span class="menu-text"> الصادر</span>
+                                                                        </span>
+                                                                    </li>
+                                                                    <li class="menu-item" aria-haspopup="true">
+                                                                        <a href="{{ route('dieselexport.create') }}"
+                                                                            class="menu-link">
+                                                                            <span class="svg-icon menu-icon">
+                                                                                <i class="flaticon-add-circular-button"></i>
+                                                                                <!--end::Svg Icon-->
+                                                                            </span>
+                                                                            <span class="menu-text">إضافة صادر
+                                                                                المحروقات</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="menu-item" aria-haspopup="true">
+                                                                        <a href="{{ route('dieselexport.index') }}"
+                                                                            class="menu-link">
+                                                                            <span class="svg-icon menu-icon">
+                                                                                <i class="flaticon-eye"></i>
+                                                                                <!--end::Svg Icon-->
+                                                                            </span>
+                                                                            <span class="menu-text">عرض صادر
+                                                                                المحروقات</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="menu-item" aria-haspopup="true">
+                                                                        <a href="{{ route('dieselexport.report') }}"
+                                                                            class="menu-link">
+                                                                            <span class="svg-icon menu-icon">
+                                                                                <i class="menu-bullet flaticon-graphic"></i>
+                                                                            </span>
+                                                                            <span class="menu-text">تقارير
+                                                                                الصادر</span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                                            data-menu-toggle="hover">
+                                                            <a href="javascript:;" class="menu-link menu-toggle">
+                                                                <span class="svg-icon menu-icon">
+                                                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                        width="24px" height="24px" viewBox="0 0 24 24"
+                                                                        version="1.1">
+                                                                        <g stroke="none" stroke-width="1" fill="none"
+                                                                            fill-rule="evenodd">
+                                                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                                                            <path
+                                                                                d="M4.85714286,1 L11.7364114,1 C12.0910962,1 12.4343066,1.12568431 12.7051108,1.35473959 L17.4686994,5.3839416 C17.8056532,5.66894833 18,6.08787823 18,6.52920201 L18,19.0833333 C18,20.8738751 17.9795521,21 16.1428571,21 L4.85714286,21 C3.02044787,21 3,20.8738751 3,19.0833333 L3,2.91666667 C3,1.12612489 3.02044787,1 4.85714286,1 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z"
+                                                                                fill="#000000" fill-rule="nonzero"
+                                                                                opacity="0.3" />
+                                                                            <path
+                                                                                d="M6.85714286,3 L14.7364114,3 C15.0910962,3 15.4343066,3.12568431 15.7051108,3.35473959 L20.4686994,7.3839416 C20.8056532,7.66894833 21,8.08787823 21,8.52920201 L21,21.0833333 C21,22.8738751 20.9795521,23 19.1428571,23 L6.85714286,23 C5.02044787,23 5,22.8738751 5,21.0833333 L5,4.91666667 C5,3.12612489 5.02044787,3 6.85714286,3 Z M8,12 C7.44771525,12 7,12.4477153 7,13 C7,13.5522847 7.44771525,14 8,14 L15,14 C15.5522847,14 16,13.5522847 16,13 C16,12.4477153 15.5522847,12 15,12 L8,12 Z M8,16 C7.44771525,16 7,16.4477153 7,17 C7,17.5522847 7.44771525,18 8,18 L11,18 C11.5522847,18 12,17.5522847 12,17 C12,16.4477153 11.5522847,16 11,16 L8,16 Z"
+                                                                                fill="#000000" fill-rule="nonzero" />
+                                                                        </g>
+                                                                    </svg>
+                                                                    <!--end::Svg Icon-->
+                                                                </span>
+                                                                <span class="menu-text">الملف التاريخي</span>
+                                                                <i class="menu-arrow"></i>
+                                                            </a>
+                                                            <div class="menu-submenu">
+                                                                <i class="menu-arrow"></i>
+                                                                <ul class="menu-subnav">
+                                                                    <li class="menu-item menu-item-parent"
+                                                                        aria-haspopup="true">
+                                                                        <span class="menu-link">
+                                                                            <span class="menu-text">الملف
+                                                                                التاريخي</span>
+                                                                        </span>
+                                                                    </li>
+                                                                    <ul class="menu-subnav">
+                                                                        <li class="menu-item menu-item-submenu"
+                                                                            aria-haspopup="true" data-menu-toggle="hover">
+                                                                            <a href="javascript:;"
+                                                                                class="menu-link menu-toggle">
+                                                                                <span class="svg-icon menu-icon">
+                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                        width="24px" height="24px"
+                                                                                        viewBox="0 0 24 24" version="1.1">
+                                                                                        <g stroke="none" stroke-width="1"
+                                                                                            fill="none"
+                                                                                            fill-rule="evenodd">
+                                                                                            <rect x="0" y="0" width="24"
+                                                                                                height="24" />
+                                                                                            <rect fill="#000000"
+                                                                                                opacity="0.3"
+                                                                                                transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
+                                                                                                x="11" y="1" width="2"
+                                                                                                height="12"
+                                                                                                rx="1" />
+                                                                                            <path
+                                                                                                d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
+                                                                                                fill="#000000"
+                                                                                                fill-rule="nonzero"
+                                                                                                opacity="0.3" />
+                                                                                            <path
+                                                                                                d="M14.2928932,10.2928932 C14.6834175,9.90236893 15.3165825,9.90236893 15.7071068,10.2928932 C16.0976311,10.6834175 16.0976311,11.3165825 15.7071068,11.7071068 L12.7071068,14.7071068 C12.3165825,15.0976311 11.6834175,15.0976311 11.2928932,14.7071068 L8.29289322,11.7071068 C7.90236893,11.3165825 7.90236893,10.6834175 8.29289322,10.2928932 C8.68341751,9.90236893 9.31658249,9.90236893 9.70710678,10.2928932 L12,12.5857864 L14.2928932,10.2928932 Z"
+                                                                                                fill="#000000"
+                                                                                                fill-rule="nonzero" />
+                                                                                        </g>
+                                                                                    </svg>
+                                                                                    <!--end::Svg Icon-->
+                                                                                </span>
+                                                                                <!--end::Svg Icon-->
+                                                                                <span class="menu-text">
+                                                                                    الوارد</span>
+                                                                                <i class="menu-arrow"></i>
+                                                                            </a>
+                                                                            <div class="menu-submenu">
+                                                                                <i class="menu-arrow"></i>
+                                                                                <ul class="menu-subnav">
+                                                                                    <li class="menu-item menu-item-parent"
+                                                                                        aria-haspopup="true">
+                                                                                        <span class="menu-link">
+                                                                                            <span class="menu-text">
+                                                                                                الوارد</span>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                    <li class="menu-item"
+                                                                                        aria-haspopup="true">
+                                                                                        <a href="{{ route('historical.waredindex') }}"
+                                                                                            class="menu-link">
+                                                                                            <i
+                                                                                                class="menu-bullet menu-bullet-dot">
+                                                                                                <span></span>
+                                                                                            </i>
+                                                                                            <span class="menu-text">عرض
+                                                                                                الملف
+                                                                                                التاريخي
+                                                                                                للوارد</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="menu-item menu-item-submenu"
+                                                                            aria-haspopup="true" data-menu-toggle="hover">
+                                                                            <a href="javascript:;"
+                                                                                class="menu-link menu-toggle">
+                                                                                <span class="svg-icon menu-icon">
+                                                                                    <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo4/dist/../src/media/svg/icons/Files/Export.svg--><svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                        width="24px" height="24px"
+                                                                                        viewBox="0 0 24 24" version="1.1">
+                                                                                        <g stroke="none" stroke-width="1"
+                                                                                            fill="none"
+                                                                                            fill-rule="evenodd">
+                                                                                            <rect x="0" y="0" width="24"
+                                                                                                height="24" />
+                                                                                            <path
+                                                                                                d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
+                                                                                                fill="#000000"
+                                                                                                fill-rule="nonzero"
+                                                                                                opacity="0.3" />
+                                                                                            <rect fill="#000000"
+                                                                                                opacity="0.3"
+                                                                                                transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
+                                                                                                x="11" y="2" width="2"
+                                                                                                height="12"
+                                                                                                rx="1" />
+                                                                                            <path
+                                                                                                d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
+                                                                                                fill="#000000"
+                                                                                                fill-rule="nonzero"
+                                                                                                transform="translate(12.000000, 2.500000) scale(1, -1) translate(-12.000000, -2.500000) " />
+                                                                                        </g>
+                                                                                    </svg>
+                                                                                    <!--end::Svg Icon-->
+                                                                                </span>
+                                                                                <span class="menu-text">
+                                                                                    الصادر</span>
+                                                                                <i class="menu-arrow"></i>
+                                                                            </a>
+                                                                            <div class="menu-submenu">
+                                                                                <i class="menu-arrow"></i>
+                                                                                <ul class="menu-subnav">
+                                                                                    <li class="menu-item menu-item-parent"
+                                                                                        aria-haspopup="true">
+                                                                                        <span class="menu-link">
+                                                                                            <span class="menu-text">
+                                                                                                الصادر</span>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                    <li class="menu-item"
+                                                                                        aria-haspopup="true">
+                                                                                        <a href="{{ route('historical.exportindex') }}"
+                                                                                            class="menu-link">
+                                                                                            <i
+                                                                                                class="menu-bullet menu-bullet-dot">
+                                                                                                <span></span>
+                                                                                            </i>
+                                                                                            <span class="menu-text">عرض
+                                                                                                الملف
+                                                                                                التاريخي
+                                                                                                للصادر</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"><a
+                                                                href="{{ route('TypesFuel.index') }}" class="menu-link "><i
+                                                                    class="menu-bullet menu-bullet-dot"><span></span></i><span
+                                                                    class="menu-text">أنواع المحروقات</span></a>
+                                                        </li>
+                                                    </ul>
                                                 </ul>
                                             </div>
                                         </li>
@@ -787,8 +723,7 @@
                                                         height="24px" viewBox="0 0 24 24" version="1.1">
                                                         <g stroke="none" stroke-width="1" fill="none"
                                                             fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24"
-                                                                height="24" />
+                                                            <rect x="0" y="0" width="24" height="24" />
                                                             <path
                                                                 d="M21.4451171,17.7910156 C21.4451171,16.9707031 21.6208984,13.7333984 19.0671874,11.1650391 C17.3484374,9.43652344 14.7761718,9.13671875 11.6999999,9 L11.6999999,4.69307548 C11.6999999,4.27886191 11.3642135,3.94307548 10.9499999,3.94307548 C10.7636897,3.94307548 10.584049,4.01242035 10.4460626,4.13760526 L3.30599678,10.6152626 C2.99921905,10.8935795 2.976147,11.3678924 3.2544639,11.6746702 C3.26907199,11.6907721 3.28437331,11.7062312 3.30032452,11.7210037 L10.4403903,18.333467 C10.7442966,18.6149166 11.2188212,18.596712 11.5002708,18.2928057 C11.628669,18.1541628 11.6999999,17.9721616 11.6999999,17.7831961 L11.6999999,13.5 C13.6531249,13.5537109 15.0443703,13.6779456 16.3083984,14.0800781 C18.1284272,14.6590944 19.5349747,16.3018455 20.5280411,19.0083314 L20.5280247,19.0083374 C20.6363903,19.3036749 20.9175496,19.5 21.2321404,19.5 L21.4499999,19.5 C21.4499999,19.0068359 21.4451171,18.2255859 21.4451171,17.7910156 Z"
                                                                 fill="#000000" fill-rule="nonzero" />
@@ -844,8 +779,7 @@
                                                         height="24px" viewBox="0 0 24 24" version="1.1">
                                                         <g stroke="none" stroke-width="1" fill="none"
                                                             fill-rule="evenodd">
-                                                            <rect x="0" y="0" width="24"
-                                                                height="24" />
+                                                            <rect x="0" y="0" width="24" height="24" />
                                                             <path
                                                                 d="M21.4451171,17.7910156 C21.4451171,16.9707031 21.6208984,13.7333984 19.0671874,11.1650391 C17.3484374,9.43652344 14.7761718,9.13671875 11.6999999,9 L11.6999999,4.69307548 C11.6999999,4.27886191 11.3642135,3.94307548 10.9499999,3.94307548 C10.7636897,3.94307548 10.584049,4.01242035 10.4460626,4.13760526 L3.30599678,10.6152626 C2.99921905,10.8935795 2.976147,11.3678924 3.2544639,11.6746702 C3.26907199,11.6907721 3.28437331,11.7062312 3.30032452,11.7210037 L10.4403903,18.333467 C10.7442966,18.6149166 11.2188212,18.596712 11.5002708,18.2928057 C11.628669,18.1541628 11.6999999,17.9721616 11.6999999,17.7831961 L11.6999999,13.5 C13.6531249,13.5537109 15.0443703,13.6779456 16.3083984,14.0800781 C18.1284272,14.6590944 19.5349747,16.3018455 20.5280411,19.0083314 L20.5280247,19.0083374 C20.6363903,19.3036749 20.9175496,19.5 21.2321404,19.5 L21.4499999,19.5 C21.4499999,19.0068359 21.4451171,18.2255859 21.4451171,17.7910156 Z"
                                                                 fill="#000000" fill-rule="nonzero"
@@ -989,6 +923,15 @@
                                                             <span class="menu-text">تقارير حركة الأصناف </span>
                                                         </a>
                                                     </li>
+                                                    <li class="menu-item" aria-haspopup="true">
+                                                        <a href="{{ route('balance') }}" class="menu-link">
+                                                            <span class="svg-icon menu-icon">
+                                                                <i class="flaticon-eye"></i>
+                                                                <!--end::Svg Icon-->
+                                                            </span>
+                                                            <span class="menu-text">تقارير أرصدة الأصناف </span>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </li>
@@ -1060,7 +1003,7 @@
                                                     <!--end::Svg Icon-->
                                                 </span>
                                                 <!--end::Svg Icon-->
-                                                <span class="menu-text"> المستخدمين</span>
+                                                <span class="menu-text"> الموظفين</span>
                                                 <i class="menu-arrow"></i>
                                             </a>
                                             <div class="menu-submenu">
@@ -1068,7 +1011,7 @@
                                                 <ul class="menu-subnav">
                                                     <li class="menu-item menu-item-parent" aria-haspopup="true">
                                                         <span class="menu-link">
-                                                            <span class="menu-text"> المستخدمين</span>
+                                                            <span class="menu-text"> الموظفين</span>
                                                         </span>
                                                     </li>
                                                     <li class="menu-item" aria-haspopup="true">
@@ -1078,7 +1021,7 @@
                                                                 <!--end::Svg Icon-->
                                                             </span>
 
-                                                            <span class="menu-text">إضافة المستخدمين </span>
+                                                            <span class="menu-text">إضافة الموظفين </span>
                                                         </a>
                                                     </li>
                                                     <li class="menu-item" aria-haspopup="true">
@@ -1087,7 +1030,7 @@
                                                                 <i class="flaticon-eye"></i>
                                                                 <!--end::Svg Icon-->
                                                             </span>
-                                                            <span class="menu-text">عرض المستخدمين </span>
+                                                            <span class="menu-text">عرض الموظفين </span>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -1172,12 +1115,11 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24" height="24" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
-                                                                                x="11" y="1" width="2"
-                                                                                height="12" rx="1" />
+                                                                                x="11" y="1" width="2" height="12"
+                                                                                rx="1" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
@@ -1235,16 +1177,14 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24" height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -1294,8 +1234,8 @@
                                                             <a href="javascript:;" class="menu-link menu-toggle">
                                                                 <span class="svg-icon menu-icon">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                        height="16" fill="currentColor"
-                                                                        class="bi bi-send" viewBox="0 0 16 16">
+                                                                        height="16" fill="currentColor" class="bi bi-send"
+                                                                        viewBox="0 0 16 16">
                                                                         <path
                                                                             d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
                                                                     </svg>
@@ -1356,8 +1296,7 @@
                                                                 <ul class="menu-subnav">
                                                                     <li class="menu-item menu-item-submenu"
                                                                         aria-haspopup="true" data-menu-toggle="hover">
-                                                                        <a href="javascript:;"
-                                                                            class="menu-link menu-toggle">
+                                                                        <a href="javascript:;" class="menu-link menu-toggle">
                                                                             <span class="svg-icon menu-icon">
                                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                                     width="16" height="16"
@@ -1563,12 +1502,11 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
-                                                                                x="11" y="1"
-                                                                                width="2" height="12"
+                                                                                x="11" y="1" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
@@ -1630,16 +1568,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -1698,16 +1635,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -1795,12 +1731,11 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
-                                                                                x="11" y="1"
-                                                                                width="2" height="12"
+                                                                                x="11" y="1" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
@@ -1859,16 +1794,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -1924,16 +1858,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -2077,16 +2010,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -2142,16 +2074,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -2239,12 +2170,11 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 7.000000) rotate(-180.000000) translate(-12.000000, -7.000000) "
-                                                                                x="11" y="1"
-                                                                                width="2" height="12"
+                                                                                x="11" y="1" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
@@ -2304,16 +2234,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -2369,16 +2298,15 @@
                                                                         version="1.1">
                                                                         <g stroke="none" stroke-width="1" fill="none"
                                                                             fill-rule="evenodd">
-                                                                            <rect x="0" y="0"
-                                                                                width="24" height="24" />
+                                                                            <rect x="0" y="0" width="24"
+                                                                                height="24" />
                                                                             <path
                                                                                 d="M17,8 C16.4477153,8 16,7.55228475 16,7 C16,6.44771525 16.4477153,6 17,6 L18,6 C20.209139,6 22,7.790861 22,10 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,9.99305689 C2,7.7839179 3.790861,5.99305689 6,5.99305689 L7.00000482,5.99305689 C7.55228957,5.99305689 8.00000482,6.44077214 8.00000482,6.99305689 C8.00000482,7.54534164 7.55228957,7.99305689 7.00000482,7.99305689 L6,7.99305689 C4.8954305,7.99305689 4,8.88848739 4,9.99305689 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,10 C20,8.8954305 19.1045695,8 18,8 L17,8 Z"
                                                                                 fill="#000000" fill-rule="nonzero"
                                                                                 opacity="0.3" />
                                                                             <rect fill="#000000" opacity="0.3"
                                                                                 transform="translate(12.000000, 8.000000) scale(1, -1) rotate(-180.000000) translate(-12.000000, -8.000000) "
-                                                                                x="11" y="2"
-                                                                                width="2" height="12"
+                                                                                x="11" y="2" width="2" height="12"
                                                                                 rx="1" />
                                                                             <path
                                                                                 d="M12,2.58578644 L14.2928932,0.292893219 C14.6834175,-0.0976310729 15.3165825,-0.0976310729 15.7071068,0.292893219 C16.0976311,0.683417511 16.0976311,1.31658249 15.7071068,1.70710678 L12.7071068,4.70710678 C12.3165825,5.09763107 11.6834175,5.09763107 11.2928932,4.70710678 L8.29289322,1.70710678 C7.90236893,1.31658249 7.90236893,0.683417511 8.29289322,0.292893219 C8.68341751,-0.0976310729 9.31658249,-0.0976310729 9.70710678,0.292893219 L12,2.58578644 Z"
@@ -2620,3 +2548,55 @@
     </div>
     <!--end::Aside Menu-->
 </div>
+<style>
+    .menu-submenu {
+        display: none;
+        /* Hide the submenu by default */
+    }
+
+    .menu-item.open .menu-submenu {
+        display: block;
+        /* Show the submenu when it's open */
+    }
+
+    .menu-item.active .menu-link {
+        font-weight: bold;
+        /* Highlight the active link */
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        // Store the current URL (path) in a variable
+        var currentUrl = window.location.href;
+
+        // Check the URL for each submenu item and make it active if it matches
+        $('.menu-item a').each(function() {
+            var linkUrl = $(this).attr('href');
+
+            // If the link's href matches the current URL, add the 'active' class to the item
+            if (currentUrl.indexOf(linkUrl) !== -1) {
+                // Add active class to this menu item
+                $(this).closest('.menu-item').addClass('active');
+
+                // If it's a submenu, open it (toggle)
+                $(this).closest('.menu-item.menu-item-submenu').addClass('open');
+                $(this).closest('.menu-item.menu-item-submenu').children('.menu-submenu').show();
+            }
+        });
+
+        // Optional: If the user clicks a link in the menu, highlight it and open the submenu
+        $('.menu-item a').on('click', function() {
+            // Remove 'active' class from all menu items
+            $('.menu-item').removeClass('active');
+
+            // Add 'active' to the clicked item
+            $(this).closest('.menu-item').addClass('active');
+
+            // Open submenu if it is a submenu link
+            if ($(this).closest('.menu-item').hasClass('menu-item-submenu')) {
+                $(this).closest('.menu-item').addClass('open');
+                $(this).closest('.menu-item').children('.menu-submenu').show();
+            }
+        });
+    });
+</script>

@@ -19,33 +19,37 @@ class CategoryController extends Controller
         return view('inventory.category.index', compact('category'));
     }
 
+    
+
     public function create()
     {
-        $next_num = Category::max('category_num') + 1;
-        if (!$next_num) {
-            $next_num = 1;
-        }
-        return view('inventory.category.create', compact('next_num'));
+        // $next_num = Category::max('category_num') + 1;
+        // if (!$next_num) {
+        //     $next_num = 1;
+        // }
+        return view('inventory.category.create');
+        // return view('inventory.category.create', compact('next_num'));
     }
 
     public function store(request $request)
     {
-        // الحصول على أعلى قيمة مخزنة في عمود category_num
-        $next_num = Category::max('category_num') + 1;
+        // // الحصول على أعلى قيمة مخزنة في عمود category_num
+        // $next_num = Category::max('category_num') + 1;
 
-        // إذا لم يتم العثور على أي سجلات، يتم تعيين القيمة 1 إلى $next_num
-        if (!$next_num) {
-            $next_num = 1;
-        }
+        // // إذا لم يتم العثور على أي سجلات، يتم تعيين القيمة 1 إلى $next_num
+        // if (!$next_num) {
+        //     $next_num = 1;
+        // }
 
         $request->validate([
-            // 'category_num' => 'required',
+            'category_num' => 'required',
             'category_name' => 'required|string|min:2',
         ]);
 
         // Save In Database
         $category = new Category();
-        $category->category_num = $next_num;
+        // $category->category_num = $next_num;
+        $category->category_num =  $request->input('category_num');
         $category->category_name = $request->input('category_name');
         $request = $category->save();
 

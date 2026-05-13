@@ -22,12 +22,14 @@
             border: 1px solid #d5c1ff !important;
         }
 
-        .btn.btn-light:hover:not(.btn-text):not(:disabled):not(.disabled), .btn.btn-light:focus:not(.btn-text), .btn.btn-light.focus:not(.btn-text) {
+        .btn.btn-light:hover:not(.btn-text):not(:disabled):not(.disabled),
+        .btn.btn-light:focus:not(.btn-text),
+        .btn.btn-light.focus:not(.btn-text) {
             border: 1px solid #d5c1ff !important;
 
         }
 
-        .btn.dropdown-toggle.btn-light.bs-placeholder{
+        .btn.dropdown-toggle.btn-light.bs-placeholder {
             border: 1px solid #d5c1ff !important;
 
         }
@@ -61,6 +63,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض فاتورة شراء</a>
+                            <x-add-resource-button />
                         </div>
                     </div>
                     <!--begin::Form-->
@@ -74,10 +77,26 @@
                                 <label for="voucher_no" class="col-lg-2 col-form-label ">
                                     <h6> رقم السند:</h6>
                                 </label>
+                                {{-- <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            onclick="decrement()">-</button>
+                                        <input type="number" class="@error('voucher_no') is-invalid @enderror form-control"
+                                            id="voucher_no" name="voucher_no" value="1">
+                                        <button type="button" class="btn btn-outline-secondary"
+                                            onclick="increment()">+</button>
+                                        @error('voucher_no')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div> --}}
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input type="number" class="@error('voucher_no') is-invalid @enderror form-control"
-                                            id="voucher_no" name="voucher_no">
+                                            id="voucher_no" name="voucher_no" disabled
+                                            value="{{ old('voucher_no', $newVoucherNo) }}">
                                         @error('voucher_no')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -93,11 +112,12 @@
                                 </label>
                                 <div class="col-lg-3">
                                     <div class="input-group">
-                                        <input type="date" class="form-control" id="voucher_date" name="voucher_date" value="{{ date('Y-m-d') }}">
+                                        <input type="date" class="form-control" id="voucher_date" name="voucher_date"
+                                            value="{{ date('Y-m-d') }}">
                                     </div>
                                 </div>
 
-                             
+
                             </div>
 
                             <div class="p-3 form-group row">
@@ -151,14 +171,16 @@
                                             data-live-search="true" title="أدخل معامل الصرف" name="currency_id"
                                             id="currency_id">
                                             @foreach ($currency as $currencys)
-                                                <option value="{{ $currencys->id}}">
+                                                <option value="{{ $currencys->id }}">
                                                     {{ $currencys->name }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-
+                                <a href="{{ url('inventory/currency/create') }}" title="اضافة مورد جديد" target="_blank">
+                                    <i class="p-3 ki ki-solid-plus icon-md"></i>
+                                </a>
                             </div>
 
 
@@ -211,15 +233,9 @@
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-10">
                                     <button type="submit" class="ml-5 btn btn-success">حفظ</button>
-
-                                    <x-add-resource-button />
-
                                 </div>
-
                             </div>
                         </div>
-
-
                     </form>
                     <!--end::Form-->
                 </div>
@@ -247,26 +263,30 @@
                 $(this).closest('tr').remove();
                 calculateTotalAll();
             });
+            //     // html += "<td> <input type='number' class='form-control' name='Total[]' readonly></td>";
 
-            // تحويل الزر "add-row" لإضافة الصف إلى جدول المنتجات
             $("#add-row").click(function() {
                 var html = "<tr>";
                 html +=
-                    "<td><select name='product[]' title='اختر الصنف' class='form-control' data-live-search='true'>";
+                    "<td><select name='product[]' class='form-control selectpicker' data-live-search='true' title='أدخل الصنف'>";
                 @foreach ($products as $product)
                     html +=
                         "<option value='{{ $product->id }}'>{{ $product->item_num }} {{ $product->item_name }} {{ $product->balance }}</option>";
                 @endforeach
                 html += "</select></td>";
                 html +=
-                    "<td><input type='number' name='quantity[]' class='form-control'  onchange='calculateTotal(this); calculateTotalAll();'></td>";
+                    "<td><input type='number' name='quantity[]' class='form-control' onchange='calculateTotal(this); calculateTotalAll();'></td>";
                 html +=
-                    "<td><input type='number' name='price[]' class='form-control'  onchange='calculateTotal(this); calculateTotalAll();'></td>";
-                // html += "<td> <input type='number' class='form-control' name='Total[]' readonly></td>";
+                    "<td><input type='number' name='price[]' class='form-control' onchange='calculateTotal(this); calculateTotalAll();'></td>";
                 html += "<td><button type='button' class='btn btn-danger delete-row'>حذف</button></td>";
                 html += "</tr>";
+
                 $("table tbody").append(html);
+
+                // Initialize Bootstrap Select for newly added select elements
+                $(".selectpicker").selectpicker();
             });
+
 
             // حساب الإجمالي الكلي
             function calculateTotalAll() {
@@ -291,4 +311,18 @@
             tr.find("input[name='Total[]']").val(total);
         }
     </script>
+
+    {{-- <script>
+    function increment() {
+        let input = document.getElementById("voucher_no");
+        input.value = parseInt(input.value) + 1;
+    }
+
+    function decrement() {
+        let input = document.getElementById("voucher_no");
+        if (input.value > 1) { // Prevents negative numbers
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+</script> --}}
 @endsection

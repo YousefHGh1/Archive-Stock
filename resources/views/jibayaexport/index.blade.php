@@ -56,7 +56,7 @@
 
         <!--begin::Card-->
         <div class="card card-custom">
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="flex-wrap pt-6 pb-0 border-0 card-header">
                 <div class="card-title">
                     <h3 class="card-label">عرض صادر الجباية </h3>
                 </div>
@@ -64,7 +64,7 @@
 
                     <!--begin::Button-->
                     <a href="https://master/CoreArchive/public/jibayaexport/create"
-                        class="btn btn-primary font-weight-bolder">
+                        class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -94,25 +94,25 @@
                                     بحــــــــــــث متــقـــــــــــــــــــــــدم</div>
                             </div>
                         </div>
-                        <div id="collapseOne5" class="collapse pl-5" data-parent="#accordionExample5"
+                        <div id="collapseOne5" class="pl-5 collapse" data-parent="#accordionExample5"
                             style="direction: rtl;">
                             <div class="card-body1">
-                                <div class="col-lg-9 mb-6">
+                                <div class="mb-6 col-lg-9">
                                     <label>التاريخ:</label>
-                                    <form action="{{ url('jibayaexport/search') }}" method="POST" class="form-group pr-5">
+                                    <form action="{{ url('jibayaexport/search') }}" method="POST" class="pr-5 form-group">
                                         @csrf
                                         <div class="input-daterange input-group">
-                                            <div class="col-4 p-0">
+                                            <div class="p-0 col-4">
                                                 <input name="start_date" type="date" class="form-control"
                                                     id="start_date" />
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                                             </div>
-                                            <div class="col-4 p-0">
+                                            <div class="p-0 col-4">
                                                 <input name="end_date" type="date" class="form-control" id="end_date" />
                                             </div>
-                                            <div class="col-lg-2 mt-auto mb-auto">
+                                            <div class="mt-auto mb-auto col-lg-2">
                                                 <input type="submit" class="btn btn-primary btn-primary--icon"
                                                     value="بحث" />
                                             </div>

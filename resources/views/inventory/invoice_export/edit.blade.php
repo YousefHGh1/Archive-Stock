@@ -134,7 +134,7 @@
                                     @foreach ($invoiceExport->InvoiceExport_product as $index => $InvoiceExport_product)
                                         <tr>
                                             <td>
-                                                <select name="product[]" class="form-control selectpicker">
+                          <select name="product[]" class="form-control selectpicker" disabled>
                                                     <option value="" disabled selected>اختر المنتج</option>
 
                                                     @foreach ($products as $product)
@@ -145,7 +145,7 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td><input type="number" name="quantity[]"
+                                            <td><input type="number" name="quantity[]" readonly
                                                     value="{{ $InvoiceExport_product->quantity }}" class="form-control"></td>
                                             {{-- <td><input type="number" name="price[]"
                                                     value="{{ $InvoiceExport_product->price }}" class="form-control"></td> --}}

@@ -65,7 +65,7 @@
                 </div>
                 <div class="pb-5 card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{ url('/inventory/unit/create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ url('/inventory/unit/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
