@@ -19,9 +19,9 @@ return new class extends Migration
             $table->date('voucher_date');
             $table->string('invoice_no');
             $table->foreignId('subSection_id')->constrained('sub_sections')->cascadeOnDelete();
-            $table->string('user_id');
+            $table->string('beneficiary');
 
-            // $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignId('beneficiary')->constrained('users')->cascadeOnDelete();
 
             $table->timestamps();
         });

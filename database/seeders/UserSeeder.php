@@ -28,14 +28,5 @@ class UserSeeder extends Seeder
             'employee_name' => 'yousef',
         ]);
 
-        DB::table('users')->insert([
-            'name' => '1105',
-            'email' => '1105@app.com',
-            'password' => Hash::make('1105'),
-            'section_id' => 1,
-            'sub_section_id' => 1,
-            'employee_name' => 'هشام يوسف الحفني غنيم',
-        ]);
-
     }
 }

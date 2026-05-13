@@ -1,0 +1,5 @@
+- [x] Add validation to the update function similar to store
+- [x] Fix class name from 'item' to 'Item'
+- [x] Remove unnecessary $item_balance code
+- [x] Update balance to add the difference of open_balance to existing balance
+- [x] Fix redirect to use route('item.index')

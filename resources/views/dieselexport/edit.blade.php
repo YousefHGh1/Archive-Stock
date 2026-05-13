@@ -138,7 +138,7 @@
                                             id="typesfuel_id">
                                             @foreach ($typesfuel as $typesfuels)
                                                 <option value="{{ $typesfuels->id }}"
-                                                    {{ $diesel->typesfuel_id == $typesfuels->id ? 'selected' : '' }}>
+                                                    {{ $dieselexport->typesfuel_id == $typesfuels->id ? 'selected' : '' }}>
                                                     {{ $typesfuels->name }}</option>
                                             @endforeach
                                         </select>

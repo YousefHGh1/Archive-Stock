@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Diesel;
@@ -7,138 +6,152 @@ use App\Models\DieselExport;
 use App\Models\Section;
 use App\Models\subSection;
 use App\Models\Supplier;
-use App\Models\TypesFuel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HistoricalController extends Controller
 {
     //
     // *************************************************wared***************************************************
-    public function waredindex()
+    public function waredindex(Request $request)
     {
-        $currentYear = date('Y');
+        $currentYear  = date('Y');
+        $previousYear = $currentYear - 1;
 
-        $diesel = Diesel::with('supplier', 'typesfuel')->whereYear('date', '!=', $currentYear)->paginate(10);
+        $allPreviousYears = range(1900, $previousYear);
 
-        $supplier = Supplier::get(['id', 'name_supplier']);
-        $typesfuel = TypesFuel::get(['id', 'name']);
+        // Query for diesel entries
+        $query = Diesel::with(['typesfuel', 'supplier'])->whereYear('date', '!=', $currentYear);
 
-        return view('historical.waredindex', compact('diesel', 'supplier', 'typesfuel'));
-    }
+        // Apply filters if the request is POST
+        if ($request->isMethod('post')) {
+            if ($request->filled('start_date') && $request->filled('end_date')) {
+                $query->whereBetween('date', [$request->start_date, $request->end_date]);
+            }
 
-    public function waredreport()
-    {
-        $currentYear = date('Y');
+            if ($request->filled('start_voucher') && $request->filled('end_voucher')) {
+                $query->whereBetween('voucher', [$request->start_voucher, $request->end_voucher]);
+            }
+        }
 
-        $diesel = Diesel::with('supplier', 'typesfuel')->whereYear('date', '!=', $currentYear)->paginate(10);
-        $supplier = Supplier::get(['id', 'name_supplier']);
-        $typesfuel = TypesFuel::get(['id', 'name']);
+        $dieselEntries = $query->get();
 
-        return view('historical.waredreport', compact('diesel', 'supplier', 'typesfuel'));
-    }
+        // Fetch previous years' data dynamically
+        $previousYearsData = Diesel::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(quantity) as total')
+            ->whereYear('date', '<', $currentYear)
+            ->groupBy('year', 'month')
+            ->get()
+            ->groupBy('year');
 
-    public function datewared(Request $request)
-    {
-        $currentYear = date('Y');
+        // Fetch diesel data for the current year (grouped by month)
+        $dieselData = Diesel::selectRaw('MONTH(date) as month, SUM(quantity) as total')
+            ->whereYear('date', '!=', $currentYear)
+            ->groupBy('month')
+            ->pluck('total', 'month');
 
-        // قم بتحميل التاريخ الأول والتاريخ الثاني من النموذج
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        // Fetch all suppliers
+        $suppliers = Supplier::all();
 
-        // قم بتنفيذ الاستعلام والحصول على نتيجة البحث
-        $diesel = Diesel::whereBetween('date', [$startDate, $endDate])->whereYear('date', '!=', $currentYear)->get();
+        // Calculate previous year balance
 
-        // قم بعرض نتيجة البحث
-        return view('historical.waredreport', compact('diesel'));
+        $previousBalance = Diesel::whereIn(DB::raw('YEAR(date)'), $allPreviousYears)->sum('quantity') -
+        DieselExport::whereIn(DB::raw('YEAR(date)'), $allPreviousYears)->sum('quantity');
+
+        // Get yearly totals
+        $totalReceived = $dieselEntries->sum('quantity');
+        $totalEntries  = $dieselEntries->count();
+
+        // Calculate remaining fuel separately for Diesel (سولار) and Gasoline (بنزين)
+        $remainingDiesel = Diesel::where('typesfuel_id', 3)->sum('quantity') -
+        DieselExport::where('typesfuel_id', 3)->sum('quantity');
+
+        $remainingGasoline = Diesel::where('typesfuel_id', 2)->sum('quantity') -
+        DieselExport::where('typesfuel_id', 2)->sum('quantity');
+
+        return view('historical.waredindex', compact(
+            'dieselData', 'previousYearsData', 'suppliers', 'previousBalance',
+            'totalReceived', 'totalEntries', 'remainingDiesel', 'remainingGasoline', 'dieselEntries'
+        ));
     }
     // *************************************************export***************************************************
-    public function exportindex()
+
+    public function exportindex(Request $request)
     {
-        $currentYear = date('Y');
+        $currentYear  = date('Y');
+        $previousYear = $currentYear - 1;
 
-        $dieselexport = DieselExport::with('section', 'subSection', 'typesfuel')->select("*")->whereYear('date', '!=', $currentYear)->get();
-        $section = Section::get(['id', 'name_section']);
-        $subSection = subSection::get(['id', 'name']);
+        $allPreviousYears = range(1900, $previousYear);
 
-        return view('historical.exportindex', compact('dieselexport', 'section'));
-    }
+        // Start the query
+        $query = DieselExport::with(['section', 'subSection', 'typesfuel'])->whereYear('date', '!=', $currentYear);
 
-    public function exportreport()
-    {
-        $currentYear = date('Y');
-
-        $dieselexport = DieselExport::select("*")->whereYear('date', '!=', $currentYear)->get();
-        $section = Section::get(['id', 'name_section']);
-        $subSection = subSection::get(['id', 'name']);
-
-        return view('historical.exportreport', compact('dieselexport', 'section', 'subSection'));
-    }
-
-    public function searchdate(Request $request)
-    {
-
-        // قم بتحميل التاريخ الأول والتاريخ الثاني من النموذج
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        // قم بتنفيذ الاستعلام والحصول على نتيجة البحث
-        $dieselexport = DieselExport::whereBetween('date', [$startDate, $endDate])->whereRaw('YEAR(diesel_exports.date) = 2022')->get();
-
-        // قم بعرض نتيجة البحث
-        $section = Section::get(['id', 'name_section']);
-        $subSection = subSection::get(['id', 'name']);
-
-        return view('historical.exportreport', compact('dieselexport', 'section', 'subSection'));
-    }
-
-    public function searchvou(Request $request)
-    {
-        $section = Section::get(['id', 'name_section']);
-        $subSection = subSection::get(['id', 'name']);
-
-        // قم بتحميل السند الأول السند الثاني من النموذج
-        $startVoucher = $request->input('start_voucher');
-        $endVoucher = $request->input('end_voucher');
-
-        // قم بتنفيذ الاستعلام والحصول على نتيجة البحث
-        $dieselexport = DieselExport::whereBetween('voucher', [$startVoucher, $endVoucher])->get();
-        // قم بعرض نتيجة البحث
-        return view('historical.exportreport', compact('dieselexport', 'section', 'subSection'));
-    }
-
-    public function searchsec(Request $request)
-    {
-        $section = Section::get(['id', 'name_section']);
-        $subSection = subSection::get(['id', 'name']);
-
-        // قم بتحميل الإيصال الأول الإيصال الثاني من النموذج
-        $startNum = $request->input('startNum');
-        $endNum = $request->input('endNum');
-
-        // قم بتنفيذ الاستعلام والحصول على نتيجة البحث
-        $dieselexport = DieselExport::whereBetween('num_section', [$startNum, $endNum])->get();
-
-        // قم بعرض نتيجة البحث
-        return view('historical.exportreport', compact('dieselexport', 'section', 'subSection'))->with('success', 'تمت عملية البحث !');
-    }
-
-    public function searchname(Request $request)
-    {
-        $section = Section::get(['id', 'name_section']);
-        $subSection = subSection::get(['id', 'name']);
-
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $section_id = $request->input('section_id');
-        $subSection_id = $request->input('subSection_id'); // تحميل القيمة الجديدة (إذا تم تحديدها)
-        $dieselexport = DieselExport::whereBetween('date', [$startDate, $endDate])
-            ->where('section_id', 'like', '%' . $section_id . '%');
-        if ($subSection_id != null) { // إذا تم تحديد قيمة للعنصر البحثي الجديد
-            $dieselexport->where('subSection_id', $subSection_id);
+        // Apply date filter if provided
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('date', [$request->start_date, $request->end_date]);
         }
-        $dieselexport = $dieselexport->get();
 
-        return view('historical.exportreport', compact('dieselexport', 'section', 'subSection'));
+        // Apply section filter if provided
+        if ($request->filled('section_id')) {
+            $query->where('section_id', $request->section_id);
+        }
+
+        // Apply sub-section filter if provided
+        if ($request->filled('sub_section_id')) {
+            $query->where('sub_section_id', $request->sub_section_id);
+        }
+
+        // Apply voucher filter if provided
+        if ($request->filled('start_voucher') && $request->filled('end_voucher')) {
+            $query->whereBetween('voucher', [$request->start_voucher, $request->end_voucher]);
+        }
+
+        // Apply voucher number filter if provided
+        if ($request->filled('startNum') && $request->filled('endNum')) {
+            $query->whereBetween('num_section', [$request->startNum, $request->endNum]);
+        }
+
+        // Get the filtered diesel export entries
+        $dieselExports = $query->get();
+
+        // Fetch previous years' data
+        $previousYearsData = DieselExport::selectRaw('YEAR(date) as year, MONTH(date) as month, SUM(quantity) as total')
+            ->whereYear('date', '<', $currentYear)
+            ->groupBy('year', 'month')
+            ->get()
+            ->groupBy('year');
+
+        // Get monthly diesel export data
+        $dieselData = DieselExport::selectRaw('MONTH(date) as month, SUM(quantity) as total')
+            ->whereYear('date', '!=', $currentYear)
+            ->groupBy('month')
+            ->pluck('total', 'month')
+            ->toArray();
+
+        // Fetch sections and sub-sections
+        $section    = Section::all();
+        $subSection = SubSection::all();
+
+        // Calculate previous year balance for Diesel
+        $previousBalance = Diesel::whereIn(DB::raw('YEAR(date)'), $allPreviousYears)->sum('quantity') -
+        DieselExport::whereIn(DB::raw('YEAR(date)'), $allPreviousYears)->sum('quantity');
+
+        // Get yearly totals
+        $totalExported = $dieselExports->sum('quantity');
+        $totalEntries  = $dieselExports->count();
+
+        // Remaining quantities for Diesel and Gasoline
+        $remainingDiesel = Diesel::where('typesfuel_id', 3)->sum('quantity') -
+        DieselExport::where('typesfuel_id', 3)->sum('quantity');
+
+        $remainingGasoline = Diesel::where('typesfuel_id', 2)->sum('quantity') -
+        DieselExport::where('typesfuel_id', 2)->sum('quantity');
+
+        // Return the view with the filtered data
+        return view('historical.exportindex', compact(
+            'dieselData', 'previousYearsData', 'section', 'subSection',
+            'previousBalance', 'totalExported', 'totalEntries',
+            'remainingDiesel', 'remainingGasoline', 'dieselExports'
+        ));
     }
 
     public function totalreport(Request $request)
@@ -146,7 +159,7 @@ class HistoricalController extends Controller
 
         // قم بتنفيذ الاستعلام والحصول على نتيجة البحث
         $dieselexport = DieselExport::all();
-        $diesel = Diesel::all();
+        $diesel       = Diesel::all();
         return view('historical.total_report', compact('dieselexport', 'diesel'));
     }
 
@@ -154,7 +167,7 @@ class HistoricalController extends Controller
     {
         // تحميل السند الأول والسند الثاني من النموذج
         $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        $endDate   = $request->input('end_date');
 
         // الحصول على مجموع الديزل الوارد بين التواريخ المحددة
         $diesel = Diesel::whereBetween('date', [$startDate, $endDate])->get();

@@ -23,13 +23,13 @@
             padding-right: 50px !important;
             margin: 10px !important;
         }
-        
+
         .dataTables_wrapper .dataTable tfoot th, .dataTables_wrapper .dataTable thead th{
             padding-right: 0px;
             padding-left: 0px;
             text-align: right;
             }
-        
+
         div.dt-buttons{
             top: 50%;
             left: 8%;
@@ -38,19 +38,19 @@
             margin-top: -20px;
             text-align: center;
             padding: 1rem 0
-        
+
         }
-        
+
         div.dt-buttons .dt-button{
             margin : -2px !important;
         }
-        
+
         .dataTables_wrapper .dataTable thead th{
             background-color: #E4E6EF;
         }
-        
-        
-        
+
+
+
         </style>
 @endsection
 
@@ -59,14 +59,14 @@
 
         <!--begin::Card-->
         <div class="card card-custom">
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="flex-wrap pt-6 pb-0 border-0 card-header">
                 <div class="card-title">
                     <h3 class="card-label">عرض وارد الرقابة </h3>
                 </div>
                 <div class="card-toolbar">
 
                     <!--begin::Button-->
-                    <a href="https://master/CoreArchive/public/censorship/create" class="btn btn-primary font-weight-bolder">
+                    <a href="https://master/CoreArchive/public/censorship/create" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -96,25 +96,25 @@
                                         بحــــــــــــث متــقـــــــــــــــــــــــدم</div>
                             </div>
                         </div>
-                        <div id="collapseOne5" class="collapse pl-5" data-parent="#accordionExample5"
+                        <div id="collapseOne5" class="pl-5 collapse" data-parent="#accordionExample5"
                             style="direction: rtl;">
                             <div class="card-body1">
-                                <div class="col-lg-9 mb-6">
+                                <div class="mb-6 col-lg-9">
                                     <label>التاريخ:</label>
-                                    <form action="{{ url('censorship/search') }}" method="POST" class="form-group pr-5">
+                                    <form action="{{ url('censorship/search') }}" method="POST" class="pr-5 form-group">
                                         @csrf
                                         <div class="input-daterange input-group">
-                                            <div class="col-4 p-0">
+                                            <div class="p-0 col-4">
                                                 <input name="start_date" type="date" class="form-control"
                                                     id="start_date" />
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                                             </div>
-                                            <div class="col-4 p-0">
+                                            <div class="p-0 col-4">
                                                 <input name="end_date" type="date" class="form-control" id="end_date" />
                                             </div>
-                                            <div class="col-lg-2 mt-auto mb-auto">
+                                            <div class="mt-auto mb-auto col-lg-2">
                                                 <input type="submit" class="btn btn-primary btn-primary--icon"
                                                     value="بحث" />
                                             </div>

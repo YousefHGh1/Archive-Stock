@@ -65,7 +65,7 @@
                 </div>
                 <div class="pb-5 card-toolbar">
                     <!--begin::Button-->
-                    <a href="{{ url('/inventory/currency/create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ url('/inventory/currency/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -81,8 +81,9 @@
                             <!--end::Svg Icon-->
                         </span>إنشاء عملة جديدة</a>
 
-                
-                </div>
+
+                        <x-add-resource-button />
+                    </div>
             </div>
             <div class="pt-0 card-body">
                 <!--begin: Datatable-->
@@ -104,7 +105,7 @@
                                 <td data-field="Actions" data-autohide-disabled="false" aria-label="null"
                                     class="datatable-cell">
                                     <span style="overflow: visible; position: relative; width: 110px;">
-                                                                               
+
                                         <a href="{{ url('/inventory/currency/' . $currencys->id . '/edit') }}"
                                             class="btn btn-sm btn-clean btn-icon" title="Edit details"><i
                                                 class="la la-edit"></i></a>

@@ -5,45 +5,69 @@ namespace App\Http\Controllers;
 use App\Models\Archive;
 use App\Models\Import;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\DB;
 
+// use Illuminate\Support\Facades\DB;
 
 class ArchiveController extends Controller
 {
-
-
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:archive', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
-    
+
     public function index(Request $request)
     {
-        // $archive = Archive::all();
-        $archive = Archive::cursor();
-        // $archive = Archive::orderBy('created_at', 'desc')->get();
-
+        $archive = Archive::whereNotNull('date')->get();
         $import = Import::all();
 
-        // Get all the years from the archive items
-        $years = $archive->pluck('date')->map(function ($date) {
-            return date('Y', strtotime($date));
-        })->unique()->toArray();
+        // استخراج السنوات
+        $years = $archive->pluck('date')
+            ->map(fn ($date) => date('Y', strtotime($date)))
+            ->unique()
+            ->values();
 
-        // Get the latest year based on created_at field
-        $latestYear = date('Y', strtotime($archive->sortByDesc('updated_at')->first()->date));
+        // آخر سنة موجودة
+        $latestYear = $years->max();
 
-        // Get the selected year from the request or use the latest year as default
+        // السنة المختارة
         $selectedYear = $request->input('year', $latestYear);
 
-        // Filter the archive items by the selected year
+        // الفلترة
         $archive = $archive->filter(function ($item) use ($selectedYear) {
             return date('Y', strtotime($item->date)) == $selectedYear;
         });
 
         return view('archive.index', compact('archive', 'import', 'years', 'selectedYear'));
+
     }
-    
+
+    // public function index(Request $request)
+    // {
+    //     // $archive = Archive::all();
+    //     $archive = Archive::cursor();
+    //     // $archive = Archive::orderBy('created_at', 'desc')->get();
+
+    //     $import = Import::all();
+
+    //     // Get all the years from the archive items
+    //     $years = $archive->pluck('date')->map(function ($date) {
+    //         return date('Y', strtotime($date));
+    //     })->unique()->toArray();
+
+    //     // Get the latest year based on created_at field
+    //     $latestYear = date('Y', strtotime($archive->sortByDesc('updated_at')->first()->date));
+
+    //     // Get the selected year from the request or use the latest year as default
+    //     $selectedYear = $request->input('year', $latestYear);
+
+    //     // Filter the archive items by the selected year
+    //     $archive = $archive->filter(function ($item) use ($selectedYear) {
+    //         return date('Y', strtotime($item->date)) == $selectedYear;
+    //     });
+
+    //     return view('archive.index', compact('archive', 'import', 'years', 'selectedYear'));
+    // }
+
     // public function indexedit(Request $request)
     // {
     //     $archive = Archive::all();
@@ -69,7 +93,6 @@ class ArchiveController extends Controller
 
     //     return view('archive.index', compact('archive', 'import', 'years', 'selectedYear'));
     // }
-
 
     // public function index(Request $request)
     // {
@@ -106,6 +129,7 @@ class ArchiveController extends Controller
         // ->sortByDesc('created_at')
         $archive = Archive::all();
         $import = Import::all();
+
         return view('archive.create', compact('archive', 'import'));
     }
 
@@ -117,14 +141,14 @@ class ArchiveController extends Controller
             'import_id' => 'required',
             'num_Ministry' => 'required',
             'date' => 'required',
-            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx,DWG,DXF,DWF'
+            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx,DWG,DXF,DWF',
         ]);
         if ($request->hasfile('files')) {
             foreach ($request->file('files') as $file) {
                 // $name = $file->getClientOriginalName();
-                $name = uniqid() . '.' . $file->getClientOriginalExtension();
+                $name = uniqid().'.'.$file->getClientOriginalExtension();
 
-                $file->move(public_path() . '/uploads/', $name);
+                $file->move(public_path().'/uploads/', $name);
                 $data[] = $name;
             }
         }
@@ -135,7 +159,7 @@ class ArchiveController extends Controller
             'import_id' => $request->get('import_id'),
             'num_Ministry' => $request->get('num_Ministry'),
             'date' => $request->get('date'),
-            'files' => json_encode($data)
+            'files' => json_encode($data),
         ]);
 
         if ($archive->save()) {
@@ -145,22 +169,21 @@ class ArchiveController extends Controller
         }
     }
 
-
     public function show($id)
     {
         $archive = Archive::find($id);
+
         return view('archive.show', compact('archive'));
     }
-
 
     public function edit($id)
     {
         //
         $archive = Archive::find($id);
         $import = Import::all();
+
         return view('archive.edit', compact('archive', 'import'));
     }
-
 
     public function update(Request $request, $id)
     {
@@ -170,16 +193,16 @@ class ArchiveController extends Controller
             'import_id' => 'required',
             'num_Ministry' => 'required',
             'date' => 'required',
-            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx|max:2048'
+            'files.*' => 'required|mimes:jpg,jpeg,png,pdf,doc,docx,xlsx|max:2048',
         ]);
 
         if ($request->hasfile('files')) {
             $data = [];
             foreach ($request->file('files') as $file) {
                 // $name = $file->getClientOriginalName();
-                $name = uniqid() . '.' . $file->getClientOriginalExtension();
+                $name = uniqid().'.'.$file->getClientOriginalExtension();
 
-                $file->move(public_path() . '/uploads/', $name);
+                $file->move(public_path().'/uploads/', $name);
                 $data[] = $name;
             }
         }
@@ -195,7 +218,6 @@ class ArchiveController extends Controller
             $archive->files = json_encode($data);
         }
 
-
         if ($archive->save()) {
             return redirect('archive')->with('info', 'تمت التعديل بنجاح!');
         } else {
@@ -207,9 +229,9 @@ class ArchiveController extends Controller
     {
         //
         Archive::destroy($id);
+
         return redirect('archive')->with('danger', 'تمت الحذف بنجاح!');
     }
-
 
     public function searchdate(Request $request)
     {
@@ -233,6 +255,7 @@ class ArchiveController extends Controller
 
         $number = $request->input('number');
         $archive = Archive::where('number', $number)->get();
+
         // قم بعرض نتيجة البحث
         return view('archive.report', compact('archive', 'import'))
 

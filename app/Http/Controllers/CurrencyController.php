@@ -29,7 +29,7 @@ class CurrencyController extends Controller
 
         // التحقق من صحة البيانات المدخلة
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:currencies,name,except,id',
             'value' => 'required',
         ]);
 

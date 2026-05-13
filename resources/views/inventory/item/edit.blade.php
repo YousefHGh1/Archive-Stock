@@ -134,7 +134,11 @@
                                 </label>
                                 <div class="col-lg-9">
                                     <div class="input-group">
-                                        <input name="balance" id="balance" type="number" min="0" readonly
+                                        <input name="balance" id="balance" type="number" min="0" 
+                                        
+
+
+                                        ++
                                             class="form-control" value="{{ $item->balance }}">
                                     </div>
                                 </div>

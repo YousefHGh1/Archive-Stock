@@ -28,71 +28,71 @@
             <!--begin::Container-->
             <div class="container">
                 <!--begin::Invoice-->
-                <div class="card card-custom position-relative overflow-hidden">
+                <div class="overflow-hidden card card-custom position-relative">
                     <!--begin::Invoice header-->
-                    <div class="row justify-content-center p-5  bg-primary">
+                    <div class="p-5 row justify-content-center bg-primary">
                         <div class="col-md-9">
                             <div class="d-flex justify-content-between align-items-md-center flex-column flex-md-row">
-                                <div class="d-flex flex-column px-0 order-2 order-md-1">
+                                <div class="order-2 px-0 d-flex flex-column order-md-1">
                                     <!--begin::Logo-->
                                     <a href="{{ url('dashboard') }}" class="mb-5 max-w-115px">
                                         <img alt="Logo" src="{{ asset('assets/media/logos/logo-light.png') }}"
                                             width="200px" />
                                     </a>
                                     <!--end::Logo-->
-                                    <span class="d-flex flex-column font-size-h5 font-weight-bold text-white">
+                                    <span class="text-white d-flex flex-column font-size-h5 font-weight-bold">
                                         <span>شمال غزة حباليا </span>
                                         <span>بالقرب من مركز شهداء الأقصى الطبي</span>
                                     </span>
                                 </div>
-                                <h1 class="display-3 font-weight-boldest text-white order-1 order-md-2">
+                                <h1 class="order-1 text-white display-3 font-weight-boldest order-md-2">
                                     فاتورة شراء</h1>
                             </div>
                         </div>
                     </div>
                     <!--end::Invoice header-->
-                    <div class="row justify-content-center p-5">
+                    <div class="p-5 row justify-content-center">
                         <div class="col-md-9">
                             <!--begin::Invoice body-->
-                            <div class="row pb-5">
+                            <div class="pb-5 row">
                                 <div class="col-md-3 border-right-md pr-md-10 py-md-10">
                                     <!--begin::Invoice To-->
-                                    <div class="text-dark-50 font-size-lg font-weight-bold mb-3">تفاصيل الفاتورة :
+                                    <div class="mb-3 text-dark-50 font-size-lg font-weight-bold">تفاصيل الفاتورة :
                                         {{ $invoice->id }}
                                     </div><br />
-                                    <div class="font-size-lg font-weight-bold mb-10">رقم السند :
+                                    <div class="mb-10 font-size-lg font-weight-bold">رقم السند :
                                         {{ $invoice->voucher_no }}
                                     </div>
-                                    <div class="font-size-lg font-weight-bold mb-10">رقم الفاتورة :
+                                    <div class="mb-10 font-size-lg font-weight-bold">رقم الفاتورة :
                                         {{ $invoice->invoice_no }}
                                     </div>
-                                    <div class="font-size-lg font-weight-bold mb-10">تاريخ السند :
+                                    <div class="mb-10 font-size-lg font-weight-bold">تاريخ السند :
                                         {{ $invoice->voucher_date }}
                                     </div>
-                                    <div class="font-size-lg font-weight-bold mb-10">اسم المورد :
+                                    <div class="mb-10 font-size-lg font-weight-bold">اسم المورد :
                                         {{ $invoice->supplier_item->supplier_item_name }}
                                     </div>
 
-                                    <div class="font-size-lg font-weight-bold mb-10">معامل الصرف :
+                                    <div class="mb-10 font-size-lg font-weight-bold">معامل الصرف :
                                         {{ $invoice->currency->name }}
                                     </div>
                                 </div>
-                                <div class="col-md-9 py-10 pl-md-10">
+                                <div class="py-10 col-md-9 pl-md-10">
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th
-                                                        class="pt-1 pb-9 pl-0 pl-md-5 font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                        class="pt-1 pl-0 pb-9 pl-md-5 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         اسم الصنف</th>
                                                     <th
-                                                        class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                        class="pt-1 text-right pb-9 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         الكمية</th>
                                                     <th
-                                                        class="pt-1 pb-9 text-right font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                        class="pt-1 text-right pb-9 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         السعر</th>
                                                     <th
-                                                        class="pt-1 pb-9 text-right pr-0 font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                        class="pt-1 pr-0 text-right pb-9 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         الاجمالي</th>
                                                 </tr>
                                             </thead>
@@ -103,12 +103,14 @@
                                                 @foreach ($invoiceProducts as $invoiceProduct)
                                                     <tr class="font-weight-bolder font-size-lg">
                                                         <td
-                                                            class="border-top-0 pl-0 pl-md-5 pt-7 d-flex align-items-center">
+                                                            class="pl-0 border-top-0 pl-md-5 pt-7 d-flex align-items-center">
                                                             {{ $invoiceProduct->item->item_name }}</td>
                                                         <td class="text-right pt-7">{{ $invoiceProduct->quantity }}</td>
                                                         <td class="text-right pt-7">{{ $invoiceProduct->price }}</td>
-                                                        <td class="pr-0 pt-7 font-size-h6 font-weight-boldest text-right">
-                                                            {{ $subtotal = $invoiceProduct->quantity * $invoiceProduct->price * $invoice->currency->value }}
+                                                        <td class="pr-0 text-right pt-7 font-size-h6 font-weight-boldest">
+                                                            {{ $subtotal = $invoiceProduct->quantity * $invoiceProduct->price * $invoice->currency_value_at_time }}
+                                                            {{-- <p>إجمالي الفاتورة: {{ $invoice->total_amount * $invoice->currency_value_at_time }} </p> --}}
+
                                                             @php
                                                                 $total += $subtotal;
                                                             @endphp
@@ -117,11 +119,11 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                        <div class="col-md-7-center pt-md-10 pb-5">
+                                        <div class="pb-5 col-md-7-center pt-md-10">
                                             <div
-                                                class="bg-primary rounded d-flex align-items-center justify-content-between text-white max-w-350px position-relative ml-auto p-7">
+                                                class="ml-auto text-white rounded bg-primary d-flex align-items-center justify-content-between max-w-350px position-relative p-7">
                                                 <!--begin::Shape-->
-                                                <div class="position-absolute opacity-30 top-0 right-0">
+                                                <div class="top-0 right-0 position-absolute opacity-30">
                                                     <span class="svg-icon svg-icon-2x svg-logo-white svg-icon-flip">
                                                         <!--begin::Svg Icon | path:assets/media/svg/shapes/abstract-8.svg-->
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="176"
@@ -168,10 +170,10 @@
                                             <thead>
                                                 <tr>
                                                     <th
-                                                        class="pt-1 pb-9 pl-0 pl-md-5 font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                        class="pt-1 pl-0 pb-9 pl-md-5 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         الاسم</th>
                                                     <th
-                                                        class="pt-1 pb-9 text-center font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                        class="pt-1 text-center pb-9 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         التوقيع</th>
 
                                                 </tr>
@@ -180,11 +182,11 @@
 
 
                                                 <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pl-0 pl-md-5 pt-7 d-flex ">
-                                                        {{ 'رئيس قسم المخازن' }}  </td>
+                                                    <td class="pl-0 border-top-0 pl-md-5 pt-7 d-flex ">
+                                                        {{ 'رئيس قسم المخازن' }} </td>
 
                                                     <td class="text-right pt-7">
-                                                     
+
 
                                                     </td>
 
@@ -193,7 +195,7 @@
 
 
                                                 <tr class="font-weight-bolder font-size-lg">
-                                                    <td class="border-top-0 pl-0 pl-md-5 pt-7 d-flex align-items-center">
+                                                    <td class="pl-0 border-top-0 pl-md-5 pt-7 d-flex align-items-center">
                                                         {{ 'أمين المخازن' }}</td>
 
                                                     <td class="text-right pt-7">
@@ -213,13 +215,13 @@
                         </div>
                     </div>
                     <!-- begin: Invoice action-->
-                    <div class="row justify-content-center border-top p-5">
+                    <div class="p-5 row justify-content-center border-top">
                         <div class="col-md-9">
-                            <div class="d-flex font-size-sm flex-wrap">
+                            <div class="flex-wrap d-flex font-size-sm">
                                 <button type="button" onclick="window.print();"
-                                    class="btn btn-light-primary font-weight-bolder mr-3 my-1">طباعة الفاتورة</button>
+                                    class="my-1 mr-3 btn btn-light-primary font-weight-bolder">طباعة الفاتورة</button>
                                 <a href="{{ url('inventory/invoice/create') }}" type="button"
-                                    class="btn btn-warning font-weight-bolder ml-sm-auto my-1">انشاء فاتورة</a>
+                                    class="my-1 btn btn-warning font-weight-bolder ml-sm-auto">انشاء فاتورة</a>
                             </div>
                         </div>
                     </div>

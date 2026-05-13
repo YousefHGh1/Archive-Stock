@@ -49,10 +49,10 @@
         .dataTables_wrapper .dataTable thead th {
             background-color: #E4E6EF;
         }
-        .card-body{
+
+        .card-body {
             padding: 10px 12px !important;
         }
-
     </style>
 @endsection
 
@@ -67,7 +67,8 @@
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    <a href="http://127.0.0.1:8000/inventory/supplier_item/create" class="btn btn-primary font-weight-bolder">
+
+                    <a href=" {{ url('/inventory/supplier_item/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -83,7 +84,7 @@
                             <!--end::Svg Icon-->
                         </span>إنشاء مورد جديد</a>
 
-                        <x-add-resource-button />
+                    <x-add-resource-button />
 
                     <!--end::Button-->
                 </div>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Supplier_item;
@@ -22,25 +21,31 @@ class SupplierItemController extends Controller
 
     public function create()
     {
-        return view('inventory.supplier_item.create');
+        $lastSupplier  = Supplier_item::latest()->value('supplier_item_num') ?? 0;
+        $NewSupplierNo = $lastSupplier + 1;
+        return view('inventory.supplier_item.create', compact('NewSupplierNo'));
     }
-
-    public function store(request $request)
+    public function store(Request $request)
     {
-
+        // Validate request data
         $validatedData = $request->validate([
-            'supplier_item_num' => 'required|unique:supplier_items',
-            'supplier_item_name' => 'required|string||regex:/^[\p{L}\s]+$/u|max:255',
-            'address' => 'required|string||regex:/^[\p{L}\s]+$/u|max:255',
-            'phone' => 'required|numeric',
+            'supplier_item_name' => ['required', 'string', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
+            'address'            => ['required', 'string', 'regex:/^[\p{L}\s]+$/u', 'max:255'],
+            'phone'              => ['required', 'numeric'],
         ]);
 
-        // Save In Database
+        // Generate new supplier item number
+        $lastSupplierNum = Supplier_item::max('supplier_item_num') ?? 0;
+        $newSupplierNum  = $lastSupplierNum + 1;
+
+        // Add supplier item number to validated data
+        $validatedData['supplier_item_num'] = $newSupplierNum;
+
+        // Create supplier item
         Supplier_item::create($validatedData);
 
         return redirect()->route('supplier_item.index')
             ->with('success', 'تم حفظ المورد بنجاح.');
-
     }
 
     public function edit($id)
@@ -59,17 +64,17 @@ class SupplierItemController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'supplier_item_num' => 'required',
+            'supplier_item_num'  => 'required',
             'supplier_item_name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'address'            => 'required',
+            'phone'              => 'required',
         ]);
 
-        $supplier_item = Supplier_item::find($id);
-        $supplier_item->supplier_item_num = $request->supplier_item_num;
+        $supplier_item                     = Supplier_item::find($id);
+        $supplier_item->supplier_item_num  = $request->supplier_item_num;
         $supplier_item->supplier_item_name = $request->supplier_item_name;
-        $supplier_item->address = $request->address;
-        $supplier_item->phone = $request->phone;
+        $supplier_item->address            = $request->address;
+        $supplier_item->phone              = $request->phone;
         $supplier_item->save();
         return redirect('inventory/supplier_item')->with('success', 'تمت التعديل بنجاح!');
     }
@@ -89,7 +94,7 @@ class SupplierItemController extends Controller
     public function search(Request $request)
     {
         $supplier_item_name = $request->input('supplier_item_name');
-        $supplier_item = Supplier_item::Where('name', 'like', '%' . $supplier_item_name . '%')->get();
+        $supplier_item      = Supplier_item::Where('name', 'like', '%' . $supplier_item_name . '%')->get();
         return view('inventory.supplier_item.report', compact('supplier_item'));
     }
 }

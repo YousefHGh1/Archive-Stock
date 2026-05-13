@@ -73,7 +73,7 @@
                                         {{ $invoiceExport->subSection->name }}
                                     </div>
                                     <div class="mb-10 font-size-lg font-weight-bold">اسم المستلم :
-                                        {{ $invoiceExport->user_id }}
+                                        {{ $invoiceExport->beneficiary }}
                                     </div>
 
                                 </div>
@@ -88,7 +88,7 @@
                                                     <th
                                                         class="pt-1 text-right pb-9 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                         الكمية</th>
-                               
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -101,7 +101,7 @@
                                                             class="pl-0 border-top-0 pl-md-5 pt-7 d-flex align-items-center">
                                                             {{ $invoiceExport_product->item->item_name }}</td>
                                                         <td class="text-right pt-7">{{ $invoiceExport_product->quantity }}</td>
-  
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -113,15 +113,15 @@
                                         <thead>
                                             <tr>
                                                 <th
-                                                    class="pt-1 pb-9 pl-0 pl-md-5 font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                    class="pt-1 pl-0 pb-9 pl-md-5 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                     أمين المخازن</th>
                                                 <th
-                                                    class="pt-1 pb-9 text-center font-weight-bolder text-muted font-size-lg text-uppercase">
+                                                    class="pt-1 text-center pb-9 font-weight-bolder text-muted font-size-lg text-uppercase">
                                                     </th>
 
                                             </tr>
                                         </thead>
-                                   
+
                                     </table>
                                 </div>
                             </div>

@@ -1,20 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Currency;
+use App\Models\DeletedVoucherArchive;
 use App\Models\Invoice;
 use App\Models\InvoiceProduct;
 use App\Models\Item;
-use App\Models\Product;
 use App\Models\Supplier_item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class InvoiceController extends Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:invoices', ['only' => ['index', 'show', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
@@ -26,86 +27,138 @@ class InvoiceController extends Controller
             ->join('currencies', 'invoices.currency_id', '=', 'currencies.id')
             ->join('invoice_products', 'invoices.id', '=', 'invoice_products.invoice_id')
             ->join('items', 'invoice_products.item_id', '=', 'items.id')
-            ->select('invoices.id', 'invoices.voucher_no', 'invoices.voucher_date', 'invoices.invoice_no', 'supplier_items.supplier_item_name','currencies.name', DB::raw('GROUP_CONCAT(items.item_name," (", invoice_products.quantity, ") &nbsp;") AS products'))
-            ->groupBy('invoices.id', 'invoices.voucher_no', 'invoices.voucher_date', 'invoices.invoice_no', 'supplier_items.supplier_item_name','currencies.name')
+            ->whereNull('invoices.deleted_at') // Exclude soft deleted records
+            ->select('invoices.id', 'invoices.voucher_no', 'invoices.voucher_date', 'invoices.invoice_no', 'supplier_items.supplier_item_name', 'currencies.name', DB::raw('GROUP_CONCAT(items.item_name," (", invoice_products.quantity, ") &nbsp;") AS products'))
+            ->groupBy('invoices.id', 'invoices.voucher_no', 'invoices.voucher_date', 'invoices.invoice_no', 'supplier_items.supplier_item_name', 'currencies.name')
             ->get();
         return view('inventory.invoice.index', compact('invoices'));
     }
 
-
     public function create()
     {
         //
-        $products = Item::all();
-        $supplier_item =  Supplier_item::all();
-        $currency = Currency::all();
-        return view('inventory.invoice.create', compact('products', 'supplier_item', 'currency'));
+        $lastVoucher  = DB::table('invoices')->max(DB::raw('CAST(voucher_no AS UNSIGNED)'));
+        $newVoucherNo = $lastVoucher ? $lastVoucher + 1 : 1;
+
+        $products      = Item::all();
+        $supplier_item = Supplier_item::all();
+        $currency      = Currency::all();
+        return view('inventory.invoice.create', compact('products', 'supplier_item', 'currency', 'newVoucherNo'));
     }
 
+    // public function store(Request $request)
+    // {
+    //     // التحقق من صحة البيانات المدخلة
+    //     $validatedData = $request->validate(
+    //         [
+    //             'voucher_no'       => 'required|unique:invoices,voucher_no',
+    //             'voucher_date'     => 'required|date',
+    //             'invoice_no'       => 'required',
+    //             'supplier_item_id' => 'required',
+    //             'currency_id'      => 'required',
 
+    //             'product.*'        => 'required|exists:items,id',
+    //             'quantity.*'       => 'required|numeric|min:0.5',
+    //             'price.*'          => 'required|numeric|min:0',
+    //         ],
+    //         [
+    //             'voucher_no.unique' => 'رقم السند مسجل مسبقا',
+    //         ]
+    //     );
+
+    //     // إنشاء فاتورة جديدة
+    //     $invoice                   = new Invoice();
+    //     $invoice->voucher_no       = $validatedData['voucher_no'];
+    //     $invoice->voucher_date     = $validatedData['voucher_date'];
+    //     $invoice->invoice_no       = $validatedData['invoice_no'];
+    //     $invoice->supplier_item_id = $validatedData['supplier_item_id'];
+    //     $invoice->currency_id      = $validatedData['currency_id'];
+
+    //     // if ($request->hasFile('amen_sign')) {
+    //     //     $image = $request->file('amen_sign');
+    //     //     $name = time() . '.' . $image->getClientOriginalExtension();
+    //     //     $path = 'imageinvoice/' . $name;
+    //     //     $image->move(public_path('imageinvoice'), $name);
+    //     //     $invoice->amen_sign = $path;
+    //     //  }
+
+    //     // if ($request->hasFile('manager_sign')) {
+    //     //     $image = $request->file('manager_sign');
+    //     //     $name = time() . '.' . $image->getClientOriginalExtension();
+    //     //     $path = 'imageinvoice/' . $name;
+    //     //     if ($image->move(public_path('imageinvoice'), $name)) {
+    //     //         $invoice->manager_sign = $path;
+    //     //     } else {
+    //     //         // handle error
+    //     //     }
+    //     //  }
+
+    //     $invoice->save();
+
+    //     // حفظ الأصناف المضافة إلى الفاتورة
+    // for ($i = 0; $i < count($validatedData['product']); $i++) {
+    //     $product  = Item::findOrFail($validatedData['product'][$i]);
+    //     $quantity = $validatedData['quantity'][$i];
+    //     $price    = $validatedData['price'][$i];
+
+    //     $invoiceProduct             = new InvoiceProduct();
+    //     $invoiceProduct->invoice_id = $invoice->id;
+    //     $invoiceProduct->item_id    = $product->id;
+    //     // $invoiceProduct->quantity = $quantity;
+
+    //     if ($invoiceProduct->quantity = $quantity) {
+    //         // Find the item
+    //         $item = Item::findOrFail($invoiceProduct->item_id);
+
+    //         // Update the item's balance
+    //         $item->balance += $invoiceProduct->quantity;
+
+    //         // Save the item
+    //         $item->update();
+    //     }
+
+    //     $invoiceProduct->price = $price;
+    //     $invoiceProduct->save();
+    // }
+
+    //     // رسالة نجاح العملية
+    //     return redirect()->back()->with('success', 'تم حفظ الفاتورة بنجاح.');
+    // }
     public function store(Request $request)
     {
-        // التحقق من صحة البيانات المدخلة
-        $validatedData = $request->validate(
-            [
-                'voucher_no' => 'required|unique:invoices,voucher_no',
-                'voucher_date' => 'required|date',
-                'invoice_no' => 'required',
-                'supplier_item_id' => 'required',
-                'currency_id' => 'required',
-   
+        $validatedData = $request->validate([
+            'voucher_date'       => 'required|date',
+            'invoice_no'         => 'required',
+            'supplier_item_id'   => 'required',
+            'currency_id'        => 'required',
+            'product.*'          => 'required|exists:items,id',
+            'quantity.*'         => 'required|numeric|min:0.5',
+            'price.*'            => 'required|numeric|min:0',
+        ]);
 
-                'product.*' => 'required|exists:items,id',
-                'quantity.*' => 'required|numeric|min:0.5',
-                'price.*' => 'required|numeric|min:0',
-            ],
-            [
-                'voucher_no.unique' => 'رقم السند مسجل مسبقا',
-            ]
-        );
+        // الحصول على آخر رقم فاتورة وزيادته (يشمل المحذوفة لمنع إعادة الاستخدام)
+        $lastVoucher  = DB::table('invoices')->max(DB::raw('CAST(voucher_no AS UNSIGNED)'));
+        $newVoucherNo = $lastVoucher ? $lastVoucher + 1 : 1;
 
-        // إنشاء فاتورة جديدة
-        $invoice = new Invoice();
-        $invoice->voucher_no = $validatedData['voucher_no'];
-        $invoice->voucher_date = $validatedData['voucher_date'];
-        $invoice->invoice_no = $validatedData['invoice_no'];
-        $invoice->supplier_item_id = $validatedData['supplier_item_id'];
-        $invoice->currency_id = $validatedData['currency_id'];
- 
-        // if ($request->hasFile('amen_sign')) {
-        //     $image = $request->file('amen_sign');
-        //     $name = time() . '.' . $image->getClientOriginalExtension();
-        //     $path = 'imageinvoice/' . $name;
-        //     $image->move(public_path('imageinvoice'), $name);
-        //     $invoice->amen_sign = $path;
-        //  }
+        $currency = Currency::findOrFail($validatedData['currency_id']);
 
-
-
-        // if ($request->hasFile('manager_sign')) {
-        //     $image = $request->file('manager_sign');
-        //     $name = time() . '.' . $image->getClientOriginalExtension();
-        //     $path = 'imageinvoice/' . $name;
-        //     if ($image->move(public_path('imageinvoice'), $name)) {
-        //         $invoice->manager_sign = $path;
-        //     } else {
-        //         // handle error
-        //     }
-        //  }
-
-
-
+        $invoice                         = new Invoice();
+        $invoice->voucher_no             = $newVoucherNo; // 👈 إدخال رقم الفاتورة تلقائيًا
+        $invoice->voucher_date           = $validatedData['voucher_date'];
+        $invoice->invoice_no             = $validatedData['invoice_no'];
+        $invoice->supplier_item_id       = $validatedData['supplier_item_id'];
+        $invoice->currency_id            = $validatedData['currency_id'];
+        $invoice->currency_value_at_time = $currency->value;
         $invoice->save();
 
-        // حفظ الأصناف المضافة إلى الفاتورة
         for ($i = 0; $i < count($validatedData['product']); $i++) {
-            $product = Item::findOrFail($validatedData['product'][$i]);
+            $product  = Item::findOrFail($validatedData['product'][$i]);
             $quantity = $validatedData['quantity'][$i];
-            $price = $validatedData['price'][$i];
+            $price    = $validatedData['price'][$i];
 
-            $invoiceProduct = new InvoiceProduct();
+            $invoiceProduct             = new InvoiceProduct();
             $invoiceProduct->invoice_id = $invoice->id;
-            $invoiceProduct->item_id = $product->id;
+            $invoiceProduct->item_id    = $product->id;
             // $invoiceProduct->quantity = $quantity;
 
             if ($invoiceProduct->quantity = $quantity) {
@@ -123,7 +176,6 @@ class InvoiceController extends Controller
             $invoiceProduct->save();
         }
 
-        // رسالة نجاح العملية
         return redirect()->back()->with('success', 'تم حفظ الفاتورة بنجاح.');
     }
 
@@ -138,14 +190,12 @@ class InvoiceController extends Controller
         return view('inventory.invoice.show', compact('invoice', 'invoiceProducts'));
     }
 
-
-
     public function edit($id)
     {
         //
-        $invoice = Invoice::findOrFail($id);
-        $products = Item::all();
-        $supplier_item =  Supplier_item::all();
+        $invoice       = Invoice::findOrFail($id);
+        $products      = Item::all();
+        $supplier_item = Supplier_item::all();
         return view('inventory.invoice.edit', compact('products', 'supplier_item', 'invoice'));
     }
 
@@ -156,19 +206,19 @@ class InvoiceController extends Controller
 
         // التحقق من صحة البيانات المدخلة
         $validatedData = $request->validate([
-            'voucher_no' => 'required',
-            'voucher_date' => 'required|date',
-            'invoice_no' => 'required',
+            'voucher_no'       => 'required',
+            'voucher_date'     => 'required|date',
+            'invoice_no'       => 'required',
             'supplier_item_id' => 'required',
-            'product.*' => 'required|exists:items,id',
-            'quantity.*' => 'required|numeric|min:0.5',
-            'price.*' => 'required|numeric|min:0',
+            'product.*'        => 'required|exists:items,id',
+            'quantity.*'       => 'required|numeric|min:0.5',
+            'price.*'          => 'required|numeric|min:0',
         ]);
 
         // تحديث الحقول الجديدة
-        $invoice->voucher_no = $validatedData['voucher_no'];
-        $invoice->voucher_date = $validatedData['voucher_date'];
-        $invoice->invoice_no = $validatedData['invoice_no'];
+        $invoice->voucher_no       = $validatedData['voucher_no'];
+        $invoice->voucher_date     = $validatedData['voucher_date'];
+        $invoice->invoice_no       = $validatedData['invoice_no'];
         $invoice->supplier_item_id = $validatedData['supplier_item_id'];
         $invoice->save();
 
@@ -187,13 +237,13 @@ class InvoiceController extends Controller
 
         // إضافة الأصناف الجديدة إلى الفاتورة
         for ($i = 0; $i < count($validatedData['product']); $i++) {
-            $product = Item::findOrFail($validatedData['product'][$i]);
+            $product  = Item::findOrFail($validatedData['product'][$i]);
             $quantity = $validatedData['quantity'][$i];
-            $price = $validatedData['price'][$i];
+            $price    = $validatedData['price'][$i];
 
-            $invoiceProduct = new invoiceproduct();
+            $invoiceProduct             = new invoiceproduct();
             $invoiceProduct->invoice_id = $invoice->id;
-            $invoiceProduct->item_id = $product->id;
+            $invoiceProduct->item_id    = $product->id;
 
             // تحديث الرصيد الجديد
             $item = Item::findOrFail($invoiceProduct->item_id);
@@ -201,7 +251,7 @@ class InvoiceController extends Controller
             $item->update();
 
             $invoiceProduct->quantity = $quantity;
-            $invoiceProduct->price = $price;
+            $invoiceProduct->price    = $price;
             $invoiceProduct->save();
         }
 
@@ -209,42 +259,118 @@ class InvoiceController extends Controller
         return redirect()->back()->with('success', 'تم تحديث الفاتورة بنجاح.');
     }
 
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        // العثور على الفاتورة المطلوبة
-        $invoice = Invoice::findOrFail($id);
+        return $this->safeDelete($id, $request);
+    }
 
-        // حذف الأصناف المرتبطة بالفاتورة
-        foreach ($invoice->invoiceproduct as $product) {
-            // العثور على الصنف المرتبط بالفاتورة
-            $item = Item::findOrFail($product->item_id);
+    /**
+     * Safe delete method with audit trail
+     */
+    private function safeDelete($id, Request $request)
+    {
+        try {
+            DB::beginTransaction();
 
-            // تحديث الرصيد
-            $item->balance -= $product->quantity;
-            $item->update();
+            // العثور على الفاتورة المطلوبة
+            $invoice = Invoice::findOrFail($id);
 
-            // حذف الصنف من الفاتورة
-            $product->delete();
+            // التحقق من أن الفاتورة ليست محذوفة بالفعل
+            if ($invoice->deleted_at) {
+                return redirect()->back()->with('error', 'هذه الفاتورة محذوفة بالفعل');
+            }
+
+            // نسخ البيانات الأصلية للأرشيف
+            $archiveData = [
+                'voucher_type' => 'invoice',
+                'voucher_no' => $invoice->voucher_no,
+                'voucher_date' => $invoice->voucher_date,
+                'invoice_no' => $invoice->invoice_no,
+                'original_id' => $invoice->id,
+                'original_data' => $invoice->toArray(),
+                'deleted_by' => Auth::id(),
+                'delete_reason' => $request->input('reason', 'حذف يدوي'),
+                'deleted_at' => now(),
+            ];
+
+            // إنشاء سجل الأرشيف
+            DeletedVoucherArchive::create($archiveData);
+
+            // استرجاع الأصناف المرتبطة بالفاتورة (إلغاء تأثير الفاتورة على المخزون)
+            foreach ($invoice->invoiceproduct as $product) {
+                $item = Item::findOrFail($product->item_id);
+                $item->balance -= $product->quantity;
+                $item->update();
+            }
+
+            // تحديث حالة الفاتورة وتمييزها كمحذوفة
+            $invoice->status = 'deleted';
+            $invoice->deleted_by = Auth::id();
+            $invoice->delete_reason = $request->input('reason', 'حذف يدوي');
+            $invoice->save(); // Save status changes before soft delete
+            $invoice->delete(); // Soft delete
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'تم حذف الفاتورة بنجاح ونقلها إلى الأرشيف');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error deleting invoice: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'حدث خطأ أثناء حذف الفاتورة: ' . $e->getMessage());
         }
+    }
 
-        // حذف الفاتورة
-        $invoice->delete();
+    /**
+     * Restore deleted invoice
+     */
+    public function restore($id)
+    {
+        try {
+            DB::beginTransaction();
 
-        // رسالة نجاح العملية
-        return redirect()->back()->with('success', 'تم حذف الفاتورة بنجاح.');
+            $invoice = Invoice::withTrashed()->findOrFail($id);
+
+            if (!$invoice->trashed()) {
+                return redirect()->back()->with('error', 'هذه الفاتورة ليست محذوفة');
+            }
+
+            // استعادة تأثير الفاتورة على المخزون
+            foreach ($invoice->invoiceproduct as $product) {
+                $item = Item::findOrFail($product->item_id);
+                $item->balance += $product->quantity;
+                $item->update();
+            }
+
+            // استعادة الفاتورة
+            $invoice->status = 'active';
+            $invoice->deleted_by = null;
+            $invoice->delete_reason = null;
+            $invoice->restore();
+
+            DB::commit();
+
+            return redirect()->back()->with('success', 'تم استعادة الفاتورة بنجاح');
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error restoring invoice: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'حدث خطأ أثناء استعادة الفاتورة: ' . $e->getMessage());
+        }
     }
 
     public function searchdate(Request $request)
     {
         // استخراج تاريخ البدء وتاريخ الانتهاء من النموذج
         $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        $endDate   = $request->input('end_date');
 
         // تنفيذ البحث عن الفواتير بين التاريخين
         $invoices = DB::table('invoices')
             ->join('supplier_items', 'invoices.supplier_item_id', '=', 'supplier_items.id')
             ->join('invoice_products', 'invoices.id', '=', 'invoice_products.invoice_id')
             ->join('items', 'invoice_products.item_id', '=', 'items.id')
+            ->whereNull('invoices.deleted_at') // Exclude soft deleted records
             ->select('invoices.id', 'invoices.voucher_no', 'invoices.voucher_date', 'invoices.invoice_no', 'supplier_items.supplier_item_name', DB::raw('GROUP_CONCAT(items.item_name," (", invoice_products.quantity, ") &nbsp;") AS products'))
             ->whereBetween('invoices.voucher_date', [$startDate, $endDate])
             ->groupBy('invoices.id', 'invoices.voucher_no', 'invoices.voucher_date', 'invoices.invoice_no', 'supplier_items.supplier_item_name')

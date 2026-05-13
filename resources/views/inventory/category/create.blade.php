@@ -51,6 +51,9 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض العائلات </a>
+
+                            <x-add-resource-button />
+
                         </div>
                     </div>
                     <!--begin::Form-->
@@ -77,7 +80,7 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input name="category_num" type="number" min="0" class="form-control"
-                                            id="category_num" value="{{ old('category_num', $next_num) }}" />
+                                            id="category_num"  />
                                     </div>
                                 </div>
                             </div>
@@ -90,21 +93,19 @@
                                 <div class="col-lg-10">
                                     <button type="submit" class="mr-2 btn btn-success">حفظ</button>
                                     <button type="reset" class="mr-2 btn btn-danger">إلغاء</button>
-                                    <x-add-resource-button />
 
                                 </div>
-                                </div>
-
                             </div>
+
                         </div>
-
-
-                    </form>
-                    <!--end::Form-->
                 </div>
-                <!--end::Card-->
 
+
+                </form>
+                <!--end::Form-->
             </div>
+            <!--end::Card-->
+
         </div>
     </div>
 @endsection

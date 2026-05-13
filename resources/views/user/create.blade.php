@@ -108,45 +108,58 @@
                         </div>
                         <!--end::Form group-->
 
-                        <!--begin::Form group-->
-                        <div class="p-3 form-group row">
-                            <label for="section_id" class="col-lg-2 col-form-label ">
-                                <h6><strong>الدائرة:</strong></h6>
-                            </label>
-                            <div class="col-lg-9">
-                                <div class="input-group">
-                                    <select class="@error('section_id') is-invalid @enderror form-control selectpicker"
-                                    {{-- onclick="console.log($(this).val())" onchange="console.log('change is firing')" --}}
-                                    data-size="7" tabindex="null"
-                                        data-live-search="true" title="..." name="section_id" id="section_id">
-                                        @foreach ($section as $sections)
-                                            <option value="{{ $sections->id }}">{{ $sections->name_section }}</option>
-                                        @endforeach
-                                    </select>
+                            <!--begin::Form group-->
+                            <div class="p-3 form-group row">
+                                <label for="section_id" class="col-lg-2 col-form-label ">
+                                    <h6><strong>الدائرة<span class="mr-1 tx-danger">:</span></strong></h6>
+                                </label>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
 
+                                        <select name="section_id" id="section_id"
+                                            class="@error('section_id') is-invalid @enderror form-control selectpicker "
+                                            data-size="7" tabindex="null" data-live-search="true" title="أدخل اسم الدائرة">
+                                            <option value="">اختر الدائرة</option>
+                                            @foreach ($section as $sections)
+                                                <option value="{{ $sections->id }}">
+                                                    {{ $sections->name_section }}
+                                                </option>
+                                            @endforeach
+                                            @if ($errors->has('section_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('section_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="sub_section_id " class="col-lg-2 col-form-label ">
+                                    <h6><strong>القسم <span class="mr-1 tx-danger">:</span></strong></h6>
+                                </label>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <select name="sub_section_id" id="sub_section_id"
+                                            onclick="console.log($(this).val())" onchange="console.log('change is firing')"
+                                            data-size="7" tabindex="null"
+                                            class="@error('sub_section_id') is-invalid @enderror form-control "
+                                            data-live-search="true" title="أدخل اسم القسم ">
+                                            <option value="">اختر القسم </option>
+                                            @foreach ($subSection as $subSections)
+                                                <option value="{{ $subSections->id }}">
+                                                    {{ $subSections->name }}
+                                                </option>
+                                            @endforeach
+                                            @if ($errors->has('sub_section_id'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('sub_section_id') }}</strong>
+                                                </span>
+                                            @endif
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--end::Form group-->
-
-                        <!--begin::Form group-->
-                        <div class="p-3 form-group row">
-                            <label for="sub_section_id" class="col-lg-2 col-form-label ">
-                                <h6><strong>القسم :</strong></h6>
-                            </label>
-                            <div class="col-lg-9">
-                                <div class="input-group">
-                                    <select class="@error('sub_section_id') is-invalid @enderror form-control selectpicker " data-size="20" tabindex="null"
-                                        data-live-search="true" title="..." name="sub_section_id"
-                                        id="sub_section_id">
-                                        @foreach ($subSection as $subSections)
-                                            <option value="{{ $subSections->id }}">{{ $subSections->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end::Form group-->
+                            <!--end::Form group-->
 
                         <!--begin::Action-->
                         <div class="card-footer">
@@ -199,28 +212,32 @@
 
 @section('scripts')
 
-{{-- <script>
-    $(document).ready(function() {
-        $('select[name="section_id"]').on('change', function() {
-            var section_id = $(this).val();
-            if (section_id) {
-                $.ajax({
-                    url: "{{ URL::to('getsub_section') }}/" + section_id,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(data) {
-                        $('select[name="sub_section_id"]').empty();
-                        $.each(data, function(key, value) {
-                            $('select[name="sub_section_id"]').append(
-                                '<option value="' +
-                                value + '">' + value + '</option>');
-                        });
-                    },
-                });
-            } else {
-                console.log('AJAX load did not work');
-            }
+    <script>
+        $(document).ready(function() {
+            $('select[name="section_id"]').on('change', function() {
+                var section_id = $(this).val();
+                if (section_id) {
+                    $.ajax({
+                        url: "{{ URL::to('getsub_section') }}/" + section_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="sub_section_id"]').empty();
+                            $.each(data, function(id, name) {
+                                // Append the correct value (ID) for sub_section_id
+                                $('select[name="sub_section_id"]').append(
+                                    '<option value="' + id + '">' + name +
+                                    '</option>'
+                                );
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
         });
-    });
-</script> --}}
+    </script>
+
+
 @endsection

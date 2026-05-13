@@ -59,14 +59,14 @@
 
         <!--begin::Card-->
         <div class="card card-custom">
-            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+            <div class="flex-wrap pt-6 pb-0 border-0 card-header">
                 <div class="card-title">
                     <h3 class="card-label">عرض الموظفين </h3>
                 </div>
                 <div class="card-toolbar">
 
                     <!--begin::Button-->
-                    <a href="{{ url('/employee/create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ url('/employee/create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -104,7 +104,7 @@
                                 <td> {{ $employees->id }}</td>
                                 <td> {{ $employees->employee_name }}</td>
                                 <td> {{ $employees->Section->name_section }}</td>
-                                <td>{{ $employees->sub_section_id }}</td>
+                                <td>{{ $employees->subSection->name }}</td>
 
 
                                 <td data-field="Actions" data-autohide-disabled="false" aria-label="null"

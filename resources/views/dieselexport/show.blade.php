@@ -47,8 +47,8 @@
                     </div>
 
                     <div class="card-body" style="margin:20px;">
-                        <div class="form-group row pb-5">
-                            <label for="section_id" class="col-lg-2 col-form-label text-lg-right"> القسم:</label>
+                        <div class="pb-5 form-group row">
+                            <label for="section_id" class="col-lg-2 col-form-label text-lg-right"> الدائرة:</label>
                             <div class="col-8">
                                 <div class="dropdown bootstrap-select form-control dropup">
                                     <input name="section_id" id="section_id" type="number" class="form-control" disabled
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="sub_section_id" class="col-lg-2 col-form-label text-lg-right">القسم الفرعي:</label>
                             <div class="col-8">
                                 <div class="dropdown bootstrap-select form-control dropup">
@@ -66,7 +66,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="num_section" class="col-lg-2 col-form-label text-lg-right">رقم الإيصال:</label>
                             <div class="col-lg-8">
                                 <div class="input-group">
@@ -76,7 +76,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="num_note" class="col-lg-2 col-form-label text-lg-right">رقم الدفتر:</label>
                             <div class="col-lg-8">
                                 <div class="input-group">
@@ -86,7 +86,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="quantity" class="col-lg-2 col-form-label text-lg-right">كمية الصادر:</label>
                             <div class="col-lg-8">
                                 <div class="input-group">

@@ -11,14 +11,108 @@
     الرئيسة
 @endsection
 @section('sub_title')
-    الأرشيف المركزي
+    الأرشيف المركزي + المخازن
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 auto 10px;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .bg-gradient-success {
+            background: linear-gradient(135deg, #4CAF50 0%, #73ed7a 100%);
+        }
+
+        .bg-gradient-danger {
+            background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+        }
+
+        .bg-gradient-warning {
+            background: linear-gradient(135deg, #FF9800 0%, #ebae72 100%);
+        }
+
+        .bg-gradient-info {
+            background: linear-gradient(135deg, #17a2b8 0%, #8be3f1 100%);
+        }
+
+        .analytics-summary {
+            border: 1px solid #EBEDF3;
+            border-radius: 8px;
+            background: #ffffff;
+            min-height: 118px;
+        }
+
+        .analytics-summary .summary-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+        }
+
+        .dashboard-chart {
+            min-height: 320px;
+        }
+
+        .dashboard-chart-sm {
+            min-height: 260px;
+        }
+
+        .chart-empty-state {
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7E8299;
+            font-weight: 600;
+        }
+    </style>
 @endsection
 
 
 @section('content')
+    @php
+        $dashboardStats = $dashboardStats ?? [];
+        $dashboardCharts = $dashboardCharts ?? [];
+    @endphp
     <!--begin::Container-->
     <div class="container">
         <!--begin::Dashboard-->
@@ -28,206 +122,245 @@
                 <!--begin::Nav Panel Widget 1-->
                 <div class="card card-custom gutter-b">
                     <!--begin::Body-->
-                    <div class="card-body ">
+                    <div class="card-body">
                         <!--begin::Nav Tabs-->
                         <ul class="p-0 m-0 dashboard-tabs nav nav-pills nav-danger row row-paddingless flex-column flex-sm-row"
                             role="tablist">
-                            <!--begin::Item-->
-                            <li class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0">
-                                <a class="py-10 border rounded nav-link active d-flex flex-grow-1 flex-column align-items-center"
+
+                            <!-- الأرشيف المركزي -->
+                            <li class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0 animate-on-scroll">
+                                <a class="py-10 border rounded nav-link active d-flex flex-grow-1 flex-column align-items-center dashboard-card bg-gradient-primary text-white animate-slide-in-left"
                                     data-toggle="pill" href="#tab_forms_widget_1">
                                     <span class="w-auto py-2 nav-icon">
-                                        <span class="svg-icon svg-icon-3x">
-                                            <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Home/Library.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24">
-                                                    </rect>
-                                                    <path
-                                                        d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z"
-                                                        fill="#000000"></path>
-                                                    <rect fill="#000000" opacity="0.3"
-                                                        transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519) "
-                                                        x="16.3255682" y="2.94551858" width="3" height="18"
-                                                        rx="1"></rect>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span> </span>
+                                        <i class="fas fa-archive fa-3x text-white icon-bounce"></i>
+                                    </span>
                                     <span class="py-2 text-center nav-text font-size-lg font-weight-bold">
                                         الأرشيف المركزي :
-
                                     </span>
-                                    <span class="text-dark-75 font-size-h6">وارد : {{ \App\Models\Archive::count() }} &
-                                        صادر : {{ \App\Models\ArchiveExport::count() }}
+                                    <span class="font-size-h6 opacity-75">
+                                        {{ \App\Models\Archive::count() }} وارد &
+                                        {{ \App\Models\ArchiveExport::count() }} صادر
                                     </span>
-                                </a>
                                 </a>
                             </li>
-                            <!--end::Item-->
 
-                            <!--begin::Item-->
-                            <li class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0">
-                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center"
+                            <!-- الحاسوب -->
+                            <li
+                                class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0 animate-on-scroll">
+                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center dashboard-card bg-gradient-success text-white animate-slide-in-right"
                                     data-toggle="pill" href="#tab_forms_widget_2">
                                     <span class="w-auto py-2 nav-icon">
-                                        <span class="svg-icon svg-icon-3x">
-                                            <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Layout/Layout-4-blocks.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24">
-                                                    </rect>
-                                                    <rect fill="#000000" x="4" y="4" width="7"
-                                                        height="7" rx="1.5"></rect>
-                                                    <path
-                                                        d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z"
-                                                        fill="#000000" opacity="0.3"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span> </span>
+                                        <i class="fas fa-laptop fa-3x text-white icon-bounce"></i>
+                                    </span>
                                     <span class="py-2 text-center nav-text font-size-lg font-weight-bolder">
                                         الحاسوب :
                                     </span>
-                                    <span class="text-dark-75 font-size-h6">وارد : {{ \App\Models\Computer::count() }} &
-                                        صادر : {{ \App\Models\ComputerExport::count() }}
+                                    <span class="font-size-h6 opacity-75">
+                                        {{ \App\Models\Computer::count() }} وارد &
+                                        {{ \App\Models\ComputerExport::count() }} صادر
                                     </span>
                                 </a>
                             </li>
-                            <!--end::Item-->
 
-                            <!--begin::Item-->
-                            <li class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0">
-                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center"
+                            <!-- الرقابة (تم التعديل) -->
+                            <li
+                                class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0 animate-on-scroll">
+                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center dashboard-card bg-gradient-info text-white animate-slide-in-right"
                                     data-toggle="pill" href="#tab_forms_widget_3">
                                     <span class="w-auto py-2 nav-icon">
-                                        <span class="svg-icon svg-icon-3x">
-                                            <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Media/Movie-Lane2.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24">
-                                                    </rect>
-                                                    <path
-                                                        d="M6,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,19 C20,20.1045695 19.1045695,21 18,21 L6,21 C4.8954305,21 4,20.1045695 4,19 L4,5 C4,3.8954305 4.8954305,3 6,3 Z M5.5,5 C5.22385763,5 5,5.22385763 5,5.5 L5,6.5 C5,6.77614237 5.22385763,7 5.5,7 L6.5,7 C6.77614237,7 7,6.77614237 7,6.5 L7,5.5 C7,5.22385763 6.77614237,5 6.5,5 L5.5,5 Z M17.5,5 C17.2238576,5 17,5.22385763 17,5.5 L17,6.5 C17,6.77614237 17.2238576,7 17.5,7 L18.5,7 C18.7761424,7 19,6.77614237 19,6.5 L19,5.5 C19,5.22385763 18.7761424,5 18.5,5 L17.5,5 Z M5.5,9 C5.22385763,9 5,9.22385763 5,9.5 L5,10.5 C5,10.7761424 5.22385763,11 5.5,11 L6.5,11 C6.77614237,11 7,10.7761424 7,10.5 L7,9.5 C7,9.22385763 6.77614237,9 6.5,9 L5.5,9 Z M17.5,9 C17.2238576,9 17,9.22385763 17,9.5 L17,10.5 C17,10.7761424 17.2238576,11 17.5,11 L18.5,11 C18.7761424,11 19,10.7761424 19,10.5 L19,9.5 C19,9.22385763 18.7761424,9 18.5,9 L17.5,9 Z M5.5,13 C5.22385763,13 5,13.2238576 5,13.5 L5,14.5 C5,14.7761424 5.22385763,15 5.5,15 L6.5,15 C6.77614237,15 7,14.7761424 7,14.5 L7,13.5 C7,13.2238576 6.77614237,13 6.5,13 L5.5,13 Z M17.5,13 C17.2238576,13 17,13.2238576 17,13.5 L17,14.5 C17,14.7761424 17.2238576,15 17.5,15 L18.5,15 C18.7761424,15 19,14.7761424 19,14.5 L19,13.5 C19,13.2238576 18.7761424,13 18.5,13 L17.5,13 Z M17.5,17 C17.2238576,17 17,17.2238576 17,17.5 L17,18.5 C17,18.7761424 17.2238576,19 17.5,19 L18.5,19 C18.7761424,19 19,18.7761424 19,18.5 L19,17.5 C19,17.2238576 18.7761424,17 18.5,17 L17.5,17 Z M5.5,17 C5.22385763,17 5,17.2238576 5,17.5 L5,18.5 C5,18.7761424 5.22385763,19 5.5,19 L6.5,19 C6.77614237,19 7,18.7761424 7,18.5 L7,17.5 C7,17.2238576 6.77614237,17 6.5,17 L5.5,17 Z"
-                                                        fill="#000000" opacity="0.3"></path>
-                                                    <path
-                                                        d="M11.3521577,14.5722612 L13.9568442,12.7918113 C14.1848159,12.6359797 14.2432972,12.3248456 14.0874656,12.0968739 C14.0526941,12.0460053 14.0088196,12.002002 13.9580532,11.9670814 L11.3533667,10.1754041 C11.1258528,10.0189048 10.8145486,10.0764735 10.6580493,10.3039875 C10.6007019,10.3873574 10.5699997,10.4861652 10.5699997,10.5873545 L10.5699997,14.1594818 C10.5699997,14.4356241 10.7938573,14.6594818 11.0699997,14.6594818 C11.1706891,14.6594818 11.2690327,14.6290818 11.3521577,14.5722612 Z"
-                                                        fill="#000000"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span> </span>
-                                    <span class="py-2 text-center nav-text font-size-lg font-weight-bolder">
-                                        الرقابة:
+                                        <i class="fas fa-eye fa-3x text-white icon-bounce"></i>
                                     </span>
-                                    <span class="text-dark-75 font-size-h6">وارد : {{ \App\Models\Censorship::count() }} &
+                                    <span class="py-2 text-center nav-text font-size-lg font-weight-bolder">
+                                        الرقابة :
+                                    </span>
+                                    <span class="font-size-h6 opacity-75">
+                                        وارد : {{ \App\Models\Censorship::count() }} &
                                         صادر : {{ \App\Models\CensorshipExport::count() }}
                                     </span>
                                 </a>
                             </li>
-                            <!--end::Item-->
 
-
-                            <!--begin::Item-->
-                            <li class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0">
-                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center"
-                                    data-toggle="pill" href="#tab_forms_widget_5">
+                            <!-- الشؤون القانونية -->
+                            <li
+                                class="flex-shrink-0 mb-3 mr-3 nav-item d-flex col-sm flex-grow-1 mb-lg-0 animate-on-scroll">
+                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center dashboard-card bg-gradient-danger text-white animate-slide-in-right"
+                                    data-toggle="pill" href="#tab_forms_widget_4">
                                     <span class="w-auto py-2 nav-icon">
-                                        <span class="svg-icon svg-icon-3x">
-                                            <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/General/Shield-check.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <rect x="0" y="0" width="24" height="24">
-                                                    </rect>
-                                                    <path
-                                                        d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z"
-                                                        fill="#000000" opacity="0.3"></path>
-                                                    <path
-                                                        d="M11.1750002,14.75 C10.9354169,14.75 10.6958335,14.6541667 10.5041669,14.4625 L8.58750019,12.5458333 C8.20416686,12.1625 8.20416686,11.5875 8.58750019,11.2041667 C8.97083352,10.8208333 9.59375019,10.8208333 9.92916686,11.2041667 L11.1750002,12.45 L14.3375002,9.2875 C14.7208335,8.90416667 15.2958335,8.90416667 15.6791669,9.2875 C16.0625002,9.67083333 16.0625002,10.2458333 15.6791669,10.6291667 L11.8458335,14.4625 C11.6541669,14.6541667 11.4145835,14.75 11.1750002,14.75 Z"
-                                                        fill="#000000"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span> </span>
+                                        <i class="fas fa-gavel fa-3x text-white icon-bounce"></i>
+                                    </span>
                                     <span class="py-2 text-center nav-text font-size-lg font-weight-bolder">
                                         الشؤون القانونية :
                                     </span>
-                                    <span class="text-dark-75 font-size-h6">وارد : {{ \App\Models\Legal::count() }} &
-                                        صادر : {{ \App\Models\LegalExport::count() }}
+                                    <span class="font-size-h6 opacity-75">
+                                        {{ \App\Models\Legal::count() }} وارد &
+                                        {{ \App\Models\LegalExport::count() }} صادر
                                     </span>
-
                                 </a>
                             </li>
-                            <!--end::Item-->
 
-                            <!--begin::Item-->
-                            <li class="flex-shrink-0 mb-3 mr-0 nav-item d-flex col-sm flex-grow-1 mb-lg-0">
-                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center"
+                            <!-- الجباية (تم التعديل) -->
+                            <li
+                                class="flex-shrink-0 mb-3 mr-0 nav-item d-flex col-sm flex-grow-1 mb-lg-0 animate-on-scroll">
+                                <a class="py-10 border rounded nav-link d-flex flex-grow-1 flex-column align-items-center dashboard-card bg-gradient-warning text-white animate-slide-in-right"
                                     data-toggle="pill" href="#tab_forms_widget_5">
                                     <span class="w-auto py-2 nav-icon">
-                                        <span class="svg-icon svg-icon-3x">
-                                            <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Group.svg--><svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                                                viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                    <path
-                                                        d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z"
-                                                        fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                    <path
-                                                        d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z"
-                                                        fill="#000000" fill-rule="nonzero"></path>
-                                                </g>
-                                            </svg>
-                                            <!--end::Svg Icon-->
-                                        </span> </span>
+                                        <i class="fas fa-hand-holding-usd fa-3x text-white icon-bounce"></i>
+                                    </span>
                                     <span class="py-2 text-center nav-text font-size-lg font-weight-bolder">
                                         الجباية :
                                     </span>
-                                    <span class="text-dark-75 font-size-h6">وارد : {{ \App\Models\Jibaya::count() }} &
+                                    <span class="font-size-h6 opacity-75">
+                                        وارد : {{ \App\Models\Jibaya::count() }} &
                                         صادر : {{ \App\Models\JibayaExport::count() }}
                                     </span>
                                 </a>
                             </li>
-                            <!--end::Item-->
+
                         </ul>
                         <!--end::Nav Tabs-->
-
-                        <!--begin::Nav Content-->
-                        <div class="p-0 m-0 tab-content">
-                            <div class="tab-pane active" id="forms_widget_tab_1" role="tabpanel">
-
-                            </div>
-                            <div class="tab-pane" id="forms_widget_tab_2" role="tabpanel">
-
-                            </div>
-                            <div class="tab-pane" id="forms_widget_tab_3" role="tabpanel">
-
-                            </div>
-                            <div class="tab-pane" id="forms_widget_tab_4" role="tabpanel">
-
-                            </div>
-                            <div class="tab-pane" id="forms_widget_tab_5" role="tabpanel">
-
-                            </div>
-                        </div>
-                        <!--end::Nav Content-->
                     </div>
                     <!--end::Body-->
                 </div>
-                <!--begin::Nav Panel Widget 1-->
+                <!--end::Nav Panel Widget 1-->
             </div>
         </div>
         <!--End::Row-->
+
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="p-6 mb-7 analytics-summary d-flex align-items-center justify-content-between animate-on-scroll">
+                    <div>
+                        <div class="text-muted font-weight-bold">إجمالي معاملات الأرشيف</div>
+                        <div class="mt-2 text-dark font-weight-bolder font-size-h2">
+                            {{ number_format($dashboardStats['totalArchiveTransactions'] ?? 0) }}
+                        </div>
+                    </div>
+                    <span class="summary-icon bg-light-primary text-primary">
+                        <i class="fas fa-folder-open"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="p-6 mb-7 analytics-summary d-flex align-items-center justify-content-between animate-on-scroll">
+                    <div>
+                        <div class="text-muted font-weight-bold">حركة المخازن</div>
+                        <div class="mt-2 text-dark font-weight-bolder font-size-h2">
+                            {{ number_format($dashboardStats['totalInventoryTransactions'] ?? 0) }}
+                        </div>
+                    </div>
+                    <span class="summary-icon bg-light-success text-success">
+                        <i class="fas fa-boxes"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="p-6 mb-7 analytics-summary d-flex align-items-center justify-content-between animate-on-scroll">
+                    <div>
+                        <div class="text-muted font-weight-bold">المراسلات الداخلية</div>
+                        <div class="mt-2 text-dark font-weight-bolder font-size-h2">
+                            {{ number_format($dashboardStats['internalMessages'] ?? 0) }}
+                        </div>
+                    </div>
+                    <span class="summary-icon bg-light-warning text-warning">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="p-6 mb-7 analytics-summary d-flex align-items-center justify-content-between animate-on-scroll">
+                    <div>
+                        <div class="text-muted font-weight-bold">الأصناف والعهد</div>
+                        <div class="mt-2 text-dark font-weight-bolder font-size-h2">
+                            {{ number_format(($dashboardStats['inventoryItems'] ?? 0) + ($dashboardStats['custodies'] ?? 0)) }}
+                        </div>
+                    </div>
+                    <span class="summary-icon bg-light-danger text-danger">
+                        <i class="fas fa-clipboard-check"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card card-custom gutter-b">
+                    <div class="border-0 card-header">
+                        <div class="card-title">
+                            <h3 class="card-label font-weight-bolder text-dark">إجمالي الحركات الشهرية لجميع المعاملات</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="overall-monthly-chart" class="dashboard-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card card-custom gutter-b">
+                    <div class="border-0 card-header">
+                        <div class="card-title">
+                            <h3 class="card-label font-weight-bolder text-dark">حجم المعاملات حسب القسم</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="department-totals-chart" class="dashboard-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="card card-custom gutter-b">
+                    <div class="border-0 card-header">
+                        <div class="card-title">
+                            <h3 class="card-label font-weight-bolder text-dark">حركة الوارد والصادر خلال السنة</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="archive-monthly-chart" class="dashboard-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card card-custom gutter-b">
+                    <div class="border-0 card-header">
+                        <div class="card-title">
+                            <h3 class="card-label font-weight-bolder text-dark">توزيع معاملات الدوائر</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="archive-distribution-chart" class="dashboard-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card card-custom gutter-b">
+                    <div class="border-0 card-header">
+                        <div class="card-title">
+                            <h3 class="card-label font-weight-bolder text-dark">حركة المخازن الشهرية</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="inventory-flow-chart" class="dashboard-chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card card-custom gutter-b">
+                    <div class="border-0 card-header">
+                        <div class="card-title">
+                            <h3 class="card-label font-weight-bolder text-dark">المراسلات حسب القسم</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="messages-chart" class="dashboard-chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {{-- ******************************************************************************************************* --}}
         <!--begin::Row-->
         <div class="row">
@@ -309,14 +442,14 @@
                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <rect x="0" y="0" width="24" height="24" />
-                                                <rect fill="#000000" opacity="0.3" x="13" y="4"
-                                                    width="3" height="16" rx="1.5" />
-                                                <rect fill="#000000" x="8" y="9" width="3"
-                                                    height="11" rx="1.5" />
-                                                <rect fill="#000000" x="18" y="11" width="3"
-                                                    height="9" rx="1.5" />
-                                                <rect fill="#000000" x="3" y="13" width="3"
-                                                    height="7" rx="1.5" />
+                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3"
+                                                    height="16" rx="1.5" />
+                                                <rect fill="#000000" x="8" y="9" width="3" height="11"
+                                                    rx="1.5" />
+                                                <rect fill="#000000" x="18" y="11" width="3" height="9"
+                                                    rx="1.5" />
+                                                <rect fill="#000000" x="3" y="13" width="3" height="7"
+                                                    rx="1.5" />
                                             </g>
                                         </svg>
                                         <!--end::Svg Icon-->
@@ -414,12 +547,13 @@
                 <!--end::Mixed Widget 1-->
             </div>
 
-            <div class="col-xl-6">
+            <div class="col-12 col-lg-6">
                 <!--begin::List Widget 11-->
                 <div class="card card-custom card-stretch gutter-b">
                     <!--begin::Header-->
                     <div class="border-0 card-header">
-                        <h3 class="card-title font-weight-bolder text-dark">المراســــــــــــــــــــــــــلات الداخليـــــــــــــــــــــــــة</h3>
+                        <h3 class="card-title font-weight-bolder text-dark">المراســــــــــــــــــــــــــلات
+                            الداخليـــــــــــــــــــــــــة</h3>
                     </div>
                     <!--end::Header-->
 
@@ -638,4 +772,409 @@
 @endsection
 
 @section('scripts')
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animate-on-scroll elements
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Dashboard card hover effects
+        document.querySelectorAll('.dashboard-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Counter animation for statistics
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 20);
+        }
+
+        // Animate counters on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can add counter animations here if needed
+            console.log('Dashboard loaded with animations');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var dashboardCharts = @json($dashboardCharts);
+
+            if (typeof ApexCharts === 'undefined') {
+                return;
+            }
+
+            function sumValues(values) {
+                return (values || []).reduce(function(total, value) {
+                    return total + Number(value || 0);
+                }, 0);
+            }
+
+            function renderEmpty(selector) {
+                var target = document.querySelector(selector);
+                if (target) {
+                    target.innerHTML = '<div class="chart-empty-state">لا توجد بيانات كافية لعرض المخطط</div>';
+                }
+            }
+
+            function renderChart(selector, options, dataGroups) {
+                var target = document.querySelector(selector);
+                var hasData = (dataGroups || []).some(function(values) {
+                    return sumValues(values) > 0;
+                });
+
+                if (!target || !hasData) {
+                    renderEmpty(selector);
+                    return;
+                }
+
+                new ApexCharts(target, options).render();
+            }
+
+            var monthLabels = dashboardCharts.monthLabels || [];
+            var archiveMonthly = dashboardCharts.monthlyArchive || {};
+            var archiveDistribution = dashboardCharts.archiveDistribution || {};
+            var inventoryFlow = dashboardCharts.inventoryFlow || {};
+            var messages = dashboardCharts.messages || {};
+            var overallMonthly = dashboardCharts.overallMonthly || {};
+            var departmentTotals = dashboardCharts.departmentTotals || {};
+
+            renderChart('#overall-monthly-chart', {
+                series: [{
+                    name: 'المعاملات الكلية وارد',
+                    data: overallMonthly.incoming || []
+                }, {
+                    name: 'المعاملات الكلية صادر',
+                    data: overallMonthly.outgoing || []
+                }],
+                chart: {
+                    type: 'area',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    },
+                    fontFamily: 'inherit'
+                },
+                colors: ['#009EF7', '#50CD89'],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 3
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        opacityFrom: 0.28,
+                        opacityTo: 0.05
+                    }
+                },
+                grid: {
+                    borderColor: '#EBEDF3',
+                    strokeDashArray: 4
+                },
+                xaxis: {
+                    categories: monthLabels,
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return value + ' معاملة';
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'right'
+                }
+            }, [overallMonthly.incoming, overallMonthly.outgoing]);
+
+            renderChart('#department-totals-chart', {
+                series: departmentTotals.values || [],
+                chart: {
+                    type: 'donut',
+                    height: 320,
+                    fontFamily: 'inherit'
+                },
+                labels: departmentTotals.labels || [],
+                colors: ['#009EF7', '#50CD89', '#F64E60', '#FFA800', '#3699FF', '#5867DD'],
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(value) {
+                        return Math.round(value) + '%';
+                    }
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '64%',
+                            labels: {
+                                show: true,
+                                total: {
+                                    show: true,
+                                    label: 'الإجمالي',
+                                    formatter: function(chart) {
+                                        return chart.globals.seriesTotals.reduce(function(total,
+                                        value) {
+                                            return total + value;
+                                        }, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }, [departmentTotals.values]);
+
+            renderChart('#archive-monthly-chart', {
+                series: [{
+                    name: 'الوارد',
+                    data: archiveMonthly.incoming || []
+                }, {
+                    name: 'الصادر',
+                    data: archiveMonthly.outgoing || []
+                }],
+                chart: {
+                    type: 'area',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    },
+                    fontFamily: 'inherit'
+                },
+                colors: ['#3699FF', '#F64E60'],
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 3
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        opacityFrom: 0.32,
+                        opacityTo: 0.04
+                    }
+                },
+                grid: {
+                    borderColor: '#EBEDF3',
+                    strokeDashArray: 4
+                },
+                xaxis: {
+                    categories: monthLabels,
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(value) {
+                            return value + ' معاملة';
+                        }
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'right'
+                }
+            }, [archiveMonthly.incoming, archiveMonthly.outgoing]);
+
+            renderChart('#archive-distribution-chart', {
+                series: [{
+                    name: 'الوارد',
+                    data: archiveDistribution.incoming || []
+                }, {
+                    name: 'الصادر',
+                    data: archiveDistribution.outgoing || []
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 320,
+                    toolbar: {
+                        show: false
+                    },
+                    fontFamily: 'inherit'
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        borderRadius: 4,
+                        barHeight: '58%'
+                    }
+                },
+                colors: ['#1BC5BD', '#FFA800'],
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: archiveDistribution.labels || [],
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#3F4254'
+                        }
+                    }
+                },
+                grid: {
+                    borderColor: '#EBEDF3',
+                    strokeDashArray: 4
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'right'
+                }
+            }, [archiveDistribution.incoming, archiveDistribution.outgoing]);
+
+            renderChart('#inventory-flow-chart', {
+                series: [{
+                    name: 'الوارد',
+                    data: inventoryFlow.incoming || []
+                }, {
+                    name: 'الصادر',
+                    data: inventoryFlow.outgoing || []
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 260,
+                    toolbar: {
+                        show: false
+                    },
+                    fontFamily: 'inherit'
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        columnWidth: '44%'
+                    }
+                },
+                colors: ['#8950FC', '#F64E60'],
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: monthLabels,
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                yaxis: {
+                    labels: {
+                        style: {
+                            colors: '#7E8299'
+                        }
+                    }
+                },
+                grid: {
+                    borderColor: '#EBEDF3',
+                    strokeDashArray: 4
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'right'
+                }
+            }, [inventoryFlow.incoming, inventoryFlow.outgoing]);
+
+            renderChart('#messages-chart', {
+                series: messages.series || [],
+                chart: {
+                    type: 'donut',
+                    height: 260,
+                    fontFamily: 'inherit'
+                },
+                labels: messages.labels || [],
+                colors: ['#FFA800', '#1BC5BD', '#F64E60', '#3699FF', '#8950FC'],
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(value) {
+                        return Math.round(value) + '%';
+                    }
+                },
+                legend: {
+                    position: 'bottom'
+                },
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '62%',
+                            labels: {
+                                show: true,
+                                total: {
+                                    show: true,
+                                    label: 'الإجمالي',
+                                    formatter: function(chart) {
+                                        return chart.globals.seriesTotals.reduce(function(total,
+                                        value) {
+                                            return total + value;
+                                        }, 0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }, [messages.series]);
+        });
+    </script>
 @endsection

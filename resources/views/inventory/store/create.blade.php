@@ -56,6 +56,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض المخازن </a>
+                            <x-add-resource-button />
                         </div>
                     </div>
 
@@ -117,7 +118,6 @@
                                         class="mr-2 btn btn-success m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">حفظ</button>
                                     <button type="reset"
                                         class="mr-2 btn btn-danger m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">الغاء</button>
-                                        <x-add-resource-button />
 
                                 </div>
                             </div>

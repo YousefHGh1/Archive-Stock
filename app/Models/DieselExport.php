@@ -24,6 +24,6 @@ class DieselExport extends Model
 
     public function typesfuel()
     {
-        return $this->belongsTo(TypesFuel::class);
+        return $this->belongsTo(TypesFuel::class, 'typesfuel_id', 'id');
     }
 }

@@ -67,18 +67,18 @@
                                                     <path
                                                         d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z"
                                                         fill="#000000" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="9"
-                                                        width="7" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="9"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="13"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="13"
-                                                        width="7" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="7" y="17"
-                                                        width="2" height="2" rx="1" />
-                                                    <rect fill="#000000" opacity="0.3" x="10" y="17"
-                                                        width="7" height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="9" width="7"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="9" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="13" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="13" width="7"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="7" y="17" width="2"
+                                                        height="2" rx="1" />
+                                                    <rect fill="#000000" opacity="0.3" x="10" y="17" width="7"
+                                                        height="2" rx="1" />
                                                 </g>
                                             </svg>
                                             <!--end::Svg Icon-->
@@ -95,7 +95,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <a href="{{ route('diesel.create') }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ route('diesel.create') }}" class="btn btn-success font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -111,34 +111,11 @@
                             <!--end::Svg Icon-->
                         </span>إنشاء وارد جديد</a>
                     <!--end::Button-->
+                    <x-add-resource-button />
+
                 </div>
             </div>
             <div class="card-body">
-                <!--begin::Search Form-->
-                {{-- id="kt_datatable" --}}
-                {{-- <div class="mb-7">
-                    <div class="row align-items-center">
-                        <div class="col-lg-9 col-xl-8">
-                            <div class="row align-items-center">
-                                <div class="my-2 col-md-4 my-md-0">
-                                    <div class="input-icon">
-                                        <input type="text" class="form-control" placeholder="ابحث..."
-                                            id="kt_datatable_search_query" />
-                                        <span>
-                                            <i class="flaticon2-search-1 text-muted"></i>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="mt-5 col-lg-3 col-xl-4 mt-lg-0">
-                                    <a href="#" class="px-6 btn btn-light-primary font-weight-bold">البحث</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div> --}}
-                <!--end::Search Form-->
 
                 <!--begin: Datatable-->
                 <div class="table-responsive">
@@ -196,44 +173,7 @@
             </div>
         </div>
         <!--end::Card-->
-        <div class="text-center card">
-            <div class="card-body">
-                <h4 class="mb-0 alert bg-primary-o-50 text-primary">كميات المحروقات</h4>
-                <table class="table table-striped table-hover table-checkable" id="myTable">
-                    <thead class="text-white bg-primary">
-                        <tr>
-                            @for ($month = 1; $month <= 12; $month++)
-                                <th>{{ 'شهر ' . $month }}</th>
-                            @endfor
-                            <th>{{ 'عدد الوارد' }}</th>
-                            <th>{{ 'مجموع الوارد' }}</th>
-                            <th>{{ 'مجموع المتبقي من المحروقات' }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @for ($month = 1; $month <= 12; $month++)
-                                <td>
-                                    {{ \App\Models\Diesel::select('quantity')->whereRaw("MONTH(diesels.date) = $month && YEAR(diesels.date) = 2023")->sum('quantity') }}
-                                    <span>لتر</span>
-                                </td>
-                            @endfor
-                            <td>
-                                {{ \App\Models\Diesel::select('id')->whereRaw('YEAR(diesels.date) = 2023')->count('id') }}
-                            </td>
-                            <td>
-                                {{ \App\Models\Diesel::select('quantity')->whereRaw('YEAR(diesels.date) = 2023')->sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-                            <td>
-                                {{ \App\Models\Diesel::sum('quantity') - \App\Models\DieselExport::sum('quantity') }}
-                                <span>لتر</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+
 
     </div>
 @endsection
@@ -258,7 +198,11 @@
         }
 
         function performDelete(id, reference) {
-            axios.delete('/diesel/' + id)
+            // Blade will output the route with a placeholder we replace in JS
+            let url = "{{ route('diesel.destroy', ['diesel' => ':id']) }}";
+            url = url.replace(':id', id);
+
+            axios.delete(url)
                 .then(function(response) {
                     console.log(response);
                     reference.closest('tr').remove();
@@ -275,7 +219,9 @@
                 'تم الحذف بنجاح!',
                 'تم حذف ملفك.',
                 'success'
-            );
+            ).then(() => {
+            location.reload(); // Refresh the page after the success alert is dismissed
+        });
         }
     </script>
 @endsection

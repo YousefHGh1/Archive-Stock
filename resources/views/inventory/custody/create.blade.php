@@ -63,7 +63,8 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>عرض العهد </a>
-                        </div>
+                                <x-add-resource-button />
+                            </div>
                     </div>
                     <!--begin::Form-->
                     <form action="{{ route('custody.store') }}" method="post" class="form needs-validation " novalidate
@@ -222,7 +223,6 @@
                                 <div class="col-lg-10">
                                     <button type="submit" class="mr-2 btn btn-success">حفظ</button>
                                     <button type="reset" class="mr-2 btn btn-danger">إلغاء</button>
-                                    <x-add-resource-button />
 
                                 </div>
 

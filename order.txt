@@ -1,0 +1,110 @@
+1️⃣ إنشاء مشروع
+composer create-project laravel/laravel myApp
+***************************************************
+php artisan serve ➡️ تشغيل السيرفر
+***************************************************
+php artisan list
+php artisan --version
+php artisan help
+***************************************************
+
+
+php artisan list	عرض جميع أوامر Laravel
+php artisan help	المساعدة
+php artisan --version	عرض إصدار Laravel
+php artisan serve	تشغيل السيرفر المحلي
+***************************************************
+-a	إنشاء كل شيء
+-m	Migration
+-c	Controller
+-r	Resource
+-f	Factory
+-s	Seeder
+-p	Policy
+php artisan make:model Product -a  إنشاء كل شيء
+php artisan make:model Post -mcrfs  🔹 مع Factory و Seeder
+php artisan make:model Post -mcr 🔹 Controller + CRUD جاهز
+***************************************************
+make:controller	إنشاء Controller
+make:model	إنشاء Model
+make:migration	إنشاء Migration
+make:seeder	إنشاء Seeder
+make:factory	إنشاء Factory
+make:middleware	إنشاء Middleware
+make:request	إنشاء Form Request
+make:policy	إنشاء Policy
+make:command	إنشاء Artisan Command
+make:event	إنشاء Event
+make:listener	إنشاء Listener
+make:job	إنشاء Job
+make:notification	إنشاء Notification
+make:resource	إنشاء API Resource
+make:test	إنشاء Test
+php artisan make:controller UserController
+***************************************************
+migrate	تشغيل الـ migrations
+migrate:fresh	حذف كل الجداول ثم إنشاؤها
+migrate:rollback	التراجع عن آخر migration
+migrate:reset	حذف كل migrations
+migrate:status	عرض حالة migrations
+db:seed	تشغيل Seeder
+db:wipe	حذف كل الجداول
+***************************************************
+cache:clear	مسح الكاش
+config:clear	مسح كاش الإعدادات
+config:cache	إنشاء كاش الإعدادات
+route:clear	مسح كاش الراوت
+route:cache	إنشاء كاش الراوت
+view:clear	مسح كاش الواجهات
+optimize
+***************************************************
+
+php artisan optimize
+php artisan cache:clear
+php artisan config:cache
+php artisan route:cache
+***************************************************
+
+php artisan key:generate
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+***************************************************
+route:list
+***************************************************
+make:auth (قديم)	إنشاء نظام تسجيل
+breeze:install	تثبيت Breeze
+composer require laravel/breeze --dev
+php artisan breeze:install
+php artisan migrate
+npm install && npm run dev
+jetstream:install	تثبيت Jetstream
+***************************************************
+queue:work	تشغيل الطابور
+queue:restart	إعادة تشغيل Queue
+queue:failed	عرض المهام الفاشلة
+queue:retry	إعادة المحاولةqueue:work	تشغيل الطابور
+queue:restart	إعادة تشغيل Queue
+queue:failed	عرض المهام الفاشلة
+queue:retry	إعادة المحاولة
+***************************************************
+schedule:run	تشغيل المهام المجدولة
+schedule:list	عرض المهام
+***************************************************
+storage:link
+ربط storage مع public
+***************************************************
+test	تشغيل الاختبارات
+test --filter	تشغيل اختبار معين
+***************************************************
+down	وضع الموقع في صيانة
+up	تشغيل الموقع
+***************************************************
+vendor:publish
+نشر ملفات الحزمة
+***************************************************
+key:generate	إنشاء APP_KEY
+env:encrypt	تشفير env
+env:decrypt	فك التشفير
+***************************************************

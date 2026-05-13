@@ -42,6 +42,7 @@
                             </svg>
                             <!--end::Svg Icon-->
                         </span>عرض الموردين</a>
+                    <x-add-resource-button />
                 </div>
 
 
@@ -72,7 +73,7 @@
                                         <h6>رقم المورد</h6>
                                     </label>
                                     <div class="col-9">
-                                        <input name="num_supplier" type="number"
+                                        <input name="num_supplier" type="number" disabled value="{{ old('num_supplier', $NewSupplierNo) }}"
                                             class="@error('num_supplier') is-invalid @enderror form-control form-control-solid"
                                             id="num_supplier" placeholder="ادخل رقم المورد" />
 

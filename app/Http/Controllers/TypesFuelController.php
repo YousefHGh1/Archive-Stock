@@ -25,7 +25,7 @@ class TypesFuelController extends Controller
         TypesFuel::create($validatedData);
 
         return redirect()->route('TypesFuel.index')
-            ->with('success', 'saved successfully.');
+            ->with('success', 'تم حفظ نوع المحروقات بنجاح .');
 
     }
 
@@ -41,7 +41,7 @@ class TypesFuelController extends Controller
         $subSection->update($validatedData);
 
         return redirect()->route('TypesFuel.index')
-            ->with('success', 'updated successfully.');
+            ->with('success', 'تم تعديل نوع المحروقات بنجاح.');
 
     }
 
@@ -50,7 +50,7 @@ class TypesFuelController extends Controller
         TypesFuel::destroy($id);
 
         return redirect()->route('TypesFuel.index')
-            ->with('success', 'deleted successfully.');
+            ->with('success', 'تم حذف نوع المحروقات بنجاح.');
 
     }
 

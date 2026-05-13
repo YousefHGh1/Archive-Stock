@@ -48,7 +48,7 @@
                     <!--begin::Form-->
 
                     <div class="card-body" style="margin:20px;">
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="exampleSelectd" class="col-lg-2 col-form-label text-lg-right">اسم المورد:</label>
                             <div class="col-8">
                                 <div class="dropdown bootstrap-select form-control dropup">
@@ -66,7 +66,7 @@
                         </div>
 
 
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="quantity" class="col-lg-2 col-form-label text-lg-right">كمية التوريد:</label>
                             <div class="col-lg-8">
                                 <div class="input-group">
@@ -76,7 +76,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="type" class="col-lg-2 col-form-label text-lg-right">جهة التوريد:</label>
                             <div class="col-lg-8">
                                 <div class="input-group">
@@ -86,7 +86,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pb-5">
+                        <div class="pb-5 form-group row">
                             <label for="invoice_num" class="col-lg-2 col-form-label text-lg-right">رقم الفاتورة:</label>
                             <div class="col-lg-8">
                                 <div class="input-group">

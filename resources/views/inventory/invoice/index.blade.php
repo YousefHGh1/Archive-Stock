@@ -138,9 +138,9 @@
                 <table id="example" class="table dt-responsive" style="width:100%">
                     <thead class="thead_dark">
                         <tr>
-                            <th width="5%">رقم الفاتورة</th>
+                            <th width="5%">رقم السند</th>
                             <th width="7%">تاريخ الفاتورة</th>
-                            <th width="6%">رقم الإيصال</th>
+                            <th width="6%">رقم الفاتورة</th>
                             <th width="14%">اسم المورد</th>
                             <th width="8%">معامل الصرف</th>
                             <th width="30%">الأصناف</th>
