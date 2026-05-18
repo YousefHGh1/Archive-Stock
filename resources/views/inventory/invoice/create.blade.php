@@ -113,7 +113,7 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="voucher_date" name="voucher_date"
-                                            value="{{ date('Y-m-d') }}">
+                                            value="{{ date('Y-m-d') }}" max="{{ date('Y-m-d') }}">
                                     </div>
                                 </div>
 

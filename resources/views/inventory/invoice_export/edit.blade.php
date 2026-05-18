@@ -68,7 +68,8 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="voucher_no" name="voucher_no"
-                                            value="{{ $invoiceExport->voucher_no }}">
+                                            value="{{ $invoiceExport->voucher_no }}"
+                                            @canany(['admin', 'stock']) {{ '' }} @else disabled @endcanany>
                                     </div>
                                 </div>
 
@@ -80,7 +81,9 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="voucher_date" name="voucher_date"
-                                            value="{{ $invoiceExport->voucher_date }}">
+                                            value="{{ $invoiceExport->voucher_date }}"
+                                            @canany(['admin', 'stock']) {{ '' }} @else disabled @endcanany
+                                            max="{{ date('Y-m-d') }}">
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +96,8 @@
                                 <div class="col-lg-3">
                                     <div class="input-group">
                                         <input type="text" class="form-control" id="invoice_no" name="invoice_no"
-                                            value="{{ $invoiceExport->invoice_no }}">
+                                            value="{{ $invoiceExport->invoice_no }}"
+                                            @canany(['admin', 'stock']) {{ '' }} @else disabled @endcanany>
                                     </div>
                                 </div>
 
@@ -107,7 +111,8 @@
                                     <div class="input-group">
                                         <select class="form-control selectpicker" data-size="7" tabindex="null"
                                             data-live-search="true" title="أدخل اسم القسم" name="subSection_id"
-                                            id="subSection_id"  selected>
+                                            id="subSection_id"  selected
+                                            @canany(['admin', 'stock']) {{ '' }} @else disabled @endcanany>
                                             @foreach ($subSection as $subSections)
                                                 <option value="{{ $subSections->id }}" {{ $invoiceExport->subSection_id == $subSections->id ? 'selected' : '' }}>
                                                     {{ $subSections->name }}
@@ -116,9 +121,11 @@
                                         </select>
                                     </div>
                                 </div>
+                                @canany(['admin', 'stock'])
                                 <a href="{{ url('inventory/sub_section/create') }}" title="اضافة قسم جديد">
                                     <i class="p-3 ki ki-solid-plus icon-md"></i>
                                 </a>
+                                @endcanany
                             </div>
 
                             <table class="table table-bordered">
@@ -128,14 +135,18 @@
                                         <th>الكمية</th>
                                         {{-- <th>السعر</th> --}}
                                         <th width="5%">جديد</th>
+                                        @can('admin')
+                                        <th width="5%">حذف</th>
+                                        @endcan
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($invoiceExport->InvoiceExport_product as $index => $InvoiceExport_product)
                                         <tr>
                                             <td>
-                          <select name="product[]" class="form-control selectpicker" disabled>
-                                                    <option value="" disabled selected>اختر المنتج</option>
+                          <select name="product[]" class="form-control selectpicker" 
+                                                    @can('admin') {{ '' }} @else disabled @endcan>
+                                                    <option value=""  selected>اختر المنتج</option>
 
                                                     @foreach ($products as $product)
                                                         <option value="{{ $product->id }}"
@@ -145,12 +156,16 @@
                                                     @endforeach
                                                 </select>
                                             </td>
-                                            <td><input type="number" name="quantity[]" readonly
-                                                    value="{{ $InvoiceExport_product->quantity }}" class="form-control"></td>
+                                            <td><input type="number" name="quantity[]" 
+                                                    value="{{ $InvoiceExport_product->quantity }}" class="form-control"
+                                                    @can('admin') {{ '' }} @else disabled @endcan></td>
                                             {{-- <td><input type="number" name="price[]"
                                                     value="{{ $InvoiceExport_product->price }}" class="form-control"></td> --}}
+                                            @can('admin')
+                                            <td><button type="button" class="btn btn-danger delete-row">حذف</button></td>
+                                            @endcan
                                     @endforeach
-                                    <td> <button type="button" class="btn btn-primary" id="add-row">+</button>
+                                    <td> @can('admin') <button type="button" class="btn btn-primary" id="add-row">+</button> @endcan
                                     </tr>
 
                                 </tbody>
@@ -162,7 +177,9 @@
                             <div class="row">
                                 <div class="col-lg-2"></div>
                                 <div class="col-lg-10">
+                                    @canany(['admin', 'stock'])
                                     <button type="submit" class="ml-5 btn btn-success">حفظ</button>
+                                    @endcanany
 
                                     <x-add-resource-button />
 
@@ -191,11 +208,13 @@
             $(this).closest('tr').remove();
         });
 
+        @can('admin')
         // إضافة زر "delete-row" إلى كل صف في جدول المنتجات
         $("table tbody tr").each(function() {
             var deleteBtnHtml = '<td><button type="button" class="btn btn-danger delete-row">حذف</button></td>';
             $(this).append(deleteBtnHtml);
         });
+        @endcan
 
         // تحويل الزر "add-row" لإضافة الصف إلى جدول المنتجات
         $("#add-row").click(function() {
